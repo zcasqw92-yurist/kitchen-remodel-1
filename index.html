@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kitchen Remodel Price Guide</title>
+
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+    <script>
+        // ==========================================
+        // ⚙️ ВАША ССЫЛКА НА ОФФЕР
+        // ==========================================
+        const OFFER_URL = "YOUR_AFFILIATE_LINK_HERE"; 
+
+        function goToOffer() { 
+            const zipInput = document.getElementById('hero-zip');
+            let url = OFFER_URL;
+            if(zipInput && zipInput.value.length === 5) {
+                // url += "&zip=" + zipInput.value;
+            }
+            window.location.href = url; 
+        }
+
+        function validateAndGo() {
+            const zipInput = document.getElementById('hero-zip');
+            if (zipInput && zipInput.value.length < 5) {
+                alert("Please enter a valid Zip Code");
+                zipInput.focus();
+                return;
+            }
+            goToOffer();
+        }
+    </script>
+
+    <style>
+        /* === PINTEREST THEME VARIABLES === */
+        :root { 
+            --primary: #E60023; /* PINTEREST RED */
+            --accent: #E60023; 
+            --green: #008a00; 
+            --text: #111; 
+            --bg: #ffffff; 
+            --gray-bg: #efefef;
+            --radius-btn: 999px; /* Pill shape */
+            --radius-card: 24px; /* Card shape */
+        }
+
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Helvetica, "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, "ＭＳ Ｐゴシック", Arial, sans-serif;
+            margin: 0; 
+            background: var(--bg); 
+            padding-bottom: 120px; 
+            color: var(--text); 
+            line-height: 1.5; 
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Разрешаем выделение в формах */
+        input, textarea { -webkit-user-select: text; -moz-user-select: text; -ms-user-select: text; user-select: text; }
+
+        .container { 
+            max-width: 600px; 
+            margin: 0 auto; 
+            background: white; 
+            box-shadow: 0 0 20px rgba(0,0,0,0.03); 
+            overflow: hidden; 
+        }
+
+        /* HEADER */
+        .status-bar { 
+            background: white; 
+            padding: 15px; 
+            font-size: 12px; 
+            text-align: center; 
+            border-bottom: 1px solid #eee; 
+            color: #777; 
+            font-weight: 600;
+        }
+
+        /* HERO */
+        .hero-section { padding: 25px 20px; text-align: center; }
+
+        h1 { 
+            font-size: 28px; 
+            font-weight: 700; 
+            line-height: 1.2; 
+            margin: 0 0 15px 0; 
+            color: #111; 
+            letter-spacing: -0.5px; 
+        }
+
+        .sub-headline { font-size: 16px; color: #333; margin-bottom: 25px; }
+
+        /* ZIP INPUT STYLES (PINTEREST STYLE) */
+        .zip-wrapper { position: relative; max-width: 100%; margin-bottom: 15px; }
+
+        .hero-zip-input {
+            width: 100%;
+            padding: 18px;
+            font-size: 16px;
+            background: var(--gray-bg);
+            border: 2px solid transparent;
+            border-radius: var(--radius-btn); /* PILL SHAPE */
+            text-align: center;
+            box-sizing: border-box;
+            transition: all 0.2s;
+            margin-bottom: 12px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .hero-zip-input:focus { 
+            background: white;
+            border-color: #ccc; 
+            outline: none; 
+            box-shadow: 0 0 0 4px rgba(0,0,0,0.05);
+        }
+
+        /* BUTTONS (PINTEREST STYLE) */
+        .btn { 
+            display: block; 
+            width: 100%; 
+            padding: 16px; 
+            font-size: 18px; 
+            font-weight: 700; 
+            text-align: center; 
+            border-radius: var(--radius-btn); /* PILL SHAPE */
+            border: none; 
+            cursor: pointer; 
+            text-decoration: none; 
+            box-sizing: border-box; 
+            transition: transform 0.1s; 
+        }
+
+        .btn:active { transform: scale(0.96); }
+
+        .btn-primary { 
+            background: var(--primary); 
+            color: white; 
+        }
+
+        .btn-accent { 
+            background: var(--primary); 
+            color: white; 
+            box-shadow: 0 4px 15px rgba(230,0,35,0.3); 
+        }
+
+        /* SECTIONS */
+        .section { padding: 30px 20px; border-bottom: none; } /* Removed hard borders for cleaner look */
+        .section-title { 
+            font-size: 22px; 
+            font-weight: 700; 
+            margin: 0 0 20px 0; 
+            color: #111; 
+            text-align: center;
+        }
+
+        /* MAP STYLES */
+        #map-wrapper { 
+            position: relative; 
+            height: 280px; 
+            width: 100%; 
+            border-radius: var(--radius-card); 
+            overflow: hidden; 
+            border: none; 
+            background: #eee; 
+            margin-top: 15px; 
+        }
+        #map { height: 100%; width: 100%; z-index: 1; }
+
+        /* WIDGET */
+        .live-notification { 
+            position: absolute; bottom: 15px; left: 50%; transform: translateX(-50%); 
+            width: auto; min-width: 200px;
+            background: rgba(255, 255, 255, 0.95); 
+            padding: 8px 16px; 
+            border-radius: 30px; 
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15); 
+            z-index: 500; 
+            display: flex; align-items: center; gap: 12px; 
+            box-sizing: border-box; 
+            transition: opacity 0.5s; 
+            pointer-events: none; 
+        }
+        .live-icon { font-size: 16px; }
+        .live-text { font-size: 13px; font-weight: 700; color: #333; line-height: 1.2; }
+        .live-subtext { font-size: 11px; color: #666; }
+
+        /* LISTS & ALERTS */
+        ul.stages-list { padding-left: 0; list-style: none; }
+        ul.stages-list li { margin-bottom: 20px; padding-left: 0; text-align: center; }
+        ul.stages-list li strong { display: block; font-size: 16px; margin-bottom: 5px; color: #111; }
+
+        .cheat-sheet { 
+            background: #fafafa; 
+            border: 1px solid #e0e0e0; 
+            padding: 24px; 
+            border-radius: var(--radius-card); 
+            margin-top: 15px; 
+        }
+        .cheat-sheet h3 { margin-top: 0; font-size: 18px; color: #111; display: flex; align-items: center; gap: 5px; justify-content: center; }
+
+        /* GEO TEXT */
+        .geo-highlight { 
+            background: transparent; 
+            color: var(--primary); 
+            font-weight: 800; 
+            padding: 0;
+        }
+
+        /* FOOTER */
+        .sticky-footer { 
+            position: fixed; bottom: 0; left: 0; width: 100%; 
+            background: rgba(255,255,255,0.95); 
+            backdrop-filter: blur(10px);
+            padding: 12px 20px; 
+            box-sizing: border-box; 
+            box-shadow: 0 -4px 20px rgba(0,0,0,0.05); 
+            z-index: 999; 
+            text-align: center; 
+        }
+        .sticky-sub { font-size: 12px; color: #666; margin-bottom: 8px; display: block; }
+
+        .legal-footer { padding: 40px 20px; font-size: 11px; color: #999; text-align: center; background: white; margin-bottom: 80px; line-height: 1.4; }
+        .footer-links { margin-bottom: 15px; }
+        .footer-links a { color: #555; text-decoration: none; margin: 0 8px; font-weight: 600; }
+        .footer-links a:hover { text-decoration: underline; }
+
+        /* REVIEWS & GALLERY */
+        .reviews-container { background-color: white; padding: 20px 0; border-bottom: none; overflow: hidden; }
+        .reviews-header { padding: 0 20px 10px 20px; }
+
+        .reviews-track, .gallery-track { 
+            display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 15px; scrollbar-width: none; 
+            -webkit-overflow-scrolling: touch; cursor: grab; user-select: none; 
+            padding: 0 20px 20px 20px;
+        }
+        .reviews-track::-webkit-scrollbar, .gallery-track::-webkit-scrollbar { display: none; }
+        .reviews-track:active, .gallery-track:active { cursor: grabbing; }
+        
+        .gallery-track { padding: 0; margin-bottom: 20px; }
+
+        .review-card { 
+            min-width: 85%; 
+            background: #fafafa; 
+            border: none;
+            border-radius: var(--radius-card); 
+            padding: 24px; 
+            scroll-snap-align: center; 
+            display: flex; flex-direction: column; justify-content: space-between; 
+        }
+
+        .review-user { display: flex; align-items: center; gap: 12px; margin-bottom: 15px; }
+        .review-avatar { width: 40px; height: 40px; border-radius: 50%; background: #eee; object-fit: cover; }
+        .review-meta { line-height: 1.3; }
+        .review-name { font-weight: bold; font-size: 14px; color: #333; }
+        .review-date { font-size: 11px; color: #888; display: flex; align-items: center; gap: 3px; }
+        .review-stars { color: #111; font-size: 12px; margin-bottom: 10px; letter-spacing: 2px; }
+        .review-title { font-weight: 700; font-size: 15px; margin-bottom: 5px; color: #111; }
+        .review-body { font-size: 14px; color: #555; line-height: 1.5; font-style: normal; }
+        .verified-badge { margin-top: 15px; padding-top: 10px; border-top: 1px solid #eee; color: #888; font-size: 11px; font-weight: 600; display: flex; align-items: center; gap: 5px; }
+
+        /* FAKE FORM */
+        .write-review-box { margin: 20px; background: #fafafa; border: none; border-radius: var(--radius-card); padding: 24px; position: relative; }
+        .form-header { font-size: 16px; font-weight: bold; margin-bottom: 15px; color: #333; }
+        .fake-input { width: 100%; padding: 12px; margin-bottom: 10px; border: none; background: white; border-radius: 12px; font-size: 14px; box-sizing: border-box; }
+        .fake-textarea { height: 80px; resize: none; }
+        .star-rating { font-size: 24px; color: #ddd; cursor: pointer; margin-bottom: 15px; display: inline-block; }
+        .star-rating span:hover, .star-rating span.active { color: #ffc107; }
+        .submit-btn { background: #111; color: white; border: none; padding: 14px; width: 100%; border-radius: var(--radius-btn); font-weight: bold; cursor: pointer; font-size: 14px; transition: background 0.2s; }
+        .submit-btn:hover { background: #333; }
+
+        .success-overlay { display: none; text-align: center; padding: 30px 20px; background: #f0fff4; border: 1px solid #c6f6d5; border-radius: 8px; margin: 20px; animation: slideDown 0.4s ease; }
+        @keyframes slideDown { from { transform: translateY(-10px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+        /* GALLERY */
+        .gallery-container { position: relative; width: 100%; margin: 20px 0; border-radius: var(--radius-card); overflow: hidden; background: white; }
+        .gallery-item { min-width: 100%; position: relative; scroll-snap-align: center; scroll-snap-stop: always; }
+        .gallery-img { width: 100%; height: 350px; object-fit: cover; display: block; opacity: 1; border-radius: var(--radius-card); }
+        .badge { position: absolute; top: 15px; left: 15px; padding: 6px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: white; z-index: 2; background: rgba(0,0,0,0.6); backdrop-filter: blur(4px); box-shadow: none; border: none; }
+        .badge-before { background: rgba(0,0,0,0.6); }
+        .badge-after { background: var(--primary); }
+        .right-arrow-hint { position: absolute; right: 15px; top: 50%; transform: translateY(-50%); font-size: 50px; color: rgba(255,255,255,0.9); text-shadow: 0 2px 5px rgba(0,0,0,0.5); animation: bounceRight 1.5s infinite ease-in-out; z-index: 10; pointer-events: none; }
+        @keyframes bounceRight { 0%, 100% { transform: translateY(-50%) translateX(0); opacity: 0.8; } 50% { transform: translateY(-50%) translateX(10px); opacity: 1; } }
+
+        /* FAQ */
+        .faq-section { background: white; padding: 30px 20px; }
+        .faq-item { border-bottom: 1px solid #eee; border-radius: 0; margin-bottom: 0; overflow: hidden; transition: all 0.3s ease; border-left: none; border-right: none; border-top: none; }
+        .faq-item.active { border-bottom: 1px solid #eee; box-shadow: none; }
+        .faq-question { background: #fff; padding: 20px 0; font-size: 16px; font-weight: 700; color: #111; cursor: pointer; display: flex; justify-content: space-between; align-items: center; user-select: none; }
+        .faq-question:hover { background: #fff; }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out, padding 0.3s ease, opacity 0.3s ease; background: #fff; padding: 0; font-size: 15px; color: #555; line-height: 1.6; opacity: 0; }
+        .faq-item.active .faq-answer { max-height: 1000px; padding-bottom: 20px; opacity: 1; }
+        .arrow-icon { transition: transform 0.3s; font-size: 12px; color: #111; }
+        .faq-item.active .arrow-icon { transform: rotate(180deg); color: var(--primary); }
+
+        /* EXIT MODAL PINTEREST STYLE */
+        .exit-modal { display: none; position: fixed; z-index: 999999; left: 0; top: 0; width: 100%; height: 100%; overflow: hidden; background-color: rgba(0,0,0,0.7); backdrop-filter: blur(4px); animation: fadeIn 0.3s; font-family: -apple-system, system-ui, sans-serif; }
+        .exit-modal-content { background-color: #fff; margin: 40% auto; padding: 0; border: none; width: 90%; max-width: 400px; border-radius: 24px; box-shadow: 0 10px 40px rgba(0,0,0,0.2); position: relative; text-align: center; overflow: hidden; }
+        @media (min-width: 768px) { .exit-modal-content { margin: 10% auto; } }
+        
+        .exit-header { background: var(--primary); color: white; padding: 20px; font-size: 18px; font-weight: 700; border-radius: 0; }
+        .exit-body { padding: 30px 25px; }
+        
+        .exit-btn { background: var(--primary); color: white; border: none; padding: 16px; width: 100%; font-size: 18px; font-weight: 700; border-radius: var(--radius-btn); cursor: pointer; margin-top: 15px; }
+        .close-link { display: block; margin-top: 20px; font-size: 14px; color: #999; cursor: pointer; font-weight: 600; }
+        
+        @keyframes fadeIn { from {opacity: 0;} to {opacity: 1;} }
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- 1. STATUS BAR -->
+    <div class="status-bar">
+        Home Improvement Trends • <span id="current-date">Today</span>
+    </div>
+
+    <!-- 2. HERO SECTION -->
+    <div class="hero-section">
+        <!-- ТЗ: Заголовок без "Program/Benefits", честная легенда -->
+        <h1>Compare Local Kitchen Remodel Quotes in <span class="geo-city geo-highlight">Your Area</span></h1>
+        <!-- ТЗ: Подзаголовок 1-2 строки, что получит человек -->
+        <p class="sub-headline">Free homeowner matching service — we connect you with up to 3 vetted local pros to compare quotes.</p>
+        
+        <!-- GALLERY -->
+        <div class="gallery-container">
+            <div class="gallery-track">
+                <!-- === PAIR 1 === -->
+                <div class="gallery-item"><span class="badge badge-before">Before</span><div class="right-arrow-hint">›</div><img src="img/1-before.jpg" class="gallery-img"></div>
+                <div class="gallery-item"><span class="badge badge-after">After ✨(Saved&#8776;$11k)</span><img src="img/1-after.jpg" class="gallery-img"></div>
+                <!-- === PAIR 2 === -->
+                <div class="gallery-item"><span class="badge badge-before">Before</span><img src="img/2-before.jpg" class="gallery-img"></div>
+                <div class="gallery-item"><span class="badge badge-after">After ✨(Saved&#8776;$9k)</span><img src="img/2-after.jpg" class="gallery-img"></div>
+            </div>
+        </div>
+
+        <!-- ТЗ: ZIP-поле видно сразу + основной CTA -->
+        <div class="zip-wrapper">
+            <input type="text" id="hero-zip" class="hero-zip-input" placeholder="Enter Zip Code" pattern="[0-9]*" maxlength="5" inputmode="numeric">
+            <button onclick="validateAndGo()" class="btn btn-primary">
+                See My Local Price Range
+            </button>
+        </div>
+        
+        <!-- ТЗ: 1 строка trust microcopy -->
+        <p style="font-size: 12px; color: #888; margin-top: 15px;">🔒 Free Service. No Obligation. Unsubscribe Anytime.</p>
+    </div>
+
+    <!-- 3. RATIONALIZATION (Calmer Tone) -->
+    <div class="section">
+        <h2 class="section-title">Why Compare Quotes Now?</h2>
+        <p style="margin-bottom: 20px; text-align: center;">
+            Contractors in <span class="geo-state">your state</span> have updated their seasonal pricing. Comparing multiple quotes is the best way to ensure you aren't overpaying for labor or materials.
+        </p>
+
+        <!-- ТЗ: Убрано "Loophole", фокус на ценности Refacing -->
+        <div class="cheat-sheet" style="border: none; background: #fff0f0; margin-top: 0;">
+            <p style="margin: 0; color: #111; line-height: 1.5;">
+                <strong style="color: var(--primary)">💡 The "Refacing" Option:</strong><br>
+                Many homeowners save up to 50% by simply replacing cabinet doors ("Refacing") instead of a full tear-out. We instantly check availability for both Full Remodel and Refacing pros in <span class="geo-city">your area</span>.
+            </p>
+        </div>
+    </div>
+
+    <!-- 4. MAP -->
+    <div class="section" style="padding-top: 0;">
+        <h2 class="section-title">Availability in <span class="geo-city">Your Area</span></h2>
+        <p style="font-size: 14px; margin-bottom: 5px; text-align: center;">We located verified pros nearby.</p>
+        
+        <div id="map-wrapper">
+            <div id="map"></div>
+            <div class="live-notification" id="live-widget">
+                <div class="live-icon" style="color: var(--primary);">●</div>
+                <div><div class="live-text">Scanning area...</div><div class="live-subtext">Please wait</div></div>
+            </div>
+        </div>
+        
+        <!-- ТЗ: Scarcity мягкий вариант -->
+        <p style="font-size: 12px; color: #666; text-align: center; margin-top: 10px;">
+            <span style="color: var(--primary)">●</span> Local pros active in your zip code.
+        </p>
+    </div>
+
+    <!-- 5. TESTIMONIALS -->
+    <div class="reviews-container">
+        <div class="reviews-header">
+            <h2 class="section-title" style="margin-bottom: 5px;">Recent Success Stories</h2>
+            <p style="font-size: 13px; color: #666; margin: 0; text-align: center;">Verified homeowners in <span class="geo-city">Your Area</span></p>
+        </div>
+
+        <div class="reviews-track">
+            <!-- 1. PRICE -->
+            <div class="review-card">
+                <div>
+                    <div class="review-user">
+                        <img src="img/review-sarah.jpg" class="review-avatar" alt="Sarah">
+                        <div class="review-meta"><div class="review-name">Sarah Jenkins</div><div class="review-date">2 hours ago • <span class="geo-city">Local</span></div></div>
+                    </div>
+                    <div class="review-stars">★★★★★</div>
+                    <div class="review-title">"Home Depot quoted me $28k..."</div>
+                    <p class="review-body">"...I almost signed it. Then I found this site. A local pro showed me I could just replace the doors ('Refacing') and keep my boxes. It looks identical to a new kitchen but only cost $14k. Literally saved half my budget."</p>
+                </div>
+                <div class="verified-badge">✔ Verified Project: Refacing</div>
+            </div>
+
+            <!-- 2. MATERIALS (Softened) -->
+            <div class="review-card">
+                <div>
+                    <div class="review-user">
+                        <img src="img/review-mark.jpg" class="review-avatar" alt="Mark">
+                        <div class="review-meta"><div class="review-name">Mark D.</div><div class="review-date">Yesterday • <span class="geo-city">Local</span></div></div>
+                    </div>
+                    <div class="review-stars">★★★★★</div>
+                    <div class="review-title">"Saved on materials."</div>
+                    <p class="review-body">"I used the checklist from this page and asked if they had surplus materials. The contractor actually had white shaker cabinets from a previous job in his warehouse. Got them for a great discount."</p>
+                </div>
+                <div class="verified-badge">✔ Verified Project: Full Remodel</div>
+            </div>
+            
+            <!-- 3. NO SPAM (Matches TЗ) -->
+            <div class="review-card">
+                <div>
+                    <div class="review-user">
+                        <img src="img/review-jen.jpg" class="review-avatar" alt="Jen">
+                        <div class="review-meta"><div class="review-name">Jennifer L.</div><div class="review-date">3 days ago • <span class="geo-city">Local</span></div></div>
+                    </div>
+                    <div class="review-stars">★★★★★</div>
+                    <div class="review-title">"Scared of spam, but pleasantly surprised."</div>
+                    <p class="review-body">"I hate putting my phone number online. But I didn't get blasted with robocalls. I got text messages from 3 specific contractors. They were professional and knew I was looking for the budget option."</p>
+                </div>
+                <div class="verified-badge">✔ Verified Project: Quote Request</div>
+            </div>
+        </div>
+        
+        <div style="text-align:center; margin-top:10px; font-size:12px; color:#aaa; display:flex; align-items:center; justify-content:center; gap:5px;"><span>👆 Swipe to read more reviews</span></div>
+
+        <!-- FAKE FORM (Kept for engagement) -->
+        <div id="review-form-box" class="write-review-box">
+            <div class="form-header">Had a project done? Leave a review</div>
+            <form id="fake-review-form">
+                <div class="star-rating"><span data-val="1">★</span><span data-val="2">★</span><span data-val="3">★</span><span data-val="4">★</span><span data-val="5">★</span></div>
+                <input type="text" class="fake-input" placeholder="Your First Name" required>
+                <textarea class="fake-input fake-textarea" placeholder="How was your experience with the contractor?" required></textarea>
+                <button type="submit" class="submit-btn">Submit Review</button>
+            </form>
+        </div>
+        
+        <div id="review-success" class="success-overlay">
+            <h3 style="color:#2f855a; margin:0 0 5px 0;">Success!</h3>
+            <p style="margin:0; font-size:14px; color:#276749;">Your review has been submitted for moderation.</p>
+        </div>
+    </div>
+
+        <!-- 6. HOW IT WORKS (REDESIGNED: Pinterest Cards) -->
+    <div class="section">
+        <h2 class="section-title">How It Works</h2>
+        
+        <style>
+            .steps-grid {
+                display: grid;
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            @media (min-width: 600px) {
+                .steps-grid { grid-template-columns: repeat(3, 1fr); }
+            }
+            .step-card {
+                background: #fafafa;
+                border-radius: 24px;
+                padding: 20px;
+                text-align: center;
+                transition: transform 0.2s;
+            }
+            .step-card:hover { transform: translateY(-3px); }
+            .step-number {
+                display: inline-block;
+                width: 32px; height: 32px;
+                background: var(--primary);
+                color: white;
+                border-radius: 50%;
+                line-height: 32px;
+                font-weight: 700;
+                margin-bottom: 10px;
+                font-size: 16px;
+            }
+            .step-title { font-weight: 700; color: #111; margin-bottom: 5px; font-size: 15px; }
+            .step-desc { font-size: 13px; color: #666; line-height: 1.4; margin: 0; }
+        </style>
+
+        <div class="steps-grid">
+            <!-- Step 1 -->
+            <div class="step-card">
+                <div class="step-number">1</div>
+                <div class="step-title">Enter ZIP</div>
+                <p class="step-desc">Check verified availability in your specific neighborhood.</p>
+            </div>
+            <!-- Step 2 -->
+            <div class="step-card">
+                <div class="step-number">2</div>
+                <div class="step-title">Select Type</div>
+                <p class="step-desc">Choose between Refacing, Full Remodel, or Painting.</p>
+            </div>
+            <!-- Step 3 -->
+            <div class="step-card">
+                <div class="step-number">3</div>
+                <div class="step-title">Compare</div>
+                <p class="step-desc">Receive up to 3 quotes to find the best price. No obligation.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 7. TIPS (REDESIGNED: Insider Pin Style) -->
+    <div class="section">
+        
+        <style>
+            .tips-container {
+                background: #FFF0F0; /* Легкий оттенок красного, как "сохраненное" */
+                border-radius: 24px;
+                padding: 30px 20px;
+                text-align: center;
+                border: 1px solid rgba(230,0,35,0.1);
+            }
+            .tips-header {
+                font-size: 18px; 
+                font-weight: 700; 
+                margin-bottom: 20px; 
+                color: #111;
+                display: flex; align-items: center; justify-content: center; gap: 8px;
+            }
+            .script-list {
+                text-align: left;
+                background: white;
+                border-radius: 16px;
+                padding: 20px;
+                box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            }
+            .script-item {
+                display: flex;
+                align-items: flex-start;
+                gap: 12px;
+                margin-bottom: 12px;
+                font-size: 14px;
+                color: #444;
+                line-height: 1.5;
+            }
+            .script-item:last-child { margin-bottom: 0; }
+            .check-icon {
+                color: var(--primary);
+                font-weight: bold;
+                font-size: 16px;
+                margin-top: 1px;
+            }
+            .highlight { font-weight: 700; color: #111; }
+        </style>
+
+        <div class="tips-container">
+            <div class="tips-header">
+                <span>🤫</span> Smart Homeowner Script
+            </div>
+            <p style="font-size: 14px; color: #555; margin-bottom: 20px; margin-top: -10px;">
+                Use these 4 questions to unlock better rates:
+            </p>
+
+            <div class="script-list">
+                <div class="script-item">
+                    <div class="check-icon">✂️</div>
+                    <div>"Do you have <span class="highlight">surplus materials</span> from other jobs?"</div>
+                </div>
+                <div class="script-item">
+                    <div class="check-icon">✂️</div>
+                    <div>"Does the quote include <span class="highlight">demolition & disposal</span>?"</div>
+                </div>
+                <div class="script-item">
+                    <div class="check-icon">✂️</div>
+                    <div>"Can I <span class="highlight">lock in today's rate</span> for 30 days?"</div>
+                </div>
+                <div class="script-item">
+                    <div class="check-icon">✂️</div>
+                    <div>"Is there a <span class="highlight">cash discount</span> for immediate booking?"</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- 8. FAQ ACCORDION (Updated answers to TЗ) -->
+    <div class="faq-section">
+        <h2 class="section-title" style="text-align:center; margin-bottom:20px;">Frequently Asked Questions</h2>
+        <div class="faq-container">
+            <!-- Q1 -->
+            <div class="faq-item active">
+                <div class="faq-question">Is this really free? What's the catch?<span class="arrow-icon">▼</span></div>
+                <div class="faq-answer">It is <strong>100% free</strong> for homeowners. We are supported by the contractors who pay a small fee to join our network. You get the benefit of pre-screened pros without paying a cent.</div>
+            </div>
+            <!-- Q2 -->
+            <div class="faq-item">
+                <div class="faq-question">Will my phone blow up with calls?<span class="arrow-icon">▼</span></div>
+                <div class="faq-answer"><strong>Absolutely not.</strong> We have a strict "Anti-Spam" policy. You will be matched with a maximum of 3 top-rated pros in your zip code. This allows you to compare quotes without being overwhelmed.</div>
+            </div>
+            <!-- Q3 -->
+            <div class="faq-item">
+                <div class="faq-question">How does the "Refacing" savings work?<span class="arrow-icon">▼</span></div>
+                <div class="faq-answer">Instead of ripping out your entire kitchen (which costs labor + demolition fees), pros simply replace the doors and veneers. It looks identical to a brand new custom kitchen but costs significantly less.</div>
+            </div>
+            <!-- Q4 -->
+            <div class="faq-item">
+                <div class="faq-question">Can I lock in the rate for later?<span class="arrow-icon">▼</span></div>
+                <div class="faq-answer">Yes. Because prices fluctuate, many contractors will honor their quote for 30 days if you request an estimate now. This helps secure your price.</div>
+            </div>
+            <!-- Q5 -->
+            <div class="faq-item">
+                <div class="faq-question">Do you handle small projects?<span class="arrow-icon">▼</span></div>
+                <div class="faq-answer">Yes. Whether you need a full gut renovation, simple cabinet painting, or just new quartz countertops, we have specialized pros for every project size.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 9. FOOTER (Added Links) -->
+    <div class="legal-footer">
+        <div class="footer-links">
+            <a href="#">Privacy Policy</a> | 
+            <a href="#">Terms of Service</a> | 
+            <a href="#">Contact Us</a>
+        </div>
+        <p><strong>Disclaimer:</strong> This site is a free service to assist homeowners in connecting with local service providers. All contractors/providers are independent and this site does not warrant or guarantee any work performed.</p>
+        <p>&copy; <span id="copyright-year">2024</span> Kitchen Remodel Price Guide.</p>
+    </div>
+
+</div>
+
+<!-- STICKY FOOTER -->
+<div class="sticky-footer">
+    <span class="sticky-sub"><span style="color:var(--primary)">●</span> Verified Pros available in <span class="geo-city">your area</span></span>
+    <!-- Unified CTA -->
+    <!-- Кнопка вызывает scrollToZip() вместо перехода на оффер -->
+<button onclick="scrollToZip()" class="btn btn-accent" style="padding: 14px;">
+    See My Local Price Range
+</button>
+</div>
+
+<!-- === SMART COMEBACKER (UPDATED: Non-aggressive) === -->
+<style>
+    .exit-modal { display: none; position: fixed; z-index: 999999; left: 0; top: 0; width: 100%; height: 100%; overflow: hidden; background-color: rgba(0,0,0,0.7); backdrop-filter: blur(4px); animation: fadeIn 0.3s; font-family: -apple-system, system-ui, sans-serif; }
+    .exit-modal-content { background-color: #fff; margin: 40% auto; padding: 0; border: none; width: 90%; max-width: 400px; border-radius: 24px; box-shadow: 0 10px 40px rgba(0,0,0,0.2); position: relative; text-align: center; }
+    @media (min-width: 768px) { .exit-modal-content { margin: 10% auto; } }
+    
+    .exit-header { background: var(--primary); color: white; padding: 20px; font-size: 18px; font-weight: 700; border-radius: 0; }
+    .exit-body { padding: 30px 20px; }
+    
+    .exit-btn { background: var(--primary); color: white; border: none; padding: 16px; width: 100%; font-size: 18px; font-weight: 700; border-radius: 999px; cursor: pointer; margin-top: 15px; }
+    .close-link { display: block; margin-top: 20px; font-size: 13px; color: #999; cursor: pointer; font-weight: 600; }
+    
+    @keyframes fadeIn { from {opacity: 0;} to {opacity: 1;} }
+</style>
+
+<div id="exitModal" class="exit-modal">
+    <div class="exit-modal-content">
+        <div class="exit-header">Before you go...</div>
+        <div class="exit-body">
+            <h3 style="margin: 0 0 10px 0; color: #111; font-size: 20px;">Want a quick price estimate?</h3>
+            <p style="color: #666; font-size: 15px; line-height: 1.4; margin-bottom: 10px;">
+                You can get a free quote range for your project in <span class="geo-city" style="font-weight: bold;">your area</span> without any commitment.
+            </p>
+            
+            <button onclick="goToOffer()" class="exit-btn">See My Range &rarr;</button>
+            <span class="close-link" onclick="document.getElementById('exitModal').style.display='none'">No thanks</span>
+        </div>
+    </div>
+</div>
+
+<!-- SCRIPTS -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+
+    /* === ДОБАВИТЬ ЭТУ ФУНКЦИЮ В БЛОК SCRIPT === */
+
+    function scrollToZip() {
+        // 1. Находим поле ввода по ID
+        const zipInput = document.getElementById('hero-zip');
+        
+        if(zipInput) {
+            // 2. Плавно крутим страницу к этому полю
+            zipInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            
+            // 3. Добавляем класс пульсации
+            zipInput.classList.add('zip-highlight-active');
+            
+            // 4. Ставим фокус (чтобы клавиатура открылась на телефоне)
+            // Небольшая задержка 500мс нужна, чтобы прокрутка успела закончиться
+            setTimeout(() => {
+                zipInput.focus();
+            }, 500);
+
+            // 5. Убираем пульсацию через 3 секунды, чтобы не надоедала
+            setTimeout(() => {
+                zipInput.classList.remove('zip-highlight-active');
+            }, 3000);
+        }
+    }
+
+
+    // 1. GLOBAL & DATE LOGIC
+    const d = new Date();
+    try { 
+        document.getElementById('current-date').textContent = d.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+        document.querySelectorAll('#current-year').forEach(el => el.textContent = d.getFullYear());
+        document.getElementById('copyright-year').textContent = d.getFullYear();
+    } catch(e){}
+
+    // 2. WIDGET LOGIC (SCARCITY REMOVED)
+    const widgetBox = document.getElementById('live-widget');
+    const widgetText = widgetBox.querySelector('.live-text');
+    const widgetSub = widgetBox.querySelector('.live-subtext');
+    const widgetIcon = widgetBox.querySelector('.live-icon');
+    
+    function getCity() { 
+        const el = document.querySelector('.geo-city'); 
+        return el && el.textContent !== "Your Area" ? el.textContent : "your area"; 
+    }
+    
+    // ТЗ: Убраны агрессивные сообщения про дефицит
+    const messages = [
+        { icon: "📦", t: () => "Materials Available", s: () => `In ${getCity()}` },
+        { icon: "💰", t: () => `Recent User Saved $${Math.floor(Math.random() * 2000) + 4500}`, s: () => "by choosing Refacing" },
+        { icon: "✅", t: () => "Verified Pros", s: () => "Ready for quotes" }
+    ];
+    
+    let msgIdx = 0;
+    setInterval(() => {
+        if(!widgetBox) return;
+        widgetBox.style.opacity = '0';
+        setTimeout(() => {
+            msgIdx = (msgIdx + 1) % messages.length;
+            widgetIcon.textContent = messages[msgIdx].icon;
+            widgetText.textContent = messages[msgIdx].t();
+            widgetSub.textContent = messages[msgIdx].s();
+            widgetBox.style.opacity = '1';
+        }, 500);
+    }, 7000);
+
+    // 3. MAP & GEO LOGIC (Unchanged functionality)
+    (async function initMap() {
+        let lat = 41.8781, lon = -87.6298; // Default Chicago
+        let zoom = 11;
+        let city = "Chicago"; 
+        let region = "Illinois";
+        let success = false;
+        
+        // Попытки определить GEO (оставлено как было)
+        try {
+            const res = await fetch('https://ipapi.co/json/');
+            if(res.ok) {
+                const data = await res.json();
+                if(data.city) { lat = data.latitude; lon = data.longitude; city = data.city; region = data.region; success = true; }
+            }
+        } catch(e) {}
+        
+        if(!success) {
+            try {
+                const res = await fetch('https://ipwho.is/');
+                if(res.ok) {
+                    const data = await res.json();
+                    if(data.success) { lat = data.latitude; lon = data.longitude; city = data.city; region = data.region; success = true; }
+                }
+            } catch(e) {}
+        }
+        
+        document.querySelectorAll('.geo-city').forEach(el => el.textContent = city);
+        document.querySelectorAll('.geo-state').forEach(el => el.textContent = region);
+        
+        if (typeof L !== 'undefined') {
+            const map = L.map('map', { zoomControl: false, scrollWheelZoom: false, dragging: false, touchZoom: false, doubleClickZoom: false, attributionControl: false }).setView([lat, lon], zoom);
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+            L.circle([lat, lon], { color: '#E60023', fillColor: '#E60023', fillOpacity: 0.15, radius: 6500 }).addTo(map); // Цвет изменен на RED
+            L.marker([lat, lon]).addTo(map);
+        }
+    })();
+
+    // 4. SCROLL LOGIC (Unchanged)
+    function enableDragScroll(selector) {
+        const slider = document.querySelector(selector);
+        let isDown = false;
+        let startX;
+        let scrollLeft;
+        slider.addEventListener('mousedown', (e) => {
+            isDown = true;
+            slider.classList.add('active');
+            startX = e.pageX - slider.offsetLeft;
+            scrollLeft = slider.scrollLeft;
+        });
+        slider.addEventListener('mouseleave', () => { isDown = false; slider.classList.remove('active'); });
+        slider.addEventListener('mouseup', () => { isDown = false; slider.classList.remove('active'); });
+        slider.addEventListener('mousemove', (e) => {
+            if(!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - slider.offsetLeft;
+            const walk = (x - startX) * 2; 
+            slider.scrollLeft = scrollLeft - walk;
+        });
+    }
+    enableDragScroll('.gallery-track');
+    enableDragScroll('.reviews-track');
+
+    // 5. COMEBACKER LOGIC (Same trigger, different content)
+    (function() {
+        const modal = document.getElementById("exitModal");
+        function showComebacker() { modal.style.display = "block"; }
+        
+        let historyPushed = false;
+        const activeTrap = function() {
+            if (historyPushed) return;
+            history.pushState({ page: 'landing' }, null, location.href);
+            historyPushed = true;
+        };
+        document.body.addEventListener('click', activeTrap, { once: true });
+        document.body.addEventListener('touchstart', activeTrap, { once: true });
+        window.addEventListener('popstate', function(event) {
+            if (modal.style.display !== "block") {
+                showComebacker();
+            }
+        });
+        let mouseTrapTriggered = false;
+        document.addEventListener("mouseleave", function(e) {
+            if (e.clientY < 0 && !mouseTrapTriggered) {
+                showComebacker();
+                mouseTrapTriggered = true;
+            }
+        });
+    })();
+
+    // 6. UI INTERACTION
+    const stars = document.querySelectorAll('.star-rating span');
+    stars.forEach((star, index) => {
+        star.addEventListener('click', () => {
+            stars.forEach((s, i) => { s.classList.toggle('active', i <= index); });
+        });
+    });
+    
+    document.getElementById('fake-review-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const btn = this.querySelector('button');
+        btn.innerText = "Processing...";
+        btn.style.opacity = "0.7";
+        setTimeout(() => {
+            document.getElementById('review-form-box').style.display = 'none';
+            document.getElementById('review-success').style.display = 'block';
+        }, 1200);
+    });
+    
+    const faqs = document.querySelectorAll('.faq-item');
+    faqs.forEach(faq => {
+        const question = faq.querySelector('.faq-question');
+        question.addEventListener('click', () => {
+            if (faq.classList.contains('active')) {
+                faq.classList.remove('active');
+                return;
+            }
+            faqs.forEach(item => item.classList.remove('active'));
+            faq.classList.add('active');
+        });
+    });
+</script>
+
+<style>
+    /* SECURITY STYLES */
+    img { -webkit-user-drag: none; -khtml-user-drag: none; -moz-user-drag: none; -o-user-drag: none; pointer-events: none; }
+    /* === ДОБАВИТЬ ЭТО В КОНЕЦ БЛОКА STYLE === */
+    
+    /* Анимация: Красная пульсация */
+    @keyframes redPulse {
+        0% {
+            box-shadow: 0 0 0 0 rgba(230, 0, 35, 0.7);
+            border-color: #E60023;
+        }
+        70% {
+            box-shadow: 0 0 0 15px rgba(230, 0, 35, 0);
+            border-color: #E60023;
+        }
+        100% {
+            box-shadow: 0 0 0 0 rgba(230, 0, 35, 0);
+            border-color: #E60023;
+        }
+    }
+
+    /* Класс, который мы будем временно вешать на инпут */
+    .zip-highlight-active {
+        animation: redPulse 1.5s infinite;
+        background-color: #fff !important; /* Делаем фон белым, чтобы выделялось */
+        transform: scale(1.02); /* Чуть увеличиваем */
+        transition: all 0.3s;
+    }
+
+</style>
+
+</body>
+</html>
