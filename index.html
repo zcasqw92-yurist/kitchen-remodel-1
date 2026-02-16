@@ -327,17 +327,34 @@
         <!-- ТЗ: Подзаголовок 1-2 строки, что получит человек -->
         <p class="sub-headline">Free homeowner matching service — we connect you with up to 3 vetted local pros to compare quotes.</p>
         
-        <!-- GALLERY -->
+    <!-- GALLERY (Optimized for LCP & CLS) -->
         <div class="gallery-container">
             <div class="gallery-track">
-                <!-- === PAIR 1 === -->
-                <div class="gallery-item"><span class="badge badge-before">Before</span><div class="right-arrow-hint">›</div><img src="img/1-before.jpg" class="gallery-img"></div>
-                <div class="gallery-item"><span class="badge badge-after">After ✨(Saved&#8776;$11k)</span><img src="img/1-after.jpg" class="gallery-img"></div>
-                <!-- === PAIR 2 === -->
-                <div class="gallery-item"><span class="badge badge-before">Before</span><img src="img/2-before.jpg" class="gallery-img"></div>
-                <div class="gallery-item"><span class="badge badge-after">After ✨(Saved&#8776;$9k)</span><img src="img/2-after.jpg" class="gallery-img"></div>
+                <!-- === PAIR 1 (Visible Immediately - High Priority) === -->
+                <div class="gallery-item">
+                    <span class="badge badge-before">Before</span>
+                    <div class="right-arrow-hint">›</div>
+                    <!-- LCP Optimization: fetchpriority="high" for the first image -->
+                    <img src="img/1-before.jpg" class="gallery-img" fetchpriority="high" width="350" height="350" alt="Old Kitchen Before Remodel" decoding="async">
+                </div>
+                <div class="gallery-item">
+                    <span class="badge badge-after">After ✨(Saved&#8776;$11k)</span>
+                    <img src="img/1-after.jpg" class="gallery-img" width="350" height="350" alt="New Kitchen After Refacing" decoding="async">
+                </div>
+
+                <!-- === PAIR 2 (Hidden - Lazy Load) === -->
+                <div class="gallery-item">
+                    <span class="badge badge-before">Before</span>
+                    <!-- Lazy Load: loading="lazy" -->
+                    <img src="img/2-before.jpg" class="gallery-img" loading="lazy" width="350" height="350" alt="Dated Kitchen Before" decoding="async">
+                </div>
+                <div class="gallery-item">
+                    <span class="badge badge-after">After ✨(Saved&#8776;$9k)</span>
+                    <img src="img/2-after.jpg" class="gallery-img" loading="lazy" width="350" height="350" alt="Modern Kitchen Upgrade" decoding="async">
+                </div>
             </div>
         </div>
+
 
         <!-- ТЗ: ZIP-поле видно сразу + основной CTA -->
         <div class="zip-wrapper">
@@ -674,7 +691,6 @@
 </div>
 
 <!-- SCRIPTS -->
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
 
     /* === ДОБАВИТЬ ЭТУ ФУНКЦИЮ В БЛОК SCRIPT === */
@@ -896,6 +912,6 @@
     }
 
 </style>
-
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 </body>
 </html>
