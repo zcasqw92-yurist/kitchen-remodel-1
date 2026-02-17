@@ -1194,19 +1194,6 @@ async function initMap() {
 
 initMap();
 
-    if ('IntersectionObserver' in window) {
-        const io = new IntersectionObserver((entries) => {
-            if (entries.some(e => e.isIntersecting)) {
-                io.disconnect();
-                start();
-            }
-        }, { rootMargin: '200px' });
-        io.observe(wrap);
-    } else {
-        setTimeout(start, 2500);
-    }
-})();
-
     // 4. SCROLL LOGIC
     function enableDragScroll(selector) {
         const slider = document.querySelector(selector);
@@ -1393,4 +1380,3 @@ initMap();
 
 </body>
 </html>
-
