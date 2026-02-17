@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -8,10 +8,10 @@
     <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     
-    <!-- GOOGLE FONTS (Sora + Inter) -->
+    <!-- GOOGLE FONTS (Inter + Poppins) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
 
     <script>
         // ==========================================
@@ -25,26 +25,35 @@
     <style>
         /* CSS RESET & VARIABLES */
         :root {
-            /* Palette */
-            --bg: #F7F4EF;
+            /* Palette (match screenshot: white + dark + yellow accent) */
+            --bg: #FFFFFF;
             --surface: #FFFFFF;
-            --border: rgba(17, 24, 39, 0.08);
-            
+            --border: rgba(15, 23, 42, 0.12);
+
             /* Text */
-            --text-strong: #111827;
-            --text: #374151;
+            --text-strong: #0B1220;
+            --text: #1F2937;
             --muted: #6B7280;
-            
-            /* CTA & Accents */
-            --cta: #2F6F5E;
-            --cta-hover: #295F51;
-            --highlight: #E8F1ED;
-            --warm-accent: #C97C5D;
-            
+
+            /* Dark UI (nav/footer vibe) */
+            --dark: #0F172A;
+            --dark-2: #0B0F14;
+            --on-dark: rgba(255,255,255,0.92);
+            --on-dark-muted: rgba(255,255,255,0.68);
+
+            /* CTA & Accents (yellow button) */
+            --cta: #F5B301;
+            --cta-hover: #E2A400;
+            --cta-text: #111111;
+
+            /* Highlight surfaces */
+            --highlight: rgba(245, 179, 1, 0.12);
+
             /* Functional Colors for Alerts */
-            --success-bg: #E8F1ED;
-            --success-text: #2F6F5E;
-            --warning-bg: #FEF3C7;
+            --success-bg: rgba(34, 197, 94, 0.12);
+            --success-text: #166534;
+
+            --warning-bg: rgba(245, 179, 1, 0.18);
             --warning-text: #92400E;
         }
 
@@ -75,19 +84,19 @@
         
         /* TYPOGRAPHY OVERRIDES */
         h1, h2, h3, .section-title, .review-title, .form-header, .exit-header {
-            font-family: 'Sora', sans-serif;
+            font-family: 'Poppins', sans-serif;
             color: var(--text-strong);
             letter-spacing: -0.01em;
         }
 
         /* HEADER */
         .status-bar { 
-            background: var(--surface); 
-            padding: 12px 8px; 
+            background: var(--dark); 
+            padding: 12px 10px; 
             font-size: 13px; 
             text-align: center; 
-            border-bottom: 1px solid var(--border); 
-            color: var(--muted); 
+            border-bottom: 1px solid rgba(255,255,255,0.08); 
+            color: var(--on-dark-muted); 
             letter-spacing: 0.02em; 
             font-weight: 500;
         }
@@ -102,7 +111,7 @@
             font-size: 28px; 
             line-height: 1.3; 
             margin: 0 0 16px 0; 
-            font-weight: 700;
+            font-weight: 800;
         }
         .sub-headline { 
             font-size: 18px; 
@@ -117,8 +126,8 @@
             width: 100%; 
             padding: 18px; 
             font-size: 18px; 
-            font-family: 'Inter', sans-serif;
-            font-weight: 600; 
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700; 
             text-align: center; 
             border-radius: 14px; 
             border: none; 
@@ -131,7 +140,7 @@
         
         .btn-primary, .btn-accent { 
             background: var(--cta); 
-            color: white; 
+            color: var(--cta-text); 
             box-shadow: none; 
         }
         .btn-primary:hover, .btn-accent:hover {
@@ -146,7 +155,7 @@
         }
         .section-title { 
             font-size: 22px; 
-            font-weight: 700; 
+            font-weight: 800; 
             margin: 0 0 20px 0; 
             color: var(--text-strong); 
         }
@@ -175,7 +184,7 @@
             backdrop-filter: blur(8px);
             padding: 12px 16px; 
             border-radius: 12px; 
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08); 
+            box-shadow: 0 6px 22px rgba(0,0,0,0.10); 
             z-index: 500; 
             display: flex; 
             align-items: center; 
@@ -186,7 +195,7 @@
             border: 1px solid var(--border);
         }
         .live-icon { font-size: 16px; }
-        .live-text { font-size: 14px; font-weight: 600; color: var(--text-strong); line-height: 1.2; }
+        .live-text { font-size: 14px; font-weight: 700; color: var(--text-strong); line-height: 1.2; font-family: 'Poppins', sans-serif; }
         .live-subtext { font-size: 12px; color: var(--muted); }
 
         /* LISTS & ALERTS */
@@ -213,13 +222,20 @@
         .cheat-sheet li { margin-bottom: 12px; }
 
         /* GEO TEXT */
-        .geo-highlight { 
-            background: var(--highlight); 
-            color: var(--cta); 
-            padding: 2px 8px; 
-            border-radius: 6px; 
-            font-weight: 600; 
-        }
+.geo-highlight{
+  background: #FBBF24;                 /* как у AFTER */
+  color: #111827;                      /* тёмный текст */
+  padding: 5px 10px;
+  border-radius: 8px;                  /* как у бейджа */
+  font-weight: 700;
+  font-size: 10px;
+  letter-spacing: 0.5px;
+  line-height: 1;
+  display: inline-block;
+  white-space: nowrap;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+}
+
 
         /* STICKY FOOTER */
         .sticky-footer { 
@@ -229,13 +245,13 @@
             width: 100%; 
             height: auto;
             min-height: 72px;
-            background: rgba(247, 244, 239, 0.92); 
+            background: rgba(255, 255, 255, 0.92); 
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             padding: 10px 14px calc(10px + env(safe-area-inset-bottom)) 14px; 
             box-sizing: border-box; 
             border-top: 1px solid var(--border);
-            box-shadow: none;
+            box-shadow: 0 -10px 28px rgba(0,0,0,0.06);
             z-index: 999; 
             text-align: center; 
             transform: translateY(120%);
@@ -254,12 +270,13 @@
         .legal-footer { 
             padding: 32px 20px; 
             font-size: 12px; 
-            color: var(--muted); 
             text-align: center; 
-            background: var(--bg); 
+            background: var(--dark-2); 
+            color: var(--on-dark-muted);
             margin-bottom: 20px; 
             line-height: 1.5; 
         }
+        .legal-footer strong { color: var(--on-dark); }
 
         /* REVIEWS & GALLERY */
         .reviews-container { 
@@ -290,7 +307,7 @@
             border-radius: 12px; 
             padding: 20px; 
             scroll-snap-align: center; 
-            box-shadow: none; 
+            box-shadow: 0 10px 28px rgba(0,0,0,0.06); 
             display: flex; 
             flex-direction: column; 
             justify-content: space-between; 
@@ -304,18 +321,18 @@
             border: 1px solid var(--border); 
             box-shadow: none; 
         }
-        .review-name { font-weight: 600; font-size: 15px; color: var(--text-strong); }
+        .review-name { font-weight: 700; font-size: 15px; color: var(--text-strong); font-family: 'Poppins', sans-serif; }
         .review-date { font-size: 12px; color: var(--muted); margin-top: 2px; }
         .review-stars { color: #F59E0B; font-size: 16px; margin-bottom: 12px; letter-spacing: 2px; }
-        .review-title { font-weight: 700; font-size: 16px; margin-bottom: 8px; color: var(--text-strong); }
+        .review-title { font-weight: 800; font-size: 16px; margin-bottom: 8px; color: var(--text-strong); }
         .review-body { font-size: 15px; color: var(--text); line-height: 1.6; font-style: normal; }
         .verified-badge { 
             margin-top: 16px; 
             padding-top: 12px; 
             border-top: 1px solid var(--border); 
-            color: var(--cta); 
+            color: var(--text-strong); 
             font-size: 12px; 
-            font-weight: 600; 
+            font-weight: 700; 
             display: flex; 
             align-items: center; 
             gap: 6px; 
@@ -328,8 +345,9 @@
             border: 1px solid var(--border); 
             border-radius: 12px; 
             padding: 24px; 
+            box-shadow: 0 10px 28px rgba(0,0,0,0.06);
         }
-        .form-header { font-size: 18px; font-weight: 700; margin-bottom: 16px; color: var(--text-strong); }
+        .form-header { font-size: 18px; font-weight: 800; margin-bottom: 16px; color: var(--text-strong); }
         .fake-input { 
             width: 100%; 
             padding: 14px; 
@@ -338,28 +356,29 @@
             border-radius: 12px; 
             font-size: 16px; 
             box-sizing: border-box; 
-            background: #FAFAFA; 
+            background: #FFFFFF; 
             color: var(--text);
             font-family: 'Inter', sans-serif;
         }
         .fake-input:focus {
-            outline: 2px solid rgba(47,111,94,0.35); 
-            border-color: var(--cta);
+            outline: 2px solid rgba(245,179,1,0.35); 
+            border-color: rgba(245,179,1,0.65);
         }
         .fake-textarea { height: 100px; resize: none; }
         .submit-btn { 
-            background: var(--text-strong); 
+            background: var(--dark); 
             color: white; 
             border: none; 
             padding: 16px; 
             width: 100%; 
             border-radius: 14px; 
-            font-weight: 600; 
+            font-weight: 700; 
             cursor: pointer; 
             font-size: 16px; 
             transition: opacity 0.2s; 
+            font-family: 'Poppins', sans-serif;
         }
-        .submit-btn:hover { opacity: 0.9; }
+        .submit-btn:hover { opacity: 0.92; }
         
         .star-rating span:hover, .star-rating span.active { color: #F59E0B; }
 
@@ -374,52 +393,52 @@
             margin: 20px; 
         }
 
-/* GALLERY STYLES (4:3 VERTICAL / PORTRAIT) */
-.gallery-container {
-  position: relative;
-  width: 100%;
-  margin: 24px 0;
-  border-radius: 12px;
-  overflow: hidden;
-  border: 1px solid var(--border);
-  background: #000;
+        /* GALLERY STYLES (4:3 VERTICAL / PORTRAIT) */
+        .gallery-container {
+          position: relative;
+          width: 100%;
+          margin: 24px 0;
+          border-radius: 12px;
+          overflow: hidden;
+          border: 1px solid var(--border);
+          background: #000;
 
-  /* fallback, если JS не сработает */
-  height: 520px;
-}
+          /* fallback, если JS не сработает */
+          height: 520px;
+        }
 
-/* оставь остальное как есть */
-.gallery-track {
-  display: flex;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  height: 100%;
-  gap: 0;
-  scrollbar-width: none;
-  -webkit-overflow-scrolling: touch;
-  scroll-behavior: smooth;
-  cursor: grab;
-  padding: 0;
-}
+        /* оставь остальное как есть */
+        .gallery-track {
+          display: flex;
+          overflow-x: auto;
+          scroll-snap-type: x mandatory;
+          height: 100%;
+          gap: 0;
+          scrollbar-width: none;
+          -webkit-overflow-scrolling: touch;
+          scroll-behavior: smooth;
+          cursor: grab;
+          padding: 0;
+        }
 
-.gallery-item {
-  min-width: 100%;
-  height: 100%;
-  position: relative;
-  scroll-snap-align: center;
-  scroll-snap-stop: always;
-}
+        .gallery-item {
+          min-width: 100%;
+          height: 100%;
+          position: relative;
+          scroll-snap-align: center;
+          scroll-snap-stop: always;
+        }
 
-/* Универсально для img и video */
-.gallery-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
+        /* Универсально для img и video */
+        .gallery-img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          display: block;
 
-  /* важно: чтобы свайп/drag всегда работал, включая первый слайд с video */
-  pointer-events: none;
-}
+          /* важно: чтобы свайп/drag всегда работал, включая первый слайд с video */
+          pointer-events: none;
+        }
 
         .badge {
             position: absolute;
@@ -428,17 +447,22 @@
             padding: 5px 10px;
             border-radius: 8px;
             font-size: 10px; 
-            font-weight: 700;
+            font-weight: 800;
             text-transform: uppercase;
             letter-spacing: 0.5px;
             color: white;
             z-index: 2;
             pointer-events: none;
+            font-family: 'Poppins', sans-serif;
         }
 
-        .badge-before { background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(4px); }
+        .badge-before { background: rgba(0, 0, 0, 0.65); backdrop-filter: blur(4px); }
 
-        .badge-after { background: var(--cta); box-shadow: 0 2px 8px rgba(0,0,0,0.25); }
+        .badge-after { 
+            background: var(--cta); 
+            box-shadow: 0 2px 10px rgba(0,0,0,0.22); 
+            color: var(--cta-text);
+        }
 
         .right-arrow-hint {
             position: absolute;
@@ -470,6 +494,7 @@
             margin-bottom: 12px; 
             overflow: hidden; 
             transition: all 0.3s ease; 
+            background: #fff;
         }
         .faq-item.active { 
             border-color: var(--border); 
@@ -479,14 +504,15 @@
             background: var(--surface); 
             padding: 18px 20px; 
             font-size: 16px; 
-            font-weight: 600; 
+            font-weight: 700; 
             color: var(--text-strong); 
             cursor: pointer; 
             display: flex; 
             justify-content: space-between; 
             align-items: center; 
+            font-family: 'Poppins', sans-serif;
         }
-        .faq-question:hover { background: #FAFAFA; }
+        .faq-question:hover { background: rgba(0,0,0,0.02); }
         .faq-answer { 
             max-height: 0; 
             overflow: hidden; 
@@ -509,20 +535,21 @@
             font-size: 12px; 
             color: var(--muted); 
         }
-        .faq-item.active .arrow-icon { transform: rotate(180deg); color: var(--cta); }
+        .faq-item.active .arrow-icon { transform: rotate(180deg); color: var(--text-strong); }
 
         /* SECURITY STYLES */
         img { -webkit-user-drag: none; -khtml-user-drag: none; -moz-user-drag: none; -o-user-drag: none; pointer-events: none; }
-/* Badge справа (для After) */
-.badge-right {
-  left: auto;
-  right: 12px;
-}
 
-/* чтобы плашки точно были поверх фото/видео */
-.badge { 
-  z-index: 3; 
-}
+        /* Badge справа (для After) */
+        .badge-right {
+          left: auto;
+          right: 12px;
+        }
+
+        /* чтобы плашки точно были поверх фото/видео */
+        .badge { 
+          z-index: 3; 
+        }
     </style>
 </head>
 <body>
@@ -531,7 +558,7 @@
 
     <!-- 1. STATUS BAR -->
     <div class="status-bar">
-        <span style="color: var(--cta)">●</span> Updated: <strong><span id="current-date">Today</span></strong> • Kitchen refacing & refresh options near <span class="geo-city geo-highlight">Your Area</span>
+        <span style="color: var(--cta)">●</span> Updated: <strong style="color:var(--on-dark)"><span id="current-date">Today</span></strong> • Kitchen refacing & refresh options near <span class="geo-city geo-highlight">Your Area</span>
     </div>
 
     <!-- 2. HERO SECTION -->
@@ -612,7 +639,7 @@
 
         <!-- What you get (inline-only, no new classes) -->
         <div style="margin-top:14px; background:var(--highlight); border:1px solid var(--border); border-radius:12px; padding:14px 16px; font-size:15px; line-height:1.5; text-align:left;">
-            <div style="font-weight:700; color:var(--text-strong); margin-bottom:8px;">What you’ll get (in 2 minutes):</div>
+            <div style="font-weight:800; font-family:'Poppins',sans-serif; color:var(--text-strong); margin-bottom:8px;">What you’ll get (in 2 minutes):</div>
             <div>• A realistic starting price range</div>
             <div>• Best path: refacing vs paint vs new counters/backsplash</div>
             <div>• Timeline + mess level (so you can plan)</div>
@@ -802,7 +829,7 @@
 
         <!-- SUCCESS -->
         <div id="review-success" class="success-overlay">
-            <h3 style="color:var(--success-text); margin:0 0 8px 0;">Saved ✅</h3>
+            <h3 style="color:var(--success-text); margin:0 0 8px 0; font-family:'Poppins',sans-serif; font-weight:800;">Saved ✅</h3>
             <p style="margin:0; font-size:15px; color:var(--success-text);">
                 Next step: start the 2-minute check to see your best options.
             </p>
@@ -819,21 +846,21 @@
         <h2 class="section-title">How it works (simple + low-pressure)</h2>
         <ul class="stages-list">
             <li>
-                <div style="flex-shrink:0; width:28px; height:28px; background:var(--highlight); color:var(--text-strong); border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:14px;">1</div>
+                <div style="flex-shrink:0; width:28px; height:28px; background:var(--highlight); color:var(--text-strong); border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:14px; font-family:'Poppins',sans-serif;">1</div>
                 <div>
                     <strong>Tell us what you want:</strong><br>
                     A quick 2-minute check (ZIP + style + what you want to upgrade). No remodeling jargon required.
                 </div>
             </li>
             <li>
-                <div style="flex-shrink:0; width:28px; height:28px; background:var(--highlight); color:var(--text-strong); border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:14px;">2</div>
+                <div style="flex-shrink:0; width:28px; height:28px; background:var(--highlight); color:var(--text-strong); border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:14px; font-family:'Poppins',sans-serif;">2</div>
                 <div>
                     <strong>Get matched correctly:</strong><br>
                     Refacing specialist, countertop crew, tile installer — based on your answers, not guesswork.
                 </div>
             </li>
             <li>
-                <div style="flex-shrink:0; width:28px; height:28px; background:var(--highlight); color:var(--text-strong); border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:14px;">3</div>
+                <div style="flex-shrink:0; width:28px; height:28px; background:var(--highlight); color:var(--text-strong); border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:14px; font-family:'Poppins',sans-serif;">3</div>
                 <div>
                     <strong>Choose what fits your budget:</strong><br>
                     Compare options and timelines. If you want a measurement or quote, you decide when to schedule.
@@ -920,7 +947,7 @@
     <!-- 9. FOOTER -->
     <div class="legal-footer">
         <p><strong>Disclaimer:</strong> This site is a free service to assist homeowners in connecting with local service providers. All contractors/providers are independent and this site does not warrant or guarantee any work performed. It is the responsibility of the homeowner to verify that the hired contractor furnishes the necessary license and insurance required for the work being performed.</p>
-        <p>&copy; <span id="copyright-year">2024</span> Kitchen Refacing & Refresh Guide.</p>
+        <p style="margin-top:10px;">&copy; <span id="copyright-year">2024</span> Kitchen Refacing & Refresh Guide.</p>
     </div>
 
 </div>
@@ -940,21 +967,23 @@
   @media (min-width: 768px) { .exit-modal-content { margin: 12% auto; } }
 
   .exit-header {
-    background: rgba(47,111,94,0.08);
+    background: rgba(245,179,1,0.14);
     padding: 14px 16px;
-    font-weight: 700;
-    color: #1f2937;
+    font-weight: 800;
+    color: #0b1220;
     font-size: 14px;
+    font-family: 'Poppins', sans-serif;
   }
 
   .exit-body { padding: 16px 16px 18px 16px; }
 
   .exit-title {
     margin: 6px 0 10px 0;
-    color: #111827;
+    color: #0b1220;
     font-size: 20px;
     line-height: 1.25;
-    font-weight: 800;
+    font-weight: 900;
+    font-family: 'Poppins', sans-serif;
   }
 
   .exit-text {
@@ -968,9 +997,9 @@
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    background: rgba(47,111,94,0.08);
-    color: #1f2937;
-    border: 1px solid rgba(17,24,39,0.08);
+    background: rgba(245,179,1,0.12);
+    color: #0b1220;
+    border: 1px solid rgba(15,23,42,0.10);
     padding: 10px 12px;
     border-radius: 12px;
     font-size: 13px;
@@ -983,13 +1012,14 @@
     width: 100%;
     background: var(--cta);
     border: none;
-    color: #fff;
+    color: var(--cta-text);
     padding: 14px 14px;
     border-radius: 12px;
-    font-weight: 800;
+    font-weight: 900;
     font-size: 16px;
     cursor: pointer;
     transition: background-color 0.2s ease, transform 0.1s ease;
+    font-family: 'Poppins', sans-serif;
   }
   .exit-btn:hover { background: var(--cta-hover); }
   .exit-btn:active { transform: scale(0.98); }
@@ -1015,34 +1045,44 @@
 <div id="exitModal" class="exit-modal">
   <div class="exit-modal-content">
     <div class="exit-header">Quick check before you go 💛</div>
-
     <div class="exit-body">
-      <div class="exit-title">Want a simple starting point?</div>
+  <div class="exit-title">Want a simple starting point?</div>
 
-      <p class="exit-text">
-        Want a realistic starting point for your kitchen?<br><br>
-        Answer 3–5 quick questions and we’ll show:<br>
-        • a starting price range<br>
-        • best path (refacing vs paint vs counters/backsplash)<br>
-        • a realistic timeline
-      </p>
+  <p class="exit-text" style="margin-bottom:12px;">
+    Answer 3–5 quick questions and we’ll show:
+  </p>
 
-      <div class="exit-pill">
-        ✅ 2 minutes • No obligation • Text-first option • English/Español
-      </div>
-
-      <button onclick="goToOffer()" class="exit-btn">
-        Show My Options (2 min) →
-      </button>
-
-      <div class="exit-micro">
-        We’ll ask ZIP + what you want to update. You can stop anytime.
-      </div>
-
-      <span class="close-link" onclick="document.getElementById('exitModal').style.display='none'">
-        Not now — continue browsing
-      </span>
+  <div style="text-align:left; max-width:340px; margin:0 auto 12px auto; color:#4b5563; font-size:15px; line-height:1.55;">
+    <div style="display:flex; gap:10px; align-items:flex-start; margin:6px 0;">
+      <span style="width:18px; text-align:center; flex:0 0 18px;">•</span>
+      <span>a starting price range</span>
     </div>
+    <div style="display:flex; gap:10px; align-items:flex-start; margin:6px 0;">
+      <span style="width:18px; text-align:center; flex:0 0 18px;">•</span>
+      <span>best path: refacing vs paint vs counters/backsplash</span>
+    </div>
+    <div style="display:flex; gap:10px; align-items:flex-start; margin:6px 0;">
+      <span style="width:18px; text-align:center; flex:0 0 18px;">•</span>
+      <span>a realistic timeline</span>
+    </div>
+  </div>
+
+  <div class="exit-pill">
+    ✅ 2 minutes • No obligation • Text-first option • English/Español
+  </div>
+
+  <button onclick="goToOffer()" class="exit-btn">
+    Show My Options (2 min) →
+  </button>
+
+  <div class="exit-micro">
+    We’ll ask ZIP + what you want to update. You can stop anytime.
+  </div>
+
+  <span class="close-link" onclick="document.getElementById('exitModal').style.display='none'">
+    Not now — continue browsing
+  </span>
+</div>
   </div>
 </div>
 
@@ -1139,7 +1179,9 @@
         if (typeof L !== 'undefined') {
             const map = L.map('map', { zoomControl: false, scrollWheelZoom: false, dragging: false, touchZoom: false, doubleClickZoom: false, attributionControl: false }).setView([lat, lon], 11);
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
-            L.circle([lat, lon], { color: '#C97C5D', fillColor: '#C97C5D', fillOpacity: 0.15, radius: 6500 }).addTo(map);
+
+            // match yellow accent
+            L.circle([lat, lon], { color: '#F5B301', fillColor: '#F5B301', fillOpacity: 0.16, radius: 6500 }).addTo(map);
             L.marker([lat, lon]).addTo(map);
         }
     })();
@@ -1170,36 +1212,31 @@
     enableDragScroll('.gallery-track');
     enableDragScroll('.reviews-track');
 
-// ✅ Force gallery to be 4:3 portrait (vertical): height = width * 4/3
-(function lockGalleryTo43Vertical() {
-  const el = document.querySelector('.gallery-container');
-  if (!el) return;
+    // ✅ Force gallery to be 4:3 portrait (vertical): height = width * 4/3
+    (function lockGalleryTo43Vertical() {
+      const el = document.querySelector('.gallery-container');
+      if (!el) return;
 
-  function setHeight() {
-    const w = el.getBoundingClientRect().width;
+      function setHeight() {
+        const w = el.getBoundingClientRect().width;
+        const desired = w * (4 / 3);
+        const cap = window.innerHeight * 0.72;
+        el.style.height = Math.round(Math.min(desired, cap)) + 'px';
+      }
 
-    // 4:3 vertical => height is bigger than width
-    const desired = w * (4 / 3);
+      window.addEventListener('resize', setHeight, { passive: true });
+      setHeight();
+    })();
 
-    // чтобы блок не был слишком высоким на маленьких экранах
-    const cap = window.innerHeight * 0.72;
-
-    el.style.height = Math.round(Math.min(desired, cap)) + 'px';
-  }
-
-  window.addEventListener('resize', setHeight, { passive: true });
-  setHeight();
-})();
-
-  // Ensure autoplay for the first gallery video (mobile-friendly)
-  document.addEventListener("DOMContentLoaded", () => {
-    const v = document.querySelector(".gallery-item video");
-    if (!v) return;
-    v.muted = true;
-    const play = () => v.play().catch(()=>{});
-    play();
-    document.addEventListener("touchstart", play, { once: true });
-  });
+    // Ensure autoplay for the first gallery video (mobile-friendly)
+    document.addEventListener("DOMContentLoaded", () => {
+      const v = document.querySelector(".gallery-item video");
+      if (!v) return;
+      v.muted = true;
+      const play = () => v.play().catch(()=>{});
+      play();
+      document.addEventListener("touchstart", play, { once: true });
+    });
 
     // 5. COMEBACKER LOGIC
     (function() {
@@ -1307,7 +1344,6 @@
             lastScrollTop = st <= 0 ? 0 : st;
         }, false);
     });
-
 </script>
 
 </body>
