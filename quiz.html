@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kitchen Options Check (2 min)</title>
+
+  <!-- GOOGLE FONTS (Sora + Inter) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      /* Palette (copied from your landing) */
+      --bg:#F7F4EF;
+      --surface:#FFFFFF;
+      --border:rgba(17,24,39,0.08);
+
+      /* Text */
+      --text-strong:#111827;
+      --text:#374151;
+      --muted:#6B7280;
+
+      /* CTA & Accents */
+      --cta:#2F6F5E;
+      --cta-hover:#295F51;
+      --highlight:#E8F1ED;
+      --warm-accent:#C97C5D;
+
+      /* Alerts */
+      --success-bg:#E8F1ED;
+      --success-text:#2F6F5E;
+      --warning-bg:#FEF3C7;
+      --warning-text:#92400E;
+    }
+
+    *{box-sizing:border-box;}
+    body{
+      font-family:'Inter',sans-serif;
+      margin:0;
+      background:var(--bg);
+      color:var(--text);
+      line-height:1.6;
+      font-size:17px;
+      padding-bottom:40px;
+      -webkit-user-select:none; -moz-user-select:none; -ms-user-select:none; user-select:none;
+    }
+    input, textarea{ -webkit-user-select:text; -moz-user-select:text; -ms-user-select:text; user-select:text; }
+
+    .container{
+      max-width:600px;
+      margin:0 auto;
+      background:var(--surface);
+      border-left:1px solid var(--border);
+      border-right:1px solid var(--border);
+      min-height:100vh;
+      overflow:hidden;
+    }
+
+    h1,h2,h3,.title{
+      font-family:'Sora',sans-serif;
+      color:var(--text-strong);
+      letter-spacing:-0.01em;
+      margin:0;
+    }
+
+    .status-bar{
+      background:var(--surface);
+      padding:12px 8px;
+      font-size:13px;
+      text-align:center;
+      border-bottom:1px solid var(--border);
+      color:var(--muted);
+      letter-spacing:0.02em;
+      font-weight:500;
+    }
+
+    .wrap{
+      padding:26px 20px 22px 20px;
+      border-bottom:1px solid var(--border);
+    }
+
+    .quiz-card{
+      background:var(--surface);
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:18px;
+    }
+
+    .progress-row{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      margin-bottom:14px;
+    }
+    .step-label{
+      font-size:13px;
+      color:var(--muted);
+      font-weight:600;
+      letter-spacing:0.01em;
+      white-space:nowrap;
+    }
+    .progress{
+      flex:1;
+      height:10px;
+      background:rgba(17,24,39,0.06);
+      border-radius:999px;
+      overflow:hidden;
+      border:1px solid var(--border);
+    }
+    .progress > div{
+      height:100%;
+      width:0%;
+      background:var(--cta);
+      transition:width .25s ease;
+    }
+
+    .question{
+      margin-top:6px;
+      margin-bottom:10px;
+      font-size:20px;
+      line-height:1.25;
+      font-weight:700;
+    }
+    .helper{
+      margin:0 0 14px 0;
+      font-size:14px;
+      color:var(--muted);
+      line-height:1.45;
+    }
+
+    .options{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      margin:14px 0 14px 0;
+    }
+
+    .opt{
+      width:100%;
+      display:flex;
+      align-items:flex-start;
+      gap:10px;
+      padding:14px 14px;
+      border-radius:12px;
+      border:1px solid var(--border);
+      background:#FAFAFA;
+      cursor:pointer;
+      text-align:left;
+      transition:background-color .2s ease, transform .1s ease, border-color .2s ease;
+      font-family:'Inter',sans-serif;
+    }
+    .opt:hover{ background:#F6F6F6; }
+    .opt:active{ transform:scale(.99); }
+
+    .dot{
+      width:18px; height:18px; border-radius:50%;
+      border:2px solid rgba(47,111,94,.35);
+      margin-top:2px;
+      flex-shrink:0;
+      position:relative;
+      background:#fff;
+    }
+    .opt.selected{
+      background:var(--highlight);
+      border-color:rgba(47,111,94,.35);
+    }
+    .opt.selected .dot{
+      border-color:var(--cta);
+    }
+    .opt.selected .dot:after{
+      content:"";
+      position:absolute;
+      left:50%; top:50%;
+      width:8px; height:8px;
+      transform:translate(-50%,-50%);
+      background:var(--cta);
+      border-radius:50%;
+    }
+
+    .opt-title{
+      font-weight:700;
+      color:var(--text-strong);
+      font-size:15px;
+      line-height:1.3;
+    }
+    .opt-sub{
+      margin-top:3px;
+      font-size:13px;
+      color:var(--muted);
+      line-height:1.35;
+    }
+
+    .field{
+      margin:14px 0 10px 0;
+    }
+    .label{
+      font-size:13px;
+      font-weight:700;
+      color:var(--text-strong);
+      margin-bottom:6px;
+      display:block;
+    }
+    .input{
+      width:100%;
+      padding:14px;
+      border:1px solid var(--border);
+      border-radius:12px;
+      background:#FAFAFA;
+      color:var(--text);
+      font-family:'Inter',sans-serif;
+      font-size:16px;
+    }
+    .input:focus{
+      outline:2px solid rgba(47,111,94,.35);
+      border-color:var(--cta);
+      background:#fff;
+    }
+
+    .row{
+      display:flex;
+      gap:10px;
+      margin-top:14px;
+    }
+
+    .btn{
+      display:block;
+      width:100%;
+      padding:16px;
+      font-size:16px;
+      font-family:'Inter',sans-serif;
+      font-weight:700;
+      text-align:center;
+      border-radius:14px;
+      border:none;
+      cursor:pointer;
+      transition:background-color .2s ease, transform .1s ease, opacity .2s ease;
+    }
+    .btn:active{ transform:scale(.98); }
+
+    .btn-primary{
+      background:var(--cta);
+      color:#fff;
+    }
+    .btn-primary:hover{ background:var(--cta-hover); }
+
+    .btn-ghost{
+      background:transparent;
+      border:1px solid var(--border);
+      color:var(--text-strong);
+    }
+    .btn-ghost:hover{ background:#FAFAFA; }
+
+    .btn[disabled]{
+      opacity:.55;
+      cursor:not-allowed;
+      transform:none;
+    }
+
+    .tiny{
+      font-size:12px;
+      color:var(--muted);
+      margin:12px 0 0 0;
+      line-height:1.45;
+    }
+
+    .pill{
+      display:inline-flex;
+      gap:8px;
+      align-items:center;
+      background:rgba(47,111,94,0.08);
+      border:1px solid var(--border);
+      color:var(--text-strong);
+      padding:10px 12px;
+      border-radius:12px;
+      font-size:13px;
+      line-height:1.35;
+      margin-top:10px;
+    }
+
+    .fade{
+      animation:fade .18s ease;
+    }
+    @keyframes fade { from{opacity:0; transform:translateY(4px);} to{opacity:1; transform:translateY(0);} }
+
+    .result{
+      background:var(--success-bg);
+      border:1px solid rgba(47,111,94,.15);
+      border-radius:14px;
+      padding:16px;
+      margin-top:10px;
+    }
+    .result h3{ font-size:18px; font-weight:800; margin:0 0 6px 0; color:var(--success-text); }
+    .result p{ margin:0; font-size:14px; color:var(--success-text); }
+
+    .summary{
+      margin-top:12px;
+      border:1px solid var(--border);
+      border-radius:12px;
+      background:#fff;
+      padding:14px;
+    }
+    .summary-item{
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      padding:8px 0;
+      border-bottom:1px solid rgba(17,24,39,0.06);
+      font-size:14px;
+    }
+    .summary-item:last-child{ border-bottom:none; }
+    .summary-item b{ color:var(--text-strong); }
+
+    .top-actions{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+      margin:0 0 12px 0;
+    }
+    .link{
+      font-size:13px;
+      color:var(--cta);
+      text-decoration:underline;
+      cursor:pointer;
+      font-weight:700;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="status-bar">
+      <span style="color:var(--cta)">●</span> Kitchen Options Check • 2 minutes • Text-first option
+    </div>
+
+    <div class="wrap">
+      <div class="quiz-card" id="quizCard">
+        <!-- content injected by JS -->
+      </div>
+      <p class="tiny">
+        We keep this simple: a few questions, then a clear next step. No obligation.
+      </p>
+    </div>
+
+    <div class="wrap" style="border-bottom:none;">
+      <div style="font-size:13px; color:var(--muted); text-align:center;">
+        <span style="color:var(--cta)">●</span> Prefer Español? You can duplicate this page and translate labels later.
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ================================
+    //  ⚙️ SET YOUR FINAL DESTINATION
+    // ================================
+    // This is where you send a user AFTER the quiz (affiliate link, provider form, etc.)
+    const FINAL_OFFER_URL = "YOUR_AFFILIATE_LINK_HERE";
+
+    // Optional: where to POST the answers (your endpoint). Leave empty to disable.
+    const LEAD_POST_URL = ""; // e.g. "https://yourdomain.com/api/leads"
+
+    const card = document.getElementById("quizCard");
+
+    const state = {
+      step: 0,           // 0=welcome, 1..N=questions, last=result
+      zip: "",
+      project: "",
+      cabinet: "",
+      timeline: "",
+      contactPref: "",
+      name: "",
+      email: "",
+      phone: ""
+    };
+
+    const TOTAL_QUESTIONS = 5;
+
+    const labels = {
+      project: {
+        "refacing": "Cabinet refacing (new doors)",
+        "counters": "New countertops",
+        "backsplash": "Backsplash / tile",
+        "refresh": "Small refresh (hardware/paint)"
+      },
+      cabinet: {
+        "solid": "Solid boxes (good shape)",
+        "minor": "Some issues (loose hinges, small chips)",
+        "water": "Water damage / swelling"
+      },
+      timeline: {
+        "soon": "ASAP (0–2 months)",
+        "later": "2–6 months",
+        "planning": "Just planning (6+ months)"
+      },
+      contactPref: {
+        "text": "Text-first",
+        "call": "Call"
+      }
+    };
+
+    function esc(s){ return String(s || "").replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])); }
+
+    function progressPercent(){
+      // step 0 welcome: 0%
+      // step 1..TOTAL_QUESTIONS: (step-1)/TOTAL_QUESTIONS
+      if(state.step <= 0) return 0;
+      if(state.step > TOTAL_QUESTIONS) return 100;
+      return Math.round(((state.step - 1) / TOTAL_QUESTIONS) * 100);
+    }
+
+    function stepLabel(){
+      if(state.step <= 0) return "Ready";
+      if(state.step > TOTAL_QUESTIONS) return "Done";
+      return `Step ${state.step} of ${TOTAL_QUESTIONS}`;
+    }
+
+    function setCard(html){
+      card.innerHTML = html;
+      card.classList.remove("fade");
+      // trigger reflow for animation
+      void card.offsetWidth;
+      card.classList.add("fade");
+    }
+
+    function render(){
+      const pct = progressPercent();
+      const top = `
+        <div class="progress-row">
+          <div class="step-label">${stepLabel()}</div>
+          <div class="progress" aria-hidden="true"><div style="width:${pct}%"></div></div>
+        </div>
+      `;
+
+      if(state.step === 0){
+        setCard(`
+          ${top}
+          <h1 class="question">See your best kitchen update options in 2 minutes.</h1>
+          <p class="helper">
+            Answer a few quick questions. We’ll help you pick the best path (refacing vs paint vs counters/backsplash) and what’s realistic for your timeline.
+          </p>
+
+          <div class="pill">✅ Free • No obligation • You choose text or call • English/Español</div>
+
+          <div class="row" style="margin-top:16px;">
+            <button class="btn btn-primary" id="startBtn">Start (2 min)</button>
+          </div>
+
+          <p class="tiny">
+            Tip: If you don’t want to share location, use ZIP code only.
+          </p>
+        `);
+
+        document.getElementById("startBtn").onclick = () => { state.step = 1; render(); };
+        return;
+      }
+
+      // STEP 1 — ZIP
+      if(state.step === 1){
+        setCard(`
+          ${top}
+          <div class="top-actions">
+            <span class="link" id="backLink" style="visibility:hidden">Back</span>
+            <span class="link" id="resetLink">Start over</span>
+          </div>
+
+          <h2 class="question">What’s your ZIP code?</h2>
+          <p class="helper">We use ZIP to show realistic local availability and a better starting range.</p>
+
+          <div class="field">
+            <label class="label" for="zip">ZIP code</label>
+            <input class="input" id="zip" inputmode="numeric" maxlength="10" placeholder="e.g. 90210" value="${esc(state.zip)}"/>
+            <div class="tiny" id="zipHelp"></div>
+          </div>
+
+          <div class="row">
+            <button class="btn btn-ghost" id="backBtn" style="visibility:hidden">Back</button>
+            <button class="btn btn-primary" id="nextBtn" disabled>Next</button>
+          </div>
+
+          <p class="tiny">We don’t need your exact address for this step.</p>
+        `);
+
+        const zipEl = document.getElementById("zip");
+        const nextBtn = document.getElementById("nextBtn");
+        const zipHelp = document.getElementById("zipHelp");
+
+        function validateZip(){
+          const v = (zipEl.value || "").trim();
+          // US ZIP basic check: 5 digits or 5-4
+          const ok = /^\d{5}(-\d{4})?$/.test(v);
+          if(!v){
+            zipHelp.textContent = "";
+            nextBtn.disabled = true;
+            return;
+          }
+          zipHelp.textContent = ok ? "Looks good ✅" : "Use 5 digits (or 5-4).";
+          zipHelp.style.color = ok ? "var(--success-text)" : "var(--warning-text)";
+          nextBtn.disabled = !ok;
+        }
+
+        zipEl.addEventListener("input", validateZip);
+        validateZip();
+        zipEl.focus();
+
+        document.getElementById("resetLink").onclick = reset;
+        nextBtn.onclick = () => { state.zip = zipEl.value.trim(); state.step = 2; render(); };
+        return;
+      }
+
+      // STEP 2 — PROJECT
+      if(state.step === 2){
+        setCard(`
+          ${top}
+          <div class="top-actions">
+            <span class="link" id="backLink">Back</span>
+            <span class="link" id="resetLink">Start over</span>
+          </div>
+
+          <h2 class="question">What do you want to update most?</h2>
+          <p class="helper">Pick the #1 priority. We’ll suggest the cleanest path from there.</p>
+
+          <div class="options" id="opts">
+            ${opt("project","refacing","Cabinet refacing","New doors/drawer fronts without full replacement")}
+            ${opt("project","counters","New countertops","Big visual impact with less demo")}
+            ${opt("project","backsplash","Backsplash / tile","Often the fastest “wow” upgrade")}
+            ${opt("project","refresh","Small refresh","Hardware, paint, lighting, small fixes")}
+          </div>
+
+          <div class="row">
+            <button class="btn btn-ghost" id="backBtn">Back</button>
+            <button class="btn btn-primary" id="nextBtn" disabled>Next</button>
+          </div>
+
+          <p class="tiny">You can combine upgrades later. We start from the most important one.</p>
+        `);
+
+        bindOptions("project");
+        document.getElementById("resetLink").onclick = reset;
+        document.getElementById("backBtn").onclick = () => { state.step = 1; render(); };
+        document.getElementById("backLink").onclick = () => { state.step = 1; render(); };
+
+        const nextBtn = document.getElementById("nextBtn");
+        nextBtn.disabled = !state.project;
+        nextBtn.onclick = () => { state.step = 3; render(); };
+        return;
+      }
+
+      // STEP 3 — CABINET CONDITION
+      if(state.step === 3){
+        setCard(`
+          ${top}
+          <div class="top-actions">
+            <span class="link" id="backLink">Back</span>
+            <span class="link" id="resetLink">Start over</span>
+          </div>
+
+          <h2 class="question">How are your cabinet boxes?</h2>
+          <p class="helper">This decides whether refacing makes sense or if replacement is safer.</p>
+
+          <div class="options" id="opts">
+            ${opt("cabinet","solid","Solid boxes","Refacing/refresh is often a great fit")}
+            ${opt("cabinet","minor","Some issues","Still possible, may need small fixes")}
+            ${opt("cabinet","water","Water damage","Replacement may be better than refacing")}
+          </div>
+
+          <div class="row">
+            <button class="btn btn-ghost" id="backBtn">Back</button>
+            <button class="btn btn-primary" id="nextBtn" disabled>Next</button>
+          </div>
+        `);
+
+        bindOptions("cabinet");
+        document.getElementById("resetLink").onclick = reset;
+        document.getElementById("backBtn").onclick = () => { state.step = 2; render(); };
+        document.getElementById("backLink").onclick = () => { state.step = 2; render(); };
+
+        const nextBtn = document.getElementById("nextBtn");
+        nextBtn.disabled = !state.cabinet;
+        nextBtn.onclick = () => { state.step = 4; render(); };
+        return;
+      }
+
+      // STEP 4 — TIMELINE
+      if(state.step === 4){
+        setCard(`
+          ${top}
+          <div class="top-actions">
+            <span class="link" id="backLink">Back</span>
+            <span class="link" id="resetLink">Start over</span>
+          </div>
+
+          <h2 class="question">When do you want to start?</h2>
+          <p class="helper">Timeline helps set realistic availability and price expectations.</p>
+
+          <div class="options" id="opts">
+            ${opt("timeline","soon","ASAP (0–2 months)","Best if you’re ready to book")}
+            ${opt("timeline","later","2–6 months","Good window for planning and quotes")}
+            ${opt("timeline","planning","Just planning (6+ months)","No pressure — clarity first")}
+          </div>
+
+          <div class="row">
+            <button class="btn btn-ghost" id="backBtn">Back</button>
+            <button class="btn btn-primary" id="nextBtn" disabled>Next</button>
+          </div>
+        `);
+
+        bindOptions("timeline");
+        document.getElementById("resetLink").onclick = reset;
+        document.getElementById("backBtn").onclick = () => { state.step = 3; render(); };
+        document.getElementById("backLink").onclick = () => { state.step = 3; render(); };
+
+        const nextBtn = document.getElementById("nextBtn");
+        nextBtn.disabled = !state.timeline;
+        nextBtn.onclick = () => { state.step = 5; render(); };
+        return;
+      }
+
+      // STEP 5 — CONTACT PREF + (optional) contact info
+      if(state.step === 5){
+        setCard(`
+          ${top}
+          <div class="top-actions">
+            <span class="link" id="backLink">Back</span>
+            <span class="link" id="resetLink">Start over</span>
+          </div>
+
+          <h2 class="question">How should we follow up?</h2>
+          <p class="helper">You choose the vibe. Text-first is the most popular (less pressure).</p>
+
+          <div class="options" id="opts">
+            ${opt("contactPref","text","Text-first","No robocalls. Easy to ignore if busy")}
+            ${opt("contactPref","call","Call","Good if you want quick clarity")}
+          </div>
+
+          <div class="field">
+            <label class="label" for="name">First name (optional)</label>
+            <input class="input" id="name" placeholder="e.g. Sarah" value="${esc(state.name)}"/>
+          </div>
+
+          <div class="field">
+            <label class="label" for="email">Email (optional)</label>
+            <input class="input" id="email" inputmode="email" placeholder="you@email.com" value="${esc(state.email)}"/>
+          </div>
+
+          <div class="field">
+            <label class="label" for="phone">Phone (optional)</label>
+            <input class="input" id="phone" inputmode="tel" placeholder="(555) 123-4567" value="${esc(state.phone)}"/>
+          </div>
+
+          <div class="row">
+            <button class="btn btn-ghost" id="backBtn">Back</button>
+            <button class="btn btn-primary" id="nextBtn" disabled>See results</button>
+          </div>
+
+          <p class="tiny">
+            We keep it simple. You can leave contact fields blank and still view your next step.
+          </p>
+        `);
+
+        bindOptions("contactPref");
+        document.getElementById("resetLink").onclick = reset;
+        document.getElementById("backBtn").onclick = () => { state.step = 4; render(); };
+        document.getElementById("backLink").onclick = () => { state.step = 4; render(); };
+
+        const nextBtn = document.getElementById("nextBtn");
+        nextBtn.disabled = !state.contactPref;
+
+        const nameEl = document.getElementById("name");
+        const emailEl = document.getElementById("email");
+        const phoneEl = document.getElementById("phone");
+
+        // Keep state updated
+        nameEl.addEventListener("input", () => state.name = nameEl.value);
+        emailEl.addEventListener("input", () => state.email = emailEl.value);
+        phoneEl.addEventListener("input", () => state.phone = phoneEl.value);
+
+        nextBtn.onclick = () => {
+          state.name = nameEl.value.trim();
+          state.email = emailEl.value.trim();
+          state.phone = phoneEl.value.trim();
+          state.step = 6;
+          render();
+        };
+        return;
+      }
+
+      // RESULT
+      if(state.step === 6){
+        const recommendation = getRecommendation();
+        setCard(`
+          ${top}
+          <h2 class="question">Perfect — here’s your best starting path.</h2>
+          <p class="helper">Based on your answers, this is the lowest-stress way to get the look you want.</p>
+
+          <div class="result">
+            <h3>${esc(recommendation.title)}</h3>
+            <p>${esc(recommendation.body)}</p>
+          </div>
+
+          <div class="summary" aria-label="Your answers summary">
+            ${sum("ZIP", state.zip)}
+            ${sum("Priority", labels.project[state.project] || state.project)}
+            ${sum("Cabinet boxes", labels.cabinet[state.cabinet] || state.cabinet)}
+            ${sum("Timeline", labels.timeline[state.timeline] || state.timeline)}
+            ${sum("Follow-up", labels.contactPref[state.contactPref] || state.contactPref)}
+          </div>
+
+          <div class="row" style="margin-top:14px;">
+            <button class="btn btn-ghost" id="editBtn">Edit answers</button>
+            <button class="btn btn-primary" id="goBtn">See local options →</button>
+          </div>
+
+          <p class="tiny">
+            Clicking continues to the matching step. You can stop anytime.
+          </p>
+        `);
+
+        document.getElementById("editBtn").onclick = () => { state.step = 1; render(); };
+
+        document.getElementById("goBtn").onclick = async () => {
+          try {
+            if(LEAD_POST_URL){
+              await fetch(LEAD_POST_URL, {
+                method: "POST",
+                headers: {"Content-Type":"application/json"},
+                body: JSON.stringify({ ...state, ts: Date.now() })
+              });
+            }
+          } catch(e){ /* silent */ }
+
+          // Append answers as query params (optional)
+          const params = new URLSearchParams({
+            zip: state.zip,
+            project: state.project,
+            cabinet: state.cabinet,
+            timeline: state.timeline,
+            contact: state.contactPref,
+            name: state.name || "",
+            email: state.email || "",
+            phone: state.phone || ""
+          });
+
+          const url = FINAL_OFFER_URL + (FINAL_OFFER_URL.includes("?") ? "&" : "?") + params.toString();
+          window.location.href = url;
+        };
+
+        return;
+      }
+    }
+
+    function opt(key, val, title, sub){
+      const selected = state[key] === val ? "selected" : "";
+      return `
+        <button class="opt ${selected}" type="button" data-k="${key}" data-v="${val}">
+          <span class="dot" aria-hidden="true"></span>
+          <span>
+            <div class="opt-title">${esc(title)}</div>
+            <div class="opt-sub">${esc(sub)}</div>
+          </span>
+        </button>
+      `;
+    }
+
+    function bindOptions(key){
+      const list = document.querySelectorAll(".opt[data-k='"+key+"']");
+      const nextBtn = document.getElementById("nextBtn");
+
+      list.forEach(btn => {
+        btn.onclick = () => {
+          list.forEach(x => x.classList.remove("selected"));
+          btn.classList.add("selected");
+          state[key] = btn.getAttribute("data-v");
+          if(nextBtn) nextBtn.disabled = !state[key];
+        };
+      });
+
+      // if already selected, enable
+      if(nextBtn) nextBtn.disabled = !state[key];
+    }
+
+    function sum(k,v){
+      return `
+        <div class="summary-item">
+          <span>${esc(k)}</span>
+          <b>${esc(v || "-")}</b>
+        </div>
+      `;
+    }
+
+    function getRecommendation(){
+      // Simple, readable logic (you can refine later)
+      if(state.cabinet === "water"){
+        return {
+          title: "Consider replacement (water damage changes the math).",
+          body: "Refacing can fail on swollen or damaged boxes. A pro can confirm the safest option and scope."
+        };
+      }
+
+      if(state.project === "refacing" || state.project === "refresh"){
+        return {
+          title: "Start with refacing / refresh (fast, clean, high impact).",
+          body: "If the boxes are solid, updating doors, finishes, and hardware often gives the biggest “new kitchen” feel with less disruption."
+        };
+      }
+
+      if(state.project === "counters"){
+        return {
+          title: "Start with countertops (big visual upgrade, manageable demo).",
+          body: "New counters often transform the space quickly. A quick check can narrow a realistic range for your area and timeline."
+        };
+      }
+
+      return {
+        title: "Start with backsplash (quick “wow” with less downtime).",
+        body: "Tile/backsplash can change the vibe fast. You can combine it later with counters or doors if needed."
+      };
+    }
+
+    function reset(){
+      state.step = 0;
+      state.zip = "";
+      state.project = "";
+      state.cabinet = "";
+      state.timeline = "";
+      state.contactPref = "";
+      state.name = "";
+      state.email = "";
+      state.phone = "";
+      render();
+    }
+
+    render();
+  </script>
+</body>
+</html>
