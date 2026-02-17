@@ -1192,16 +1192,7 @@ async function initMap() {
     }
 }
 
-(function lazyInitMap() {
-    const wrap = document.getElementById('map-wrapper');
-    if (!wrap) return;
-
-    let started = false;
-    const start = () => {
-        if (started) return;
-        started = true;
-        initMap();
-    };
+initMap();
 
     if ('IntersectionObserver' in window) {
         const io = new IntersectionObserver((entries) => {
@@ -1402,3 +1393,4 @@ async function initMap() {
 
 </body>
 </html>
+
