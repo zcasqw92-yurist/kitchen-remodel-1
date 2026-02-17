@@ -410,14 +410,16 @@
   scroll-snap-stop: always;
 }
 
+/* Универсально для img и video */
 .gallery-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
-  opacity: 0.95;
-}
 
+  /* важно: чтобы свайп/drag всегда работал, включая первый слайд с video */
+  pointer-events: none;
+}
 
         .badge {
             position: absolute;
@@ -511,6 +513,16 @@
 
         /* SECURITY STYLES */
         img { -webkit-user-drag: none; -khtml-user-drag: none; -moz-user-drag: none; -o-user-drag: none; pointer-events: none; }
+/* Badge справа (для After) */
+.badge-right {
+  left: auto;
+  right: 12px;
+}
+
+/* чтобы плашки точно были поверх фото/видео */
+.badge { 
+  z-index: 3; 
+}
     </style>
 </head>
 <body>
@@ -533,10 +545,19 @@
         <!-- GALLERY -->
         <div class="gallery-container">
             <div class="gallery-track">
+                <!-- === PAIR 0 === -->
+                <div class="gallery-item">
+                <span class="badge badge-before">Before</span>
+                <span class="badge badge-after badge-right">After ✨</span>
+                <div class="right-arrow-hint">›</div>
+                <video class="gallery-img" autoplay loop muted playsinline preload="metadata" poster="img/1111-before.jpg">
+                <source src="img/1111-before.mp4" type="video/mp4">
+                </video>
+                </div>
+
                 <!-- === PAIR 1 === -->
                 <div class="gallery-item">
                     <span class="badge badge-before">Before</span>
-                    <div class="right-arrow-hint">›</div>
                     <img src="img/1-before.jpg" class="gallery-img" alt="Kitchen before update">
                 </div>
                 <div class="gallery-item">
@@ -1170,6 +1191,15 @@
   setHeight();
 })();
 
+  // Ensure autoplay for the first gallery video (mobile-friendly)
+  document.addEventListener("DOMContentLoaded", () => {
+    const v = document.querySelector(".gallery-item video");
+    if (!v) return;
+    v.muted = true;
+    const play = () => v.play().catch(()=>{});
+    play();
+    document.addEventListener("touchstart", play, { once: true });
+  });
 
     // 5. COMEBACKER LOGIC
     (function() {
