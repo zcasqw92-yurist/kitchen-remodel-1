@@ -107,6 +107,11 @@
       letter-spacing: 0.02em;
       font-weight: 500;
     }
+      .status-bar{
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
 
     /* HERO */
     .hero-section {
@@ -266,6 +271,15 @@
       white-space: nowrap;
       box-shadow: 0 2px 8px rgba(0,0,0,0.25);
     }
+
+      .geo-city{ display:inline-block; }
+
+      /* именно для плашки */
+      .geo-highlight{
+       min-width: 10ch;         /* можно 12ch если часто длинные города */
+       text-align: center;
+    }
+
 
     /* STICKY FOOTER */
     .sticky-footer {
@@ -457,13 +471,6 @@
       
       /* Основная пропорция 3:4 */
       aspect-ratio: 3 / 4; 
-    }
-
-    /* На коротких экранах делаем галерею квадратной, чтобы всё влезло без прыжков */
-    @media (max-height: 700px) {
-      .gallery-container {
-        aspect-ratio: 1 / 1;
-      }
     }
 
     /* трек и слайды */
@@ -661,6 +668,12 @@
       }
       .hero-section .sub-headline {
         min-height: 3.2em; /* резерв под ~2 строки */
+      }
+
+      .hero-section h1,
+      .hero-section .sub-headline,
+      .hero-section .btn{
+       font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
       }
     }
   </style>
