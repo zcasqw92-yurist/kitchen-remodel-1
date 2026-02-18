@@ -1136,9 +1136,39 @@
 
 <!-- === SMART COMEBACKER (ONE-TIME BACK BUTTON TRAP) === -->
 <style>
-  .exit-modal { display: none; position: fixed; z-index: 999999; left: 0; top: 0; width: 100%; height: 100%; overflow: hidden; background-color: rgba(0,0,0,0.55); backdrop-filter: blur(4px); animation: fadeIn 0.25s; font-family: -apple-system, system-ui, sans-serif; }
-  .exit-modal-content { background-color: #fff; margin: 40% auto; padding: 0; width: 92%; max-width: 420px; border-radius: 14px; box-shadow: 0 12px 30px rgba(0,0,0,0.35); position: relative; text-align: center; overflow: hidden; }
-  @media (min-width: 768px) { .exit-modal-content { margin: 12% auto; } }
+  /* === FIX: center modal perfectly on mobile === */
+.exit-modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  z-index:999999;
+  background-color:rgba(0,0,0,0.55);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  animation: fadeIn 0.25s;
+  font-family: -apple-system, system-ui, sans-serif;
+
+  /* ключ: центрируем флексом */
+  display:none;
+  align-items:center;
+  justify-content:center;
+
+  /* чтобы не упиралось в safe-area (айфоны) */
+  padding: 16px;
+  padding-top: calc(16px + env(safe-area-inset-top));
+  padding-bottom: calc(16px + env(safe-area-inset-bottom));
+}
+
+.exit-modal-content{
+  background:#fff;
+  width: min(420px, 92vw);
+  max-height: min(78vh, 640px);
+  overflow:auto;
+  border-radius:14px;
+  box-shadow:0 12px 30px rgba(0,0,0,0.35);
+  position:relative;
+  text-align:center;
+}
   .exit-header { background: rgba(245,179,1,0.14); padding: 14px 16px; font-weight: 800; color: #0b1220; font-size: 14px; font-family: 'Poppins', sans-serif; }
   .exit-body { padding: 16px 16px 18px 16px; }
   .exit-title { margin: 6px 0 10px 0; color: #0b1220; font-size: 20px; line-height: 1.25; font-weight: 900; font-family: 'Poppins', sans-serif; }
@@ -1178,7 +1208,7 @@
       <div class="exit-pill">Free matching • No obligation • Text-first option</div>
       <button onclick="goToOffer()" class="exit-btn">See Pricing & Ideas (2 min) →</button>
       <div class="exit-micro">It’s free and helps you plan your budget.</div>
-      <span class="close-link" onclick="document.getElementById('exitModal').style.display='none'">
+      <span class="close-link" onclick="__closeExitModal()">
         No thanks — I’ll keep browsing
       </span>
     </div>
@@ -1355,31 +1385,85 @@
         window.addEventListener("mousemove", loadVideo, { once: true, passive: true });
     });
 
-    // 5. COMEBACKER LOGIC
-    (function() {
-        const modal = document.getElementById("exitModal");
-        if(!modal) return;
-        function showComebacker() { modal.style.display = "block"; }
-        
-        let historyPushed = false;
-        const activeTrap = function() {
-            if (historyPushed) return;
-            history.pushState({ page: 'landing' }, null, location.href);
-            historyPushed = true;
-        };
-        document.body.addEventListener('click', activeTrap, { once: true });
-        document.body.addEventListener('touchstart', activeTrap, { once: true });
-        window.addEventListener('popstate', function(event) {
-            if (modal.style.display !== "block") showComebacker();
-        });
-        let mouseTrapTriggered = false;
-        document.addEventListener("mouseleave", function(e) {
-            if (e.clientY < 0 && !mouseTrapTriggered) {
-                showComebacker();
-                mouseTrapTriggered = true;
-            }
-        });
-    })();
+    // 5. COMEBACKER LOGIC (centered + allows exit)
+(function() {
+  const modal = document.getElementById("exitModal");
+  if (!modal) return;
+
+  let trapArmed = false;        // мы поставили фиктивный state
+  let hasShownOnce = false;     // показали модалку 1 раз
+  let allowExitNow = false;     // после закрытия — следующий back выходит
+
+  function openModal() {
+    modal.style.display = "flex";     // важно: flex, чтобы центрировалось
+    document.documentElement.style.overflow = "hidden";
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeModal() {
+    modal.style.display = "none";
+    document.documentElement.style.overflow = "";
+    document.body.style.overflow = "";
+    allowExitNow = true;              // следующий back должен реально выйти
+  }
+
+  // закрытие по клику на "No thanks"
+  window.__closeExitModal = closeModal; // если хочешь вызвать из inline onclick
+
+  // IMPORTANT: arm the trap once (first interaction)
+  function armTrapOnce() {
+    if (trapArmed) return;
+    history.pushState({ cb: 1 }, "", location.href);
+    trapArmed = true;
+  }
+
+  document.addEventListener("click", armTrapOnce, { once: true, passive: true });
+  document.addEventListener("touchstart", armTrapOnce, { once: true, passive: true });
+
+  // Back button behavior
+  window.addEventListener("popstate", function() {
+    // Если ловушка не была взведена — не вмешиваемся
+    if (!trapArmed) return;
+
+    // Если уже разрешили выход — больше не ловим
+    if (allowExitNow) return;
+
+    // Первый back: показываем модалку и тут же возвращаем состояние,
+    // чтобы следующий back был "реальным выходом"
+    if (!hasShownOnce) {
+      hasShownOnce = true;
+      openModal();
+      history.pushState({ cb: 1 }, "", location.href);
+      return;
+    }
+
+    // Если модалка уже показывалась, не блокируем выход (даём браузеру уйти)
+    // (ничего не делаем)
+  });
+
+  // Desktop exit intent (не ломает мобилу)
+  let mouseTrapTriggered = false;
+  document.addEventListener("mouseleave", function(e) {
+    if (e.clientY < 0 && !mouseTrapTriggered && !hasShownOnce) {
+      openModal();
+      hasShownOnce = true;
+      mouseTrapTriggered = true;
+    }
+  });
+
+  // close on backdrop click
+  modal.addEventListener("click", function(e) {
+    if (e.target === modal) closeModal();
+  });
+
+  // close on Escape
+  document.addEventListener("keydown", function(e) {
+    if (e.key === "Escape" && modal.style.display !== "none") {
+      closeModal();
+    }
+  });
+
+})();
 
     // 6. UI: TESTIMONIALS & FAQ
     const stars = document.querySelectorAll('.star-rating span');
