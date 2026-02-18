@@ -2,18 +2,20 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="description" content="Compare kitchen refacing, countertops, backsplash, and refresh options. Get a free price range and local availability in 2 minutes.">
+  <link rel="canonical" href="https://homesupplycenter.org/">
+  <meta name="robots" content="index,follow">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="referrer" content="no-referrer">
   <title>Kitchen Refacing & Refresh Guide</title>
 
   <!-- Leaflet CSS (lazy-friendly) -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"></noscript>
 
   <!-- GOOGLE FONTS (Inter + Sora) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preload" as="image" href="img/1111-before.jpg" fetchpriority="high">
+  <link rel="preload" as="image" href="img/1111-before.webp" fetchpriority="high">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
   <noscript>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
@@ -421,16 +423,25 @@
     }
 
     /* GALLERY STYLES (4:3 VERTICAL / PORTRAIT) */
-    .gallery-container {
-      position: relative;
-      width: 100%;
-      margin: 24px 0;
-      border-radius: 12px;
-      overflow: hidden;
-      border: 1px solid var(--border);
-      background: #000;
-      height: 520px; /* fallback */
-    }
+   .gallery-container{
+  position: relative;
+  width: 100%;
+  margin: 24px 0;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: #000;
+
+  /* ключевое: фиксируем геометрию ДО загрузки контента */
+  aspect-ratio: 3 / 4;             /* вертикальный 4:3 */
+  height: auto;                    /* больше не дергаем JS */
+  max-height: 72vh;                /* чтобы не было слишком высоко */
+}
+.gallery-track,
+.gallery-item{
+  height: 100%;
+}
+
 
     .gallery-track {
       display: flex;
@@ -626,11 +637,30 @@
         <div class="gallery-track">
           <!-- === PAIR 0 === -->
           <div class="gallery-item">
-            <span class="badge badge-before">❌ Before</span>
-            <span class="badge badge-after badge-right">After ✨</span>
-            <div class="right-arrow-hint">›</div>
-            <video class="gallery-img lcp-video" autoplay loop muted playsinline preload="none" poster="img/1111-before.jpg" data-src="img/1111-before.mp4"></video>
-          </div>
+  <span class="badge badge-before">❌ Before</span>
+  <span class="badge badge-after badge-right">After ✨</span>
+  <div class="right-arrow-hint">›</div>
+
+  <!-- LCP: реальная картинка с высоким приоритетом -->
+  <img
+    class="gallery-img lcp-poster"
+    src="img/1111-before.webp"
+    width="768" height="1024"
+    alt="Kitchen before and after preview"
+    fetchpriority="high"
+    decoding="async"
+  >
+
+  <!-- Видео подгрузится позже и заменит картинку -->
+  <video
+    class="gallery-img lcp-video"
+    autoplay loop muted playsinline
+    preload="none"
+    data-src="img/1111-before.mp4"
+    style="display:none"
+  ></video>
+</div>
+
 
           <!-- === PAIR 1 === -->
           <div class="gallery-item">
@@ -686,7 +716,8 @@
 
       <button onclick="goToOffer()" class="btn btn-primary">Show My Options (2 min)</button>
 
-      <!-- TRUST BADGES BLOCK END -->
+       <!-- TRUST BADGES BLOCK END -->
+
       <p style="font-size: 13px; color: var(--muted); margin-top: 12px; margin-bottom: 0;">
         Free matching • No obligation • Text-first option
       </p>
@@ -695,7 +726,7 @@
       <div class="trust-badges">
         <div class="trust-item"><span class="trust-icon">🔒</span> SSL Secure</div>
       </div>
-
+     
       <!-- What you get (inline-only, no new classes) -->
       <div style="margin-top:14px; background:var(--highlight); border:1px solid var(--border); border-radius:12px; padding:14px 16px; font-size:15px; line-height:1.5; text-align:left;">
         <div style="font-weight:800; font-family:'Sora',sans-serif; color:var(--text-strong); margin-bottom:8px;">What you’ll get (in 2 minutes):</div>
@@ -1207,7 +1238,6 @@
   </div>
 
   <!-- SCRIPTS -->
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script>
     // 1) DATE LOGIC
     (function setDate() {
@@ -1256,11 +1286,39 @@
     })();
 
     // 3) MAP & GEO LOGIC (true lazy init when map gets near viewport)
+    let __leafletLoaded = false;
     let __mapInited = false;
 
+function loadLeaflet() {
+  if (__leafletLoaded) return Promise.resolve();
+  __leafletLoaded = true;
+
+  const css = new Promise((res, rej) => {
+    const l = document.createElement("link");
+    l.rel = "stylesheet";
+    l.href = "https://unpkg.com/leaflet@1.9.4/dist/leaflet.css";
+    l.onload = res;
+    l.onerror = rej;
+    document.head.appendChild(l);
+  });
+
+  const js = new Promise((res, rej) => {
+    const s = document.createElement("script");
+    s.src = "https://unpkg.com/leaflet@1.9.4/dist/leaflet.js";
+    s.defer = true;
+    s.onload = res;
+    s.onerror = rej;
+    document.body.appendChild(s);
+  });
+
+  return Promise.all([css, js]);
+}
+
     async function initMap() {
-      if (__mapInited) return;
-      __mapInited = true;
+  if (__mapInited) return;
+  __mapInited = true;
+
+  await loadLeaflet();
 
       let lat = 41.8781, lon = -87.6298;
       let city = "Your Area";
@@ -1364,59 +1422,54 @@
     enableDragScroll('.gallery-track');
     enableDragScroll('.reviews-track');
 
-    // 5) Force gallery to be 4:3 portrait: height = width * 4/3
-    (function lockGalleryTo43Vertical() {
-      const el = document.querySelector('.gallery-container');
-      if (!el) return;
-
-      function setHeight() {
-        const w = el.getBoundingClientRect().width;
-        const desired = w * (4 / 3);
-        const cap = window.innerHeight * 0.72;
-        el.style.height = Math.round(Math.min(desired, cap)) + 'px';
-      }
-
-      window.addEventListener('resize', setHeight, { passive: true });
-      setHeight();
-    })();
-
+    
     // 6) Ensure autoplay for the first gallery video (mobile-friendly)
     (function lazyLoadHeroVideo() {
-      const run = () => {
-        const v = document.querySelector(".lcp-video");
-        if (!v) return;
+  const run = () => {
+    const v = document.querySelector(".lcp-video");
+    const posterImg = document.querySelector(".lcp-poster");
+    if (!v) return;
 
-        const src = v.getAttribute("data-src");
-        let loaded = false;
+    const src = v.getAttribute("data-src");
+    let loaded = false;
 
-        const loadVideo = () => {
-          if (loaded) return;
-          loaded = true;
-          const s = document.createElement("source");
-          s.src = src;
-          s.type = "video/mp4";
-          v.appendChild(s);
-          v.load();
-          v.play().catch(() => {});
-        };
+    const loadVideo = () => {
+      if (loaded) return;
+      loaded = true;
 
-        if ("requestIdleCallback" in window) {
-          requestIdleCallback(loadVideo, { timeout: 1500 });
-        } else {
-          setTimeout(loadVideo, 1200);
-        }
+      const s = document.createElement("source");
+      s.src = src;
+      s.type = "video/mp4";
+      v.appendChild(s);
 
-        window.addEventListener("scroll", loadVideo, { once: true, passive: true });
-        window.addEventListener("touchstart", loadVideo, { once: true, passive: true });
-        window.addEventListener("mousemove", loadVideo, { once: true, passive: true });
+      v.load();
+
+      const showVideo = () => {
+        v.style.display = "block";
+        if (posterImg) posterImg.style.display = "none";
       };
 
-      if (document.readyState === "loading") {
-        document.addEventListener("DOMContentLoaded", run);
-      } else {
-        run();
-      }
-    })();
+      v.addEventListener("canplay", showVideo, { once: true });
+
+      v.play().then(showVideo).catch(() => {
+        // если autoplay заблокирован — просто оставляем картинку (LCP уже ок)
+      });
+    };
+
+    if ("requestIdleCallback" in window) {
+      requestIdleCallback(loadVideo, { timeout: 1500 });
+    } else {
+      setTimeout(loadVideo, 1200);
+    }
+
+    window.addEventListener("scroll", loadVideo, { once: true, passive: true });
+    window.addEventListener("touchstart", loadVideo, { once: true, passive: true });
+    window.addEventListener("mousemove", loadVideo, { once: true, passive: true });
+  };
+
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", run);
+  else run();
+})();
 
     // 7) COMEBACKER LOGIC (centered + allows exit)
     (function() {
@@ -1564,5 +1617,3 @@
   </script>
 </body>
 </html>
-
-
