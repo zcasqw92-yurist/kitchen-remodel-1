@@ -13,10 +13,17 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" media="print" onload="this.media='all'">
 
   <!-- GOOGLE FONTS (Inter + Sora) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preload" as="image" href="img/1111-before.webp" fetchpriority="high">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@600;700;800&display=swap"
+      onload="this.onload=null;this.rel='stylesheet'">
+
+<noscript>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@600;700;800&display=swap">
+</noscript>
 
   <script>
     // ==========================================
@@ -56,7 +63,7 @@
     }
 
     body {
-      font-family: 'Inter', sans-serif;
+      font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
       margin: 0;
       background: var(--bg);
       padding-bottom: 100px;
@@ -90,7 +97,7 @@
 
     /* TYPOGRAPHY OVERRIDES */
     h1, h2, h3, .section-title, .review-title, .form-header, .exit-header {
-      font-family: 'Sora', sans-serif;
+      font-family: 'Sora', system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
       color: var(--text-strong);
       letter-spacing: -0.01em;
     }
@@ -619,6 +626,15 @@
       .btn { transition: none; }
       .live-notification { transition: none; }
     }
+
+    /* === CLS FIX: reserve hero text height on small screens === */
+@media (max-width: 520px) {
+  .hero-section h1 {
+    min-height: 2.6em; /* резерв под ~2 строки */
+  }
+  .hero-section .sub-headline {
+    min-height: 3.2em; /* резерв под ~2 строки */
+  }
   </style>
 </head>
 
@@ -1313,15 +1329,19 @@ function loadLeaflet() {
   __leafletLoaded = true;
 
   const css = new Promise((res, rej) => {
-    const l = document.createElement("link");
-    l.rel = "stylesheet";
-    l.href = "https://unpkg.com/leaflet@1.9.4/dist/leaflet.css";
-    l.onload = res;
-    l.onerror = rej;
-    document.head.appendChild(l);
-  });
+  const existing = document.querySelector("link[href*='leaflet@1.9.4/dist/leaflet.css']");
+  if (existing) return res();
 
-  const js = new Promise((res, rej) => {
+  const l = document.createElement("link");
+  l.rel = "stylesheet";
+  l.href = "https://unpkg.com/leaflet@1.9.4/dist/leaflet.css";
+  l.onload = res;
+  l.onerror = rej;
+  document.head.appendChild(l);
+});
+
+
+    const js = new Promise((res, rej) => {
     const s = document.createElement("script");
     s.src = "https://unpkg.com/leaflet@1.9.4/dist/leaflet.js";
     s.defer = true;
