@@ -9,8 +9,12 @@
   <meta name="referrer" content="no-referrer">
   <title>Kitchen Refacing & Refresh Guide</title>
 
-  <!-- Leaflet CSS (Load normally to prevent layout shift from late loading) -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+    <!-- ЗАМЕНИТЕ ПОДКЛЮЧЕНИЕ LEAFLET НА ЭТО -->
+   <!-- ЗАМЕНИТЕ СТАРУЮ СТРОКУ LEAFLET НА ЭТОТ БЛОК -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" media="print" onload="this.media='all'">
+  <noscript>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  </noscript>
 
   <!-- GOOGLE FONTS -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -446,12 +450,20 @@
       border-radius: 12px;
       overflow: hidden;
       border: 1px solid var(--border);
-      background: #000;
+      background: #eee; /* Цвет фона, пока грузится картинка */
       
-      /* FIX CLS: Удален конфликт max-height и aspect-ratio */
+      /* FIX CLS: Строгая изоляция. Браузер сразу знает размер блока */
+      contain: strict;
+      
+      /* Основная пропорция 3:4 */
       aspect-ratio: 3 / 4; 
-      /* Изоляция лайаута */
-      contain: content; 
+    }
+
+    /* На коротких экранах делаем галерею квадратной, чтобы всё влезло без прыжков */
+    @media (max-height: 700px) {
+      .gallery-container {
+        aspect-ratio: 1 / 1;
+      }
     }
 
     /* трек и слайды */
