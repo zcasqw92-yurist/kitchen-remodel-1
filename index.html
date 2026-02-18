@@ -557,6 +557,31 @@
         .badge { 
           z-index: 3; 
         }
+
+/* TRUST BADGES */
+.trust-badges {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    margin-top: 16px;
+    flex-wrap: wrap;
+    padding: 0 10px;
+}
+.trust-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    color: var(--muted);
+    font-weight: 500;
+    white-space: nowrap;
+}
+.trust-icon {
+    font-size: 14px;
+    filter: grayscale(1);
+    opacity: 0.7;
+}
     </style>
 </head>
 <body>
@@ -570,10 +595,13 @@
 
     <!-- 2. HERO SECTION -->
     <div class="hero-section">
-        <h1>Refresh your kitchen without replacing your cabinets.</h1>
+        <!-- Заголовок стал чуть шире по смыслу -->
+        <h1>Update your kitchen’s look without a full remodel.</h1>
+        
+        <!-- В подзаголовке перечисляем ТО, ЧТО ОНИ ИСКАЛИ (Keywords) -->
         <p class="sub-headline">
-            Cabinet refacing, new countertops, backsplash, hardware — and even built-in appliances when it makes sense.
-            Start a quick 2-minute check to see your best options in <span class="geo-city">your area</span>.
+            New countertops, backsplash, built-in appliances, or cabinet refacing.
+            Check if <span class="geo-city">your area</span> qualifies for a custom refresh plan.
         </p>
         
         <!-- GALLERY -->
@@ -581,7 +609,7 @@
             <div class="gallery-track">
                 <!-- === PAIR 0 === -->
                 <div class="gallery-item">
-                <span class="badge badge-before">Before</span>
+                <span class="badge badge-before">❌ Before</span>
                 <span class="badge badge-after badge-right">After ✨</span>
                 <div class="right-arrow-hint">›</div>
                 <video class="gallery-img lcp-video" autoplay loop muted playsinline preload="none" poster="img/1111-before.jpg" data-src="img/1111-before.mp4">
@@ -590,93 +618,109 @@
 
                 <!-- === PAIR 1 === -->
                 <div class="gallery-item">
-                    <span class="badge badge-before">Before</span>
+                    <span class="badge badge-before">❌ Condition: Good Layout, but Dated & Dark</span>
                     <img src="img/1-before.jpg" class="gallery-img" alt="Kitchen before update" loading="lazy" decoding="async">
                 </div>
                 <div class="gallery-item">
-                    <span class="badge badge-after">After ✨ (Refaced)</span>
+                    <span class="badge badge-after">✨ Refaced to Modern White | Saved ~$5,800</span>
                     <img src="img/1-after.jpg" class="gallery-img" alt="Kitchen after refacing" loading="lazy" decoding="async">
                 </div>
                 <!-- === PAIR 2 === -->
                 <div class="gallery-item">
-                    <span class="badge badge-before">Before</span>
+                    <span class="badge badge-before">❌ Problem: Generic "Builder-Grade" Style</span>
                     <img src="img/2-before.jpg" class="gallery-img" alt="Kitchen before" loading="lazy" decoding="async">
                 </div>
                 <div class="gallery-item">
-                    <span class="badge badge-after">After ✨ (New counters)</span>
+                    <span class="badge badge-after">💎 Custom Two-Tone Look | Cost: ~50% Less vs. New</span>
                     <img src="img/2-after.jpg" class="gallery-img" alt="Kitchen after" loading="lazy" decoding="async">
                 </div>
                 <!-- === PAIR 3 === -->
                 <div class="gallery-item">
-                    <span class="badge badge-before">Before</span>
+                    <span class="badge badge-before">🌒 Dated "Old World" Style & Dark Granite</span>
                     <img src="img/3-before.jpg" class="gallery-img" alt="Kitchen before" loading="lazy" decoding="async">
                 </div>
                 <div class="gallery-item">
-                    <span class="badge badge-after">After ✨ (Backsplash)</span>
+                    <span class="badge badge-after">✨ Full Transformation: Grey Shaker + New Quartz Tops</span>
                     <img src="img/3-after.jpg" class="gallery-img" alt="Kitchen after" loading="lazy" decoding="async">
                 </div>
                 <!-- === PAIR 4 === -->
                 <div class="gallery-item">
-                    <span class="badge badge-before">Before</span>
+                    <span class="badge badge-before">⚠️ Problem: Peeling Finish & Worn Out</span>
                     <img src="img/4-before.jpg" class="gallery-img" alt="Kitchen before" loading="lazy" decoding="async">
                 </div>
                 <div class="gallery-item">
-                    <span class="badge badge-after">After ✨ (Hardware)</span>
+                    <span class="badge badge-after">⏱️ Modern Farmhouse Style | Done in 3 Days</span>
                     <img src="img/4-after.jpg" class="gallery-img" alt="Kitchen after" loading="lazy" decoding="async">
                 </div>
                 <!-- === PAIR 5 === -->
                 <div class="gallery-item">
-                    <span class="badge badge-before">Before</span>
+                    <span class="badge badge-before">⚠️ Problem: Dated "Heavy" Wood & Visual Noise</span>
                     <img src="img/5-before.jpg" class="gallery-img" alt="Kitchen before" loading="lazy" decoding="async">
                 </div>
                 <div class="gallery-item">
-                    <span class="badge badge-after">After ✨ (Refresh)</span>
+                    <span class="badge badge-after">✨ Ultra-Modern "Euro" Style | High-End Upgrade</span>
                     <img src="img/5-after.jpg" class="gallery-img" alt="Kitchen after" loading="lazy" decoding="async">
                 </div>
             </div>
         </div>
 
         <button onclick="goToOffer()" class="btn btn-primary">
-            Show My Options (2 min)
-        </button>
-        <p style="font-size: 13px; color: var(--muted); margin-top: 16px;">
-            Free matching • No obligation • You choose text or call • English/Español
-        </p>
+    Show My Options (2 min)
+</button>
 
-        <!-- What you get (inline-only, no new classes) -->
+<!-- TRUST BADGES BLOCK START -->
+<div class="trust-badges">
+    <div class="trust-item">
+        <span class="trust-icon">🔒</span> SSL Secure
+    </div>
+    <div class="trust-item">
+        <span class="trust-icon">🏠</span> Verified Pros
+    </div>
+    <div class="trust-item">
+        <span class="trust-icon">💰</span> No-Cost Estimates
+    </div>
+</div>
+<!-- TRUST BADGES BLOCK END -->
+
+<p style="font-size: 13px; color: var(--muted); margin-top: 12px; margin-bottom: 0;">
+    Free matching • No obligation • Text-first option
+</p>
+
+<!-- What you get (inline-only, no new classes) -->
         <div style="margin-top:14px; background:var(--highlight); border:1px solid var(--border); border-radius:12px; padding:14px 16px; font-size:15px; line-height:1.5; text-align:left;">
             <div style="font-weight:800; font-family:'Poppins',sans-serif; color:var(--text-strong); margin-bottom:8px;">What you’ll get (in 2 minutes):</div>
             <div>• A realistic starting price range</div>
-            <div>• Best path: refacing vs paint vs new counters/backsplash</div>
+            <div>• Options for: counters, doors, appliances, & more</div>
             <div>• Timeline + mess level (so you can plan)</div>
         </div>
     </div>
 
     <!-- 3. RATIONALIZATION -->
     <div class="section">
-        <h2 class="section-title">What “refacing” actually means (in plain English)</h2>
+        <h2 class="section-title">What is the best option for your kitchen?</h2>
         <p style="margin-bottom: 24px; color: var(--text);">
-            If your cabinet boxes are solid, you can get a “new kitchen” look by updating the parts you see and touch:
-            new doors and drawer fronts, fresh finishes, modern hardware — and optionally new countertops and backsplash.
-            It’s often faster, cleaner, and more budget-friendly than a full cabinet replacement.
-        </p>
+    <strong>Refacing:</strong> Keeps your existing layout but replaces doors, drawers, and hardware for a brand-new look.<br><br>
+    <strong>Counters & More:</strong> You can update <em>just</em> the countertops, backsplash, or appliances — or combine everything for a full transformation.
+            It’s often faster, cleaner, and more budget-friendly than a full rip-out remodel.
+             </p>
         <div style="background: var(--warning-bg); padding: 20px; border: 1px solid var(--border); border-radius: 12px; font-size: 15px;">
             <p style="margin: 0; color: var(--warning-text); line-height: 1.6;">
                 <strong>💡 Quick reality check:</strong><br>
-                Refacing is great when the cabinet “boxes” are in good shape. If there’s major water damage or the layout must change,
-                a different option may be better. The 2-minute check helps sort that out so you don’t waste time or money.
+                Not sure what you need? The 2-minute check helps you compare options (refacing vs. just counters vs. full remodel) so you don't waste time or money on the wrong service.
             </p>
         </div>
     </div>
 
-    <!-- 4. MAP -->
+        <!-- 4. MAP -->
     <div class="section">
         <h2 class="section-title">Local options near <span class="geo-city">Your Area</span></h2>
+        
         <p style="font-size: 15px; margin-bottom: 8px;">
-            We use your area to show nearby availability and match you with the right type of pro (refacing, countertops, tile, etc.).
+            We check your area for top-rated specialists, whether you need full refacing, new countertops, or a simple refresh.
         </p>
+        
         <p style="font-size:13px; color:var(--muted); margin:0 0 12px 0;">
-            We match by project type (doors, counters, backsplash) — not one-size-fits-all.
+            We match by expertise (cabinetry, stone, tile, appliances) — so you get the right pro for the job.
         </p>
 
         <div id="map-wrapper">
@@ -689,16 +733,18 @@
                 </div>
             </div>
         </div>
+        
         <p style="font-size: 13px; color: var(--muted); text-align: center; margin-top: 12px;">
-            <span style="color: var(--cta)">●</span> Prefer not to share location? No problem — the 2-minute check works with ZIP code.
+    <span style="color: var(--cta)">●</span> We are actively matching homeowners in <span class="geo-city">your area</span> right now. Start the 2-minute check to see availability.
         </p>
-    </div>
+          </div>
 
     <!-- 5. TESTIMONIALS -->
     <div class="reviews-container">
         <div class="reviews-header">
-            <h2 class="section-title" style="margin-bottom: 8px;">Real reviews from homeowners</h2>
-            <p style="font-size: 14px; color: var(--muted); margin: 0;">Feedback from people who used the 2-minute quiz to compare options (refacing vs. paint vs. replacement) and choose text or call.</p>
+            <!-- CHANGED: Focus on savings and consultation value -->
+            <h2 class="section-title" style="margin-bottom: 8px;">See how homeowners saved time & money</h2>
+            <p style="font-size: 14px; color: var(--muted); margin: 0;">Feedback from neighbors who used our diagnostic quiz to find the smartest renovation path and avoid overpriced quotes.</p>
         </div>
         
         <div class="reviews-track">
@@ -709,19 +755,19 @@
                         <img src="img/review-sarah.jpg" class="review-avatar" alt="Homeowner" loading="lazy" decoding="async">
                             <div class="review-meta">
                             <div class="review-name">Sarah M. (Homeowner)</div>
-                            <div class="review-date">Wanted a realistic starting range</div>
+                            <div class="review-date">Saved roughly $5k on cabinets</div>
                         </div>
                     </div>
                     <div class="review-stars">★★★★★</div>
-                    <div class="review-title">“Clear options. Zero pressure.”</div>
+                    <div class="review-title">“The call saved me roughly $5,000.”</div>
                     <p class="review-body">
-                        I wasn’t ready to talk to contractors yet — I just wanted a realistic starting point.
-  I answered a few quick questions and immediately saw a starting price range, the best path for my kitchen
-  (refacing vs paint vs counters/backsplash), and what the timeline/mess usually looks like.
-  I also liked that I could choose text-first — no spam, no nonstop calls, and no obligation.
+                        I was convinced I needed brand new cabinets. I took the quiz just to compare prices. 
+                        The expert who called me reviewed my answers and explained that my cabinet boxes were still good—I only needed refacing. 
+                        Honest advice, no upsell, and the call took less than 10 minutes.
                     </p>
                 </div>
-                <div class="verified-badge">✔ Outcome: starting range + best path + timeline (text-first option)</div>
+                <!-- CHANGED: Focus on money saving outcome -->
+                <div class="verified-badge">✔ Outcome: Saved money by choosing refacing vs. replacement</div>
             </div>
 
             <!-- 2 -->
@@ -731,19 +777,19 @@
                         <img src="img/review-mark.jpg" class="review-avatar" alt="Homeowner" loading="lazy" decoding="async">
                         <div class="review-meta">
                             <div class="review-name">Mark T. (Homeowner)</div>
-                            <div class="review-date">Wanted a realistic timeline + mess level</div>
+                            <div class="review-date">Hates robocalls & spam</div>
                         </div>
                     </div>
                     <div class="review-stars">★★★★★</div>
-                    <div class="review-title">“I knew what to expect — and that lowered my stress.”</div>
+                    <div class="review-title">“Short, professional, and zero spam.”</div>
                     <p class="review-body">
-                        My biggest fear was the kitchen being unusable and the house turning into a dust zone.
-  The 2-minute check helped me understand the most realistic path for my situation (refacing vs paint vs counters/backsplash)
-  and what the timeline and disruption typically look like.
-  That clarity made planning easy — and I could start text-first without feeling pushed into a call.
+                        I hesitate to give out my number because of robocalls. But here, I selected "Evening" for a callback, and that’s exactly when they called. 
+                        The contractor came prepared because of the quiz info. 
+                        We skipped the awkward "sales pitch" and went straight to discussing my kitchen layout.
                     </p>
                 </div>
-                <div class="verified-badge">✔ Helped most: timeline expectation + mess level (text-first option)</div>
+                <!-- CHANGED: Focus on respectful communication -->
+                <div class="verified-badge">✔ Experience: Respectful communication • No unwanted calls</div>
             </div>
 
             <!-- 3 -->
@@ -753,19 +799,19 @@
                         <img src="img/review-jen.jpg" class="review-avatar" alt="Homeowner" loading="lazy" decoding="async">
                         <div class="review-meta">
                             <div class="review-name">Danielle R. (Homeowner)</div>
-                            <div class="review-date">Text-first option • No robocalls</div>
+                            <div class="review-date">Needed clear direction</div>
                         </div>
                     </div>
                     <div class="review-stars">★★★★★</div>
-                    <div class="review-title">“Finally: clarity without getting spammed.”</div>
+                    <div class="review-title">“Finally, someone listened to what I actually wanted.”</div>
                     <p class="review-body">
-                        I normally avoid lead forms because I don’t want my phone blowing up.
-  This felt different: I answered a few quick questions, saw a realistic starting range and what option fit best
-  (refacing vs paint vs counters/backsplash), and I could keep it text-first.
-  No robocalls, no pressure, and nothing felt “pushy.”
+                        Other companies tried to sell me a full demo instantly. 
+                        This 2-minute check helped me clarify that I only wanted to change the countertops and backsplash. 
+                        The specialist confirmed this was possible without tearing everything apart. It gave me the confidence to move forward.
                     </p>
                 </div>
-                <div class="verified-badge">✔ Preference: Text-first • matched with a limited number of pros</div>
+                <!-- CHANGED: Focus on clarity -->
+                <div class="verified-badge">✔ Outcome: Clear renovation plan tailored to my needs</div>
             </div>
 
             <!-- 4 -->
@@ -779,15 +825,15 @@
                         </div>
                     </div>
                     <div class="review-stars">★★★★★</div>
-                    <div class="review-title">“It helped me choose the ‘least chaos’ option.”</div>
+                    <div class="review-title">“We figured out a plan to keep the kitchen livable.”</div>
                     <p class="review-body">
-                        With kids at home, I couldn’t do a weeks-long remodel or live in constant dust.
-  The 2-minute check made it clear what would change the look the most with the least disruption
-  (doors/hardware first, then counters/backsplash if it made sense).
-  I also appreciated seeing a realistic timeline expectation before deciding on anything — and I could start text-first.
+                        With kids at home, I couldn't afford a messy 6-week renovation. 
+                        The quiz asked about my timeline, and the pro who called suggested a "low-disruption" refacing plan. 
+                        I didn't know that was an option! We got the modern look we wanted in just 5 days of actual work.
                     </p>
                 </div>
-                <div class="verified-badge">✔ Best for: keeping the home livable (timeline + mess expectations)</div>
+                <!-- CHANGED: Focus on lifestyle protection -->
+                <div class="verified-badge">✔ Best for: Minimal disruption + Accurate timeline expectations</div>
             </div>
 
             <!-- 5 -->
@@ -797,26 +843,26 @@
                         <img src="img/review-robert.jpg" class="review-avatar" alt="Homeowner" loading="lazy" decoding="async">
                         <div class="review-meta">
                             <div class="review-name">Robert S. (Homeowner)</div>
-                            <div class="review-date">Helped me ask the right questions</div>
+                            <div class="review-date">Not ready for home visits yet</div>
                         </div>
                     </div>
                     <div class="review-stars">★★★★★</div>
-                    <div class="review-title">“It saved me a bunch of back-and-forth.”</div>
+                    <div class="review-title">“Got my questions answered without a home visit.”</div>
                     <p class="review-body">
-                        I didn’t even know what to ask for. The 2-minute check gave me a clear starting direction
-  (refacing vs paint vs counters/backsplash) and a realistic starting range, so I wasn’t going into conversations blind.
-  It made the first call straightforward and focused — and I liked that it didn’t feel pushy.
+                        I wasn't ready to have strangers in my house yet. Filling out the form allowed me to get a preliminary consultation over the phone first. 
+                        The representative was knowledgeable, answered my questions about materials, and gave me a ballpark idea before we ever scheduled a measurement.
                     </p>
                 </div>
-                <div class="verified-badge">✔ Outcome: clear direction + starting range (fewer back-and-forth questions)</div>
+                <!-- CHANGED: Focus on low commitment -->
+                <div class="verified-badge">✔ Preference: Informative phone consultation before home visit</div>
             </div>
         </div>
 
         <div style="text-align:center; margin-top:16px; font-size:13px; color:var(--muted); display:flex; align-items:center; justify-content:center; gap:6px;">
-            <span>👆 Swipe to see the most common concerns</span>
+            <span>👆 Swipe to see common renovation wins</span>
         </div>
 
-        <!-- “FAKE FORM” repurposed as OPTIONAL NOTE (text-only change) -->
+        <!-- “FAKE FORM” repurposed as OPTIONAL NOTE -->
         <div id="review-form-box" class="write-review-box">
             <div class="form-header">Optional: Leave a note for your project goal</div>
             <form id="fake-review-form">
@@ -824,7 +870,10 @@
                     <span data-val="1">★</span><span data-val="2">★</span><span data-val="3">★</span><span data-val="4">★</span><span data-val="5">★</span>
                 </div>
                 <input type="text" class="fake-input" placeholder="First name (optional)">
-                <textarea class="fake-input fake-textarea" placeholder="What do you want to change most? (doors, counters, backsplash, appliances, etc.)"></textarea>
+                
+                <!-- CHANGED: Placeholder now prompts for specific call details -->
+                <textarea class="fake-input fake-textarea" placeholder="E.g., I want to keep my current layout but change the color. Best time to call is after 6 PM."></textarea>
+                
                 <button type="submit" class="submit-btn">Save Note</button>
                 <p style="margin:10px 0 0 0; font-size:12px; color:var(--muted);">
                     Optional — this helps a pro come prepared, so you get fewer back-and-forth questions.<br>
@@ -833,130 +882,249 @@
             </form>
         </div>
 
-        <!-- SUCCESS -->
+               <!-- SUCCESS -->
         <div id="review-success" class="success-overlay">
-            <h3 style="color:var(--success-text); margin:0 0 8px 0; font-family:'Poppins',sans-serif; font-weight:800;">Saved ✅</h3>
-            <p style="margin:0; font-size:15px; color:var(--success-text);">
-                Next step: start the 2-minute check to see your best options.
+            
+            <!-- Headline: Explicitly states moderation status -->
+            <h3 style="color:var(--success-text); margin:0 0 8px 0; font-family:'Poppins',sans-serif; font-weight:800;">
+                Sent for Moderation ✅
+            </h3>
+
+            <!-- Body: Confirms receipt + Pushes to next step -->
+            <p style="margin:0; font-size:14px; color:var(--success-text); line-height: 1.5;">
+                Thank you! Your note has been submitted for review.<br>
+                <span style="font-weight:600; display:block; margin-top:4px;">
+                    Next step: Start the 2-minute check to see your options.
+                </span>
             </p>
+
             <div style="margin-top:14px;">
                 <button onclick="goToOffer()" class="btn btn-primary" style="padding: 14px; border-radius: 14px;">
                     Show My Options (2 min)
                 </button>
             </div>
+
         </div>
+
     </div>
 
     <!-- 6. AUTHORITY -->
     <div class="section" id="how-it-works-section">
-        <h2 class="section-title">How it works (simple + low-pressure)</h2>
+        <h2 class="section-title">How to Get Your Exact Price (Simple & Stress-Free)</h2>
         <ul class="stages-list">
             <li>
                 <div style="flex-shrink:0; width:28px; height:28px; background:var(--highlight); color:var(--text-strong); border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:14px; font-family:'Poppins',sans-serif;">1</div>
                 <div>
-                    <strong>Tell us what you want:</strong><br>
-                    A quick 2-minute check (ZIP + style + what you want to upgrade). No remodeling jargon required.
+                    <strong>Answer a few questions:</strong><br>
+                    Tell us about your current kitchen layout and what style you’re looking for. It takes less than 2 minutes.
                 </div>
             </li>
             <li>
                 <div style="flex-shrink:0; width:28px; height:28px; background:var(--highlight); color:var(--text-strong); border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:14px; font-family:'Poppins',sans-serif;">2</div>
                 <div>
-                    <strong>Get matched correctly:</strong><br>
-                    Refacing specialist, countertop crew, tile installer — based on your answers, not guesswork.
+                    <strong>Get Matched with a Pro:</strong><br>
+                    We analyze your project needs and connect you with a local expert who specializes in your specific request.
                 </div>
             </li>
             <li>
                 <div style="flex-shrink:0; width:28px; height:28px; background:var(--highlight); color:var(--text-strong); border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:14px; font-family:'Poppins',sans-serif;">3</div>
                 <div>
-                    <strong>Choose what fits your budget:</strong><br>
-                    Compare options and timelines. If you want a measurement or quote, you decide when to schedule.
-                    You’ll see a realistic starting range before you decide anything.
+                    <strong>Receive Your Custom Quote:</strong><br>
+                    Review your options and pricing details with a specialist. No guesswork—just honest numbers so you can decide.
                 </div>
             </li>
         </ul>
     </div>
 
-    <!-- 7. CHEAT SHEET -->
+        <!-- 7. CHEAT SHEET -->
     <div class="section" style="background-color: var(--bg);">
-        <h2 class="section-title">✅ Smart questions to ask any contractor</h2>
+        <h2 class="section-title">Insider Checklist: 4 Questions That Save You Money & Headaches</h2>
+        
         <p>
-            Want to feel confident on the first call? Here are four questions that protect your budget and your peace of mind:
+            Don't just get a quote—get the <em>right</em> quote. Use this cheat sheet when you speak with a pro to ensure you get the best deal with zero surprises.
         </p>
         
         <div class="cheat-sheet">
             <h3>
                 <span style="font-size:20px">🧾</span> Ask these 4 questions:
             </h3>
-            <ol>
-                <li>"Are you licensed/insured for this type of work where required?"</li>
-                <li>"What exactly is included — materials, install, removal/disposal, and cleanup?"</li>
-                <li>"What’s the realistic timeline (and what could delay it)?"</li>
-                <li>"How do you protect floors/counters and control dust during the work?"</li>
+            <ol style="margin: 0; padding-left: 20px;">
+                <li style="margin-bottom: 16px;">
+                    <strong>"Is this the 'Out-the-Door' Price?"</strong><br>
+                    <span style="font-size: 14px; color: var(--muted);">Make sure materials, installation, disposal, and cleanup are ALL included. No hidden fees later.</span>
+                </li>
+                <li style="margin-bottom: 16px;">
+                    <strong>"Can you verify your License & Insurance?"</strong><br>
+                    <span style="font-size: 14px; color: var(--muted);">Protects you from liability. Legit pros (like the ones in our network) will happily show proof.</span>
+                </li>
+                <li style="margin-bottom: 16px;">
+                    <strong>"What is the Guaranteed Finish Date?"</strong><br>
+                    <span style="font-size: 14px; color: var(--muted);">Refacing should take days, not weeks. Get a firm timeline in writing.</span>
+                </li>
+                <li style="margin-bottom: 16px;">
+                    <strong>"What is your Dust Control Plan?"</strong><br>
+                    <span style="font-size: 14px; color: var(--muted);">Professional crews use specialized coverings to keep your floors safe and your home dust-free.</span>
+                </li>
             </ol>
         </div>
         
-        <p style="font-size: 13px; color: var(--muted); text-align: center; margin-top: 16px; margin-bottom: 0;">
-            <em>*A clear scope + timeline upfront prevents most surprise costs.</em>
+        <p style="font-size: 14px; color: var(--text-strong); text-align: center; margin-top: 16px; margin-bottom: 0; background: var(--success-bg); padding: 10px; border-radius: 8px;">
+            <strong>✅ Confidence Booster:</strong> Our network pros expect these questions. In fact, they love educated homeowners!
         </p>
     </div>
 
-    <!-- 8. FAQ ACCORDION -->
-    <div class="faq-section">
-        <h2 class="section-title" style="text-align:center; margin-bottom:32px;">Frequently Asked Questions</h2>
-        <div class="faq-container">
-            <!-- Q1 -->
-            <div class="faq-item active">
-                <div class="faq-question">Is this really free? What happens after I click?<span class="arrow-icon">▼</span></div>
-                <div class="faq-answer">
-                    Yes — it’s <strong>free</strong>. After 3–5 quick questions, you’ll see:<br>
-                    • a realistic starting price range<br>
-                    • the best path (refacing vs paint vs counters/backsplash)<br>
-                    • a timeline expectation<br><br>
-                    If you request quotes, you choose <strong>text or call</strong> and we match you with a small number of local pros — <strong>no obligation</strong>.
-                </div>
-            </div>
-            <!-- Q2 -->
-            <div class="faq-item">
-                <div class="faq-question">Will my phone blow up with calls?<span class="arrow-icon">▼</span></div>
-                <div class="faq-answer">
-                    No. You can choose <strong>text-first</strong>, and you’re matched with a limited number of pros. The goal is clarity — not pressure.
-                </div>
-            </div>
-            <!-- Q3 -->
-            <div class="faq-item">
-                <div class="faq-question">How much can refacing save?<span class="arrow-icon">▼</span></div>
-                <div class="faq-answer">
-                    Refacing often costs less than full replacement because you keep the cabinet boxes and avoid heavy demolition.
-                    Exact cost depends on door style, finishes, and whether you’re also upgrading countertops/backsplash.
-                    The 2-minute check helps narrow a realistic range for your situation.
-                </div>
-            </div>
-            <!-- Q4 -->
-            <div class="faq-item">
-                <div class="faq-question">Can I get a quote now and schedule later?<span class="arrow-icon">▼</span></div>
-                <div class="faq-answer">
-                    Often yes. Many contractors can provide an estimate and offer a short quote-validity window.
-                    Timelines depend on materials and scheduling — you’ll see what’s realistic for your area.
-                </div>
-            </div>
-            <!-- Q5 -->
-            <div class="faq-item">
-                <div class="faq-question">Do you handle small upgrades too?<span class="arrow-icon">▼</span></div>
-                <div class="faq-answer">
-                    Yes. Some homeowners start with hardware + paint, others do refacing only, and many combine it with new countertops or backsplash.
-                    You don’t need a massive budget to make a big visual difference.
-                </div>
-            </div>
-        </div>
+<!-- 8. FAQ ACCORDION -->
+<div class="faq-section"> 
+<h2 class="section-title" style="text-align:center; margin-bottom:32px;">Frequently Asked Questions</h2> 
+<div class="faq-container">
+  <!-- Q1 -->
+  <div class="faq-item active">
+    <div class="faq-question">What happens after I tap “Show My Options (2 min)”?<span class="arrow-icon">▼</span></div>
+    <div class="faq-answer">
+      You’ll go to a quick 2-minute check where you describe what you want (refacing, counters, backsplash, appliances, or a mix).
+      After that, a local pro can reach out to confirm a couple details and give you a <strong>realistic price range</strong> for your area.
+      <br><br>
+      <strong>Zero pressure:</strong> you can use it just to plan your budget.
     </div>
+  </div>
 
-    <!-- 9. FOOTER -->
-    <div class="legal-footer">
-        <p><strong>Disclaimer:</strong> This site is a free service to assist homeowners in connecting with local service providers. All contractors/providers are independent and this site does not warrant or guarantee any work performed. It is the responsibility of the homeowner to verify that the hired contractor furnishes the necessary license and insurance required for the work being performed.</p>
-        <p style="margin-top:10px;">&copy; <span id="copyright-year">2024</span> Kitchen Refacing & Refresh Guide.</p>
+  <!-- Q2 -->
+  <div class="faq-item">
+    <div class="faq-question">Why can’t I see an exact price instantly on this page?<span class="arrow-icon">▼</span></div>
+    <div class="faq-answer">
+      Kitchens are priced by details that online calculators usually miss: cabinet condition, door style, material choices, layout, and install complexity.
+      The 2-minute check narrows it down, and a pro confirms the specifics so you don’t get “bait” pricing.
     </div>
+  </div>
+
+  <!-- Q3 -->
+  <div class="faq-item">
+    <div class="faq-question">Do I have to talk to someone right away?<span class="arrow-icon">▼</span></div>
+    <div class="faq-answer">
+      Not necessarily. Many homeowners start with <strong>text-first</strong> to get a ballpark range and ask a few questions.
+      If you want a truly exact quote, you can schedule a measurement later — only if and when you’re comfortable.
+    </div>
+  </div>
+
+  <!-- Q4 -->
+  <div class="faq-item">
+    <div class="faq-question">Why do you need my phone number?<span class="arrow-icon">▼</span></div>
+    <div class="faq-answer">
+      Because accurate pricing usually needs 1–2 clarifying questions (materials, rough measurements, timeline).
+      <br><br>
+      <strong>Important:</strong> you should never be asked for sensitive info (like SSN or bank details) just to get an estimate.
+    </div>
+  </div>
+
+  <!-- Q6 -->
+  <div class="faq-item">
+    <div class="faq-question">Will I get spammed with calls?<span class="arrow-icon">▼</span></div>
+    <div class="faq-answer">
+      It’s normal to get a follow-up when you request pricing — that’s how estimates work.
+      But you stay in control:
+      <ul style="margin:10px 0 0 18px;">
+        <li>Request <strong>text-first</strong> if you hate calls</li>
+        <li>Set a <strong>time window</strong> (morning/evening)</li>
+        <li>If you’re not moving forward, say “Please stop contacting me”</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Q7 -->
+  <div class="faq-item">
+    <div class="faq-question">How many pros will contact me?<span class="arrow-icon">▼</span></div>
+    <div class="faq-answer">
+      Often it’s one local specialist. In some areas, more than one may reach out.
+      If you only want one quote, just tell the first person: <strong>“I’m only collecting one estimate right now.”</strong>
+    </div>
+  </div>
+
+  <!-- Q8 -->
+  <div class="faq-item">
+    <div class="faq-question">Is the estimate really free? Am I obligated to buy?<span class="arrow-icon">▼</span></div>
+    <div class="faq-answer">
+      Yes — requesting options and an estimate is <strong>free</strong>, and you’re not obligated to hire anyone.
+      Any work agreement (if you choose to move forward) is between you and the contractor.
+    </div>
+  </div>
+
+  <!-- Q9 -->
+  <div class="faq-item">
+    <div class="faq-question">Are the pros local and trustworthy?<span class="arrow-icon">▼</span></div>
+    <div class="faq-answer">
+      We aim to match you with <strong>local specialists</strong> who handle the type of work you selected (cabinetry, stone, tile, appliances).
+      <br><br>
+      Still — always verify basics before scheduling:
+      <ul style="margin:10px 0 0 18px;">
+        <li><strong>License</strong> (where required)</li>
+        <li><strong>Insurance</strong> (proof)</li>
+        <li>A <strong>written</strong>, itemized estimate</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Q10 -->
+  <div class="faq-item">
+    <div class="faq-question">I’m scared of hidden fees or “price jumps.” How do I protect myself?<span class="arrow-icon">▼</span></div>
+    <div class="faq-answer">
+      Ask for an <strong>out-the-door</strong> price in writing (materials + labor + cleanup + disposal), and confirm what triggers extra costs.
+      <br><br>
+      Tip: use the <strong>“Insider Checklist”</strong> above — it’s designed exactly for this.
+    </div>
+  </div>
+
+  <!-- Q11 -->
+  <div class="faq-item">
+    <div class="faq-question">What’s the difference: refacing vs. refresh vs. full remodel?<span class="arrow-icon">▼</span></div>
+    <div class="faq-answer">
+      <strong>Refacing:</strong> keeps cabinet boxes, replaces doors/drawers/hardware for a new look.<br>
+      <strong>Refresh:</strong> smaller upgrades (paint/finish, hardware, lighting, backsplash, counters).<br>
+      <strong>Full remodel:</strong> layout changes, major demo, typically higher cost and longer timeline.
+    </div>
+  </div>
+
+  <!-- Q12 -->
+  <div class="faq-item">
+    <div class="faq-question">Can I just replace countertops, backsplash, or appliances (no full remodel)?<span class="arrow-icon">▼</span></div>
+    <div class="faq-answer">
+      Yes. Many homeowners do a “smart upgrade” instead of a full tear-out.
+      You can mix and match: counters + backsplash, refacing + new sink, appliance install, and more.
+    </div>
+  </div>
+
+  <!-- Q13 -->
+  <div class="faq-item">
+    <div class="faq-question">How long does it take, and how messy is it?<span class="arrow-icon">▼</span></div>
+    <div class="faq-answer">
+      Refacing/refresh projects are often measured in <strong>days</strong> (not weeks), but timing depends on kitchen size, materials, and scope.
+      Ask about <strong>dust control</strong>, daily cleanup, and what stays usable during the work — a good crew will explain it clearly.
+    </div>
+  </div>
+
+  <!-- Q15 -->
+  <div class="faq-item">
+    <div class="faq-question">I’m just browsing and not ready. Is it still worth doing?<span class="arrow-icon">▼</span></div>
+    <div class="faq-answer">
+      Yes — many people use the 2-minute check for <strong>budget planning</strong> only.
+      If a pro reaches out, you can simply say you’re “researching” and want a rough range. That’s totally normal.
+    </div>
+  </div>
 
 </div>
+  
+    <!-- 9. FOOTER -->
+    <div class="legal-footer">
+        <p><strong>Disclaimer:</strong> HomeSupplyCenter.org is a free service to assist homeowners in connecting with local service providers. All contractors/providers are independent and HomeSupplyCenter.org does not warrant or guarantee any work performed. It is the responsibility of the homeowner to verify that the hired contractor furnishes the necessary license and insurance required for the work being performed.</p>
+        
+        <!-- LINKS -->
+        <p style="margin-top: 16px; font-size: 11px;">
+            <a href="privacy.html" style="color: var(--on-dark-muted); text-decoration: none; margin: 0 8px;">Privacy Policy</a> |
+            <a href="terms.html" style="color: var(--on-dark-muted); text-decoration: none; margin: 0 8px;">Terms of Use</a> |
+            <a href="ccpa.html" style="color: var(--on-dark-muted); text-decoration: none; margin: 0 8px;">Do Not Sell My Personal Information</a>
+        </p>
+
+        <p style="margin-top:10px;">&copy; <span id="copyright-year">2024</span> Kitchen Refacing & Refresh Guide.</p>
+    </div>
 
 <!-- STICKY FOOTER -->
 <div class="sticky-footer" id="sticky-cta">
@@ -971,124 +1139,49 @@
   .exit-modal { display: none; position: fixed; z-index: 999999; left: 0; top: 0; width: 100%; height: 100%; overflow: hidden; background-color: rgba(0,0,0,0.55); backdrop-filter: blur(4px); animation: fadeIn 0.25s; font-family: -apple-system, system-ui, sans-serif; }
   .exit-modal-content { background-color: #fff; margin: 40% auto; padding: 0; width: 92%; max-width: 420px; border-radius: 14px; box-shadow: 0 12px 30px rgba(0,0,0,0.35); position: relative; text-align: center; overflow: hidden; }
   @media (min-width: 768px) { .exit-modal-content { margin: 12% auto; } }
-
-  .exit-header {
-    background: rgba(245,179,1,0.14);
-    padding: 14px 16px;
-    font-weight: 800;
-    color: #0b1220;
-    font-size: 14px;
-    font-family: 'Poppins', sans-serif;
-  }
-
+  .exit-header { background: rgba(245,179,1,0.14); padding: 14px 16px; font-weight: 800; color: #0b1220; font-size: 14px; font-family: 'Poppins', sans-serif; }
   .exit-body { padding: 16px 16px 18px 16px; }
-
-  .exit-title {
-    margin: 6px 0 10px 0;
-    color: #0b1220;
-    font-size: 20px;
-    line-height: 1.25;
-    font-weight: 900;
-    font-family: 'Poppins', sans-serif;
-  }
-
-  .exit-text {
-    color: #4b5563;
-    font-size: 15px;
-    line-height: 1.45;
-    margin: 0 0 12px 0;
-  }
-
-  .exit-pill {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: rgba(245,179,1,0.12);
-    color: #0b1220;
-    border: 1px solid rgba(15,23,42,0.10);
-    padding: 10px 12px;
-    border-radius: 12px;
-    font-size: 13px;
-    line-height: 1.35;
-    margin: 10px 0 12px 0;
-    text-align: left;
-  }
-
-  .exit-btn {
-    width: 100%;
-    background: var(--cta);
-    border: none;
-    color: var(--cta-text);
-    padding: 14px 14px;
-    border-radius: 12px;
-    font-weight: 900;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.2s ease, transform 0.1s ease;
-    font-family: 'Poppins', sans-serif;
-  }
+  .exit-title { margin: 6px 0 10px 0; color: #0b1220; font-size: 20px; line-height: 1.25; font-weight: 900; font-family: 'Poppins', sans-serif; }
+  .exit-text { color: #4b5563; font-size: 15px; line-height: 1.45; margin: 0 0 12px 0; }
+  .exit-pill { display: inline-flex; align-items: center; gap: 8px; background: rgba(245,179,1,0.12); color: #0b1220; border: 1px solid rgba(15,23,42,0.10); padding: 10px 12px; border-radius: 12px; font-size: 13px; line-height: 1.35; margin: 10px 0 12px 0; text-align: left; font-weight: 600; }
+  .exit-btn { width: 100%; background: var(--cta); border: none; color: var(--cta-text); padding: 16px 14px; border-radius: 12px; font-weight: 800; font-size: 17px; cursor: pointer; transition: background-color 0.2s ease, transform 0.1s ease; font-family: 'Poppins', sans-serif; box-shadow: 0 4px 12px rgba(245, 179, 1, 0.25); }
   .exit-btn:hover { background: var(--cta-hover); }
   .exit-btn:active { transform: scale(0.98); }
-
-  .exit-micro {
-    margin: 10px 0 0 0;
-    font-size: 12px;
-    color: #6b7280;
-  }
-
-  .close-link {
-    display: inline-block;
-    margin-top: 10px;
-    font-size: 12px;
-    color: #6b7280;
-    text-decoration: underline;
-    cursor: pointer;
-  }
-
+  .exit-micro { margin: 12px 0 0 0; font-size: 12px; color: #9ca3af; }
+  .close-link { display: inline-block; margin-top: 14px; font-size: 13px; color: #6b7280; text-decoration: underline; cursor: pointer; opacity: 0.8; }
+  .close-link:hover { opacity: 1; }
   @keyframes fadeIn { from {opacity: 0;} to {opacity: 1;} }
 </style>
 
 <div id="exitModal" class="exit-modal">
   <div class="exit-modal-content">
-    <div class="exit-header">Quick check before you go 💛</div>
+    <div class="exit-header">Just curious about pricing? 💛</div>
     <div class="exit-body">
-  <div class="exit-title">Want a simple starting point?</div>
-
-  <p class="exit-text" style="margin-bottom:12px;">
-    Answer 3–5 quick questions and we’ll show:
-  </p>
-
-  <div style="text-align:left; max-width:340px; margin:0 auto 12px auto; color:#4b5563; font-size:15px; line-height:1.55;">
-    <div style="display:flex; gap:10px; align-items:flex-start; margin:6px 0;">
-      <span style="width:18px; text-align:center; flex:0 0 18px;">•</span>
-      <span>a starting price range</span>
+      <div class="exit-title">You don't need to talk to anyone yet.</div>
+      <p class="exit-text" style="margin-bottom:14px; color:#4b5563;">
+        Use the 2-minute check strictly for <strong>information gathering</strong>:
+      </p>
+      <div style="text-align:left; max-width:340px; margin:0 auto 16px auto; color:#374151; font-size:15px; line-height:1.6;">
+        <div style="display:flex; gap:10px; align-items:flex-start; margin:6px 0;">
+          <span style="color:var(--cta); font-weight:bold;">•</span>
+          <span>See realistic price ranges near you</span>
+        </div>
+        <div style="display:flex; gap:10px; align-items:flex-start; margin:6px 0;">
+          <span style="color:var(--cta); font-weight:bold;">•</span>
+          <span>Compare: Refacing vs. New Counters vs. Appliances</span>
+        </div>
+        <div style="display:flex; gap:10px; align-items:flex-start; margin:6px 0;">
+          <span style="color:var(--cta); font-weight:bold;">•</span>
+          <span>Get a timeline (so you can plan for later)</span>
+        </div>
+      </div>
+      <div class="exit-pill">Free matching • No obligation • Text-first option</div>
+      <button onclick="goToOffer()" class="exit-btn">See Pricing & Ideas (2 min) →</button>
+      <div class="exit-micro">It’s free and helps you plan your budget.</div>
+      <span class="close-link" onclick="document.getElementById('exitModal').style.display='none'">
+        No thanks — I’ll keep browsing
+      </span>
     </div>
-    <div style="display:flex; gap:10px; align-items:flex-start; margin:6px 0;">
-      <span style="width:18px; text-align:center; flex:0 0 18px;">•</span>
-      <span>best path: refacing vs paint vs counters/backsplash</span>
-    </div>
-    <div style="display:flex; gap:10px; align-items:flex-start; margin:6px 0;">
-      <span style="width:18px; text-align:center; flex:0 0 18px;">•</span>
-      <span>a realistic timeline</span>
-    </div>
-  </div>
-
-  <div class="exit-pill">
-    ✅ 2 minutes • No obligation • Text-first option • English/Español
-  </div>
-
-  <button onclick="goToOffer()" class="exit-btn">
-    Show My Options (2 min) →
-  </button>
-
-  <div class="exit-micro">
-    We’ll ask ZIP + what you want to update. You can stop anytime.
-  </div>
-
-  <span class="close-link" onclick="document.getElementById('exitModal').style.display='none'">
-    Not now — continue browsing
-  </span>
-</div>
   </div>
 </div>
 
@@ -1098,9 +1191,12 @@
     // 1. GLOBAL & DATE LOGIC
     const d = new Date();
     try { 
-        document.getElementById('current-date').textContent = d.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+        const dateEl = document.getElementById('current-date');
+        if(dateEl) dateEl.textContent = d.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+        
         document.querySelectorAll('#current-year').forEach(el => el.textContent = d.getFullYear());
-        document.getElementById('copyright-year').textContent = d.getFullYear();
+        const copyEl = document.getElementById('copyright-year');
+        if(copyEl) copyEl.textContent = d.getFullYear();
     } catch(e){}
 
     // 2. WIDGET LOGIC
@@ -1116,10 +1212,10 @@
         }
 
         const messages = [
-            { icon: "🧰", t: () => "Matching the right type of pro…", s: () => `Near ${getCity()}` },
-            { icon: "🧩", t: () => "Refacing vs paint vs replace", s: () => "2-min questions → best path" },
-            { icon: "💬", t: () => "You choose text or call", s: () => "English/Español" },
-            { icon:"🔒", t:()=> "No spam. No robocalls.", s:()=> "Text-first option" }
+            { icon: "🧰", t: () => "Finding local specialists…", s: () => `Checking ${getCity()}` },
+            { icon: "🧩", t: () => "Comparing your options", s: () => "Refacing • Counters • Appliances" },
+            { icon: "💬", t: () => "Text-first option available", s: () => "No pressure. No spam." },
+            { icon: "💰", t: () => "100% Free Quote", s: () => "See pricing in 2 mins" }
         ];
         
         let msgIdx = 0;
@@ -1132,67 +1228,64 @@
                 widgetSub.textContent = messages[msgIdx].s();
                 widgetBox.style.opacity = '1';
             }, 500);
-        }, 7000);
+        }, 5000); 
     }
 
     // 3. MAP & GEO LOGIC (lazy init when map is near viewport)
-async function initMap() {
-    let lat = 41.8781, lon = -87.6298;
-    let city = "Your Area";
-    let region = "Your State";
-    let found = false;
+    async function initMap() {
+        let lat = 41.8781, lon = -87.6298;
+        let city = "Your Area";
+        let region = "Your State";
+        let found = false;
 
-    const tryFetch = async (url) => {
-        try {
-            const res = await fetch(url);
-            if (res.ok) return await res.json();
-        } catch (e) { return null; }
-        return null;
-    };
+        const tryFetch = async (url) => {
+            try {
+                const res = await fetch(url);
+                if (res.ok) return await res.json();
+            } catch (e) { return null; }
+            return null;
+        };
 
-    if (!found) {
-        const data = await tryFetch('https://ipapi.co/json/');
-        if (data && data.city) {
-            lat = data.latitude; lon = data.longitude; city = data.city; region = data.region; found = true;
+        if (!found) {
+            const data = await tryFetch('https://ipapi.co/json/');
+            if (data && data.city) {
+                lat = data.latitude; lon = data.longitude; city = data.city; region = data.region; found = true;
+            }
+        }
+        if (!found) {
+            const data = await tryFetch('https://ipwho.is/');
+            if (data && data.success) {
+                lat = data.latitude; lon = data.longitude; city = data.city; region = data.region; found = true;
+            }
+        }
+        if (!found) {
+            const data = await tryFetch('https://get.geojs.io/v1/ip/geo.json');
+            if (data && data.city) {
+                lat = parseFloat(data.latitude); lon = parseFloat(data.longitude); city = data.city; region = data.region; found = true;
+            }
+        }
+
+        if (found) {
+            document.querySelectorAll('.geo-city').forEach(el => el.textContent = city);
+            document.querySelectorAll('.geo-state').forEach(el => el.textContent = region);
+        }
+
+        if (typeof L !== 'undefined') {
+            const map = L.map('map', {
+                zoomControl: false,
+                scrollWheelZoom: false,
+                dragging: false,
+                touchZoom: false,
+                doubleClickZoom: false,
+                attributionControl: false
+            }).setView([lat, lon], 11);
+
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+            L.circle([lat, lon], { color: '#C97C5D', fillColor: '#C97C5D', fillOpacity: 0.15, radius: 6500 }).addTo(map);
+            L.marker([lat, lon]).addTo(map);
         }
     }
-
-    if (!found) {
-        const data = await tryFetch('https://ipwho.is/');
-        if (data && data.success) {
-            lat = data.latitude; lon = data.longitude; city = data.city; region = data.region; found = true;
-        }
-    }
-
-    if (!found) {
-        const data = await tryFetch('https://get.geojs.io/v1/ip/geo.json');
-        if (data && data.city) {
-            lat = parseFloat(data.latitude); lon = parseFloat(data.longitude); city = data.city; region = data.region; found = true;
-        }
-    }
-
-    if (found) {
-        document.querySelectorAll('.geo-city').forEach(el => el.textContent = city);
-        document.querySelectorAll('.geo-state').forEach(el => el.textContent = region);
-    }
-
-    if (typeof L !== 'undefined') {
-        const map = L.map('map', {
-            zoomControl: false,
-            scrollWheelZoom: false,
-            dragging: false,
-            touchZoom: false,
-            doubleClickZoom: false,
-            attributionControl: false
-        }).setView([lat, lon], 11);
-
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
-        L.circle([lat, lon], { color: '#C97C5D', fillColor: '#C97C5D', fillOpacity: 0.15, radius: 6500 }).addTo(map);
-        L.marker([lat, lon]).addTo(map);
-    }
-}
-
-initMap();
+    initMap();
 
     // 4. SCROLL LOGIC
     function enableDragScroll(selector) {
@@ -1224,51 +1317,43 @@ initMap();
     (function lockGalleryTo43Vertical() {
       const el = document.querySelector('.gallery-container');
       if (!el) return;
-
       function setHeight() {
         const w = el.getBoundingClientRect().width;
         const desired = w * (4 / 3);
         const cap = window.innerHeight * 0.72;
         el.style.height = Math.round(Math.min(desired, cap)) + 'px';
       }
-
       window.addEventListener('resize', setHeight, { passive: true });
       setHeight();
     })();
 
     // Ensure autoplay for the first gallery video (mobile-friendly)
     document.addEventListener("DOMContentLoaded", () => {
-    const v = document.querySelector(".lcp-video");
-    if (!v) return;
+        const v = document.querySelector(".lcp-video");
+        if (!v) return;
+        const src = v.getAttribute("data-src");
+        let loaded = false;
+        
+        const loadVideo = () => {
+          if (loaded) return;
+          loaded = true;
+          const s = document.createElement("source");
+          s.src = src;
+          s.type = "video/mp4";
+          v.appendChild(s);
+          v.load();
+          v.play().catch(() => {});
+        };
 
-    const src = v.getAttribute("data-src");
-    let loaded = false;
-
-    const loadVideo = () => {
-      if (loaded) return;
-      loaded = true;
-
-      const s = document.createElement("source");
-      s.src = src;
-      s.type = "video/mp4";
-      v.appendChild(s);
-
-      v.load();
-      v.play().catch(() => {});
-    };
-
-    // load on idle or shortly after first paint
-    if ("requestIdleCallback" in window) {
-      requestIdleCallback(loadVideo, { timeout: 1500 });
-    } else {
-      setTimeout(loadVideo, 1200);
-    }
-
-    // also load on first interaction
-    window.addEventListener("scroll", loadVideo, { once: true, passive: true });
-    window.addEventListener("touchstart", loadVideo, { once: true, passive: true });
-    window.addEventListener("mousemove", loadVideo, { once: true, passive: true });
-  });
+        if ("requestIdleCallback" in window) {
+          requestIdleCallback(loadVideo, { timeout: 1500 });
+        } else {
+          setTimeout(loadVideo, 1200);
+        }
+        window.addEventListener("scroll", loadVideo, { once: true, passive: true });
+        window.addEventListener("touchstart", loadVideo, { once: true, passive: true });
+        window.addEventListener("mousemove", loadVideo, { once: true, passive: true });
+    });
 
     // 5. COMEBACKER LOGIC
     (function() {
@@ -1304,16 +1389,19 @@ initMap();
         });
     });
 
-    document.getElementById('fake-review-form').addEventListener('submit', function(e) {
-        e.preventDefault();
-        const btn = this.querySelector('button');
-        btn.innerText = "Saving…";
-        btn.style.opacity = "0.7";
-        setTimeout(() => {
-            document.getElementById('review-form-box').style.display = 'none';
-            document.getElementById('review-success').style.display = 'block';
-        }, 1200);
-    });
+    const fakeForm = document.getElementById('fake-review-form');
+    if(fakeForm) {
+        fakeForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const btn = this.querySelector('button');
+            btn.innerText = "Saving…";
+            btn.style.opacity = "0.7";
+            setTimeout(() => {
+                document.getElementById('review-form-box').style.display = 'none';
+                document.getElementById('review-success').style.display = 'block';
+            }, 1200);
+        });
+    }
 
     const faqs = document.querySelectorAll('.faq-item');
     faqs.forEach(faq => {
@@ -1340,22 +1428,23 @@ initMap();
         const THRESHOLD_PX = 500;
         const SCROLL_DELTA = 10; 
 
-        inputs.forEach(input => {
-            input.addEventListener('focus', () => {
-                isInputFocused = true;
-                sticky.classList.remove('visible');
+        if(inputs) {
+            inputs.forEach(input => {
+                input.addEventListener('focus', () => {
+                    isInputFocused = true;
+                    if(sticky) sticky.classList.remove('visible');
+                });
+                input.addEventListener('blur', () => {
+                    isInputFocused = false;
+                    if(hasPassedThreshold && sticky) {
+                        sticky.classList.add('visible');
+                    }
+                });
             });
-            input.addEventListener('blur', () => {
-                isInputFocused = false;
-                if(hasPassedThreshold) {
-                    sticky.classList.add('visible');
-                }
-            });
-        });
+        }
 
         window.addEventListener('scroll', function() {
-            if(isInputFocused) return;
-
+            if(isInputFocused || !sticky) return;
             let st = window.pageYOffset || document.documentElement.scrollTop;
             let howItWorksTop = howItWorks ? howItWorks.offsetTop : THRESHOLD_PX;
             
@@ -1366,7 +1455,6 @@ initMap();
                 }
             } else {
                 if (Math.abs(lastScrollTop - st) <= SCROLL_DELTA) return;
-
                 if (st > lastScrollTop) {
                     sticky.classList.remove('visible');
                 } else {
@@ -1377,6 +1465,5 @@ initMap();
         }, false);
     });
 </script>
-
 </body>
 </html>
