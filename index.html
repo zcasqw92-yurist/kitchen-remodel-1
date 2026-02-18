@@ -633,86 +633,96 @@
       </p>
 
       <!-- GALLERY -->
-      <div class="gallery-container">
-        <div class="gallery-track">
-          <!-- === PAIR 0 === -->
-          <div class="gallery-item">
-  <span class="badge badge-before">❌ Before</span>
-  <span class="badge badge-after badge-right">After ✨</span>
-  <div class="right-arrow-hint">›</div>
+<div class="gallery-container">
+  <div class="gallery-track">
+    <!-- === PAIR 0 === -->
+    <div class="gallery-item">
+      <span class="badge badge-before">❌ Before</span>
+      <span class="badge badge-after badge-right">After ✨</span>
+      <div class="right-arrow-hint">›</div>
 
-  <!-- LCP: реальная картинка с высоким приоритетом -->
-  <img
-    class="gallery-img lcp-poster"
-    src="img/1111-before.webp"
-    width="768" height="1024"
-    alt="Kitchen before and after preview"
-    fetchpriority="high"
-    decoding="async"
-  >
+      <!-- LCP poster (webp) -->
+      <img
+        class="gallery-img lcp-poster"
+        src="img/1111-before.webp"
+        width="768" height="1024"
+        alt="Kitchen before and after preview"
+        fetchpriority="high"
+        decoding="async"
+      >
 
-  <!-- Видео подгрузится позже и заменит картинку -->
-  <video
-    class="gallery-img lcp-video"
-    autoplay loop muted playsinline
-    preload="none"
-    data-src="img/1111-before.mp4"
-    style="display:none"
-  ></video>
+      <!-- Video (mp4/webm) loads later and replaces poster -->
+      <video
+        class="gallery-img lcp-video"
+        autoplay loop muted playsinline
+        preload="none"
+        data-webm="img/1111-before.webm"
+        data-mp4="img/1111-before.mp4"
+        style="display:none"
+      ></video>
+
+      <!-- GIF fallback (optional): покажется только если видео не взлетит -->
+      <img
+        class="gallery-img lcp-gif"
+        data-gif="img/1111-before.gif"
+        alt="Kitchen preview animation"
+        decoding="async"
+        loading="lazy"
+        style="display:none"
+      >
+    </div>
+
+    <!-- === PAIR 1 === -->
+    <div class="gallery-item">
+      <span class="badge badge-before">❌ Condition: Good Layout, but Dated & Dark</span>
+      <img src="img/1-before.webp" class="gallery-img" alt="Kitchen before update" loading="lazy" decoding="async">
+    </div>
+    <div class="gallery-item">
+      <span class="badge badge-after">✨ Refaced to Modern White | Saved ~$5,800</span>
+      <img src="img/1-after.webp" class="gallery-img" alt="Kitchen after refacing" loading="lazy" decoding="async">
+    </div>
+
+    <!-- === PAIR 2 === -->
+    <div class="gallery-item">
+      <span class="badge badge-before">❌ Problem: Generic "Builder-Grade" Style</span>
+      <img src="img/2-before.webp" class="gallery-img" alt="Kitchen before" loading="lazy" decoding="async">
+    </div>
+    <div class="gallery-item">
+      <span class="badge badge-after">💎 Custom Two-Tone Look | Cost: ~50% Less vs. New</span>
+      <img src="img/2-after.webp" class="gallery-img" alt="Kitchen after" loading="lazy" decoding="async">
+    </div>
+
+    <!-- === PAIR 3 === -->
+    <div class="gallery-item">
+      <span class="badge badge-before">🌒 Dated "Old World" Style & Dark Granite</span>
+      <img src="img/3-before.webp" class="gallery-img" alt="Kitchen before" loading="lazy" decoding="async">
+    </div>
+    <div class="gallery-item">
+      <span class="badge badge-after">✨ Grey Shaker + New Quartz Tops</span>
+      <img src="img/3-after.webp" class="gallery-img" alt="Kitchen after" loading="lazy" decoding="async">
+    </div>
+
+    <!-- === PAIR 4 === -->
+    <div class="gallery-item">
+      <span class="badge badge-before">⚠️ Problem: Peeling Finish & Worn Out</span>
+      <img src="img/4-before.webp" class="gallery-img" alt="Kitchen before" loading="lazy" decoding="async">
+    </div>
+    <div class="gallery-item">
+      <span class="badge badge-after">⏱️ Modern Farmhouse Style | Done in 3 Days</span>
+      <img src="img/4-after.webp" class="gallery-img" alt="Kitchen after" loading="lazy" decoding="async">
+    </div>
+
+    <!-- === PAIR 5 === -->
+    <div class="gallery-item">
+      <span class="badge badge-before">⚠️ Problem: Dated "Heavy" Wood & Visual Noise</span>
+      <img src="img/5-before.webp" class="gallery-img" alt="Kitchen before" loading="lazy" decoding="async">
+    </div>
+    <div class="gallery-item">
+      <span class="badge badge-after">✨ Ultra-Modern "Euro" Style | High-End Upgrade</span>
+      <img src="img/5-after.webp" class="gallery-img" alt="Kitchen after" loading="lazy" decoding="async">
+    </div>
+  </div>
 </div>
-
-
-          <!-- === PAIR 1 === -->
-          <div class="gallery-item">
-            <span class="badge badge-before">❌ Condition: Good Layout, but Dated & Dark</span>
-            <img src="img/1-before.jpg" class="gallery-img" alt="Kitchen before update" loading="lazy" decoding="async">
-          </div>
-          <div class="gallery-item">
-            <span class="badge badge-after">✨ Refaced to Modern White | Saved ~$5,800</span>
-            <img src="img/1-after.jpg" class="gallery-img" alt="Kitchen after refacing" loading="lazy" decoding="async">
-          </div>
-
-          <!-- === PAIR 2 === -->
-          <div class="gallery-item">
-            <span class="badge badge-before">❌ Problem: Generic "Builder-Grade" Style</span>
-            <img src="img/2-before.jpg" class="gallery-img" alt="Kitchen before" loading="lazy" decoding="async">
-          </div>
-          <div class="gallery-item">
-            <span class="badge badge-after">💎 Custom Two-Tone Look | Cost: ~50% Less vs. New</span>
-            <img src="img/2-after.jpg" class="gallery-img" alt="Kitchen after" loading="lazy" decoding="async">
-          </div>
-
-          <!-- === PAIR 3 === -->
-          <div class="gallery-item">
-            <span class="badge badge-before">🌒 Dated "Old World" Style & Dark Granite</span>
-            <img src="img/3-before.jpg" class="gallery-img" alt="Kitchen before" loading="lazy" decoding="async">
-          </div>
-          <div class="gallery-item">
-            <span class="badge badge-after">✨ Grey Shaker + New Quartz Tops</span>
-            <img src="img/3-after.jpg" class="gallery-img" alt="Kitchen after" loading="lazy" decoding="async">
-          </div>
-
-          <!-- === PAIR 4 === -->
-          <div class="gallery-item">
-            <span class="badge badge-before">⚠️ Problem: Peeling Finish & Worn Out</span>
-            <img src="img/4-before.jpg" class="gallery-img" alt="Kitchen before" loading="lazy" decoding="async">
-          </div>
-          <div class="gallery-item">
-            <span class="badge badge-after">⏱️ Modern Farmhouse Style | Done in 3 Days</span>
-            <img src="img/4-after.jpg" class="gallery-img" alt="Kitchen after" loading="lazy" decoding="async">
-          </div>
-
-          <!-- === PAIR 5 === -->
-          <div class="gallery-item">
-            <span class="badge badge-before">⚠️ Problem: Dated "Heavy" Wood & Visual Noise</span>
-            <img src="img/5-before.jpg" class="gallery-img" alt="Kitchen before" loading="lazy" decoding="async">
-          </div>
-          <div class="gallery-item">
-            <span class="badge badge-after">✨ Ultra-Modern "Euro" Style | High-End Upgrade</span>
-            <img src="img/5-after.jpg" class="gallery-img" alt="Kitchen after" loading="lazy" decoding="async">
-          </div>
-        </div>
-      </div>
 
       <button onclick="goToOffer()" class="btn btn-primary">Show My Options (2 min)</button>
 
@@ -1422,49 +1432,92 @@ function loadLeaflet() {
     enableDragScroll('.gallery-track');
     enableDragScroll('.reviews-track');
 
-    
-    // 6) Ensure autoplay for the first gallery video (mobile-friendly)
-    (function lazyLoadHeroVideo() {
+    // 6) HERO media: prefer VIDEO (webm/mp4), fallback to GIF, else keep poster
+(function lazyLoadHeroMedia() {
   const run = () => {
     const v = document.querySelector(".lcp-video");
     const posterImg = document.querySelector(".lcp-poster");
+    const gifImg = document.querySelector(".lcp-gif");
+
     if (!v) return;
 
-    const src = v.getAttribute("data-src");
+    const webmSrc = v.getAttribute("data-webm");
+    const mp4Src  = v.getAttribute("data-mp4");
+    const gifSrc  = gifImg ? gifImg.getAttribute("data-gif") : null;
+
     let loaded = false;
 
-    const loadVideo = () => {
+    const showPosterOnly = () => {
+      v.style.display = "none";
+      if (gifImg) gifImg.style.display = "none";
+      if (posterImg) posterImg.style.display = "block";
+    };
+
+    const showGif = () => {
+      if (!gifImg || !gifSrc) return showPosterOnly();
+      gifImg.src = gifSrc;
+      gifImg.style.display = "block";
+      v.style.display = "none";
+      if (posterImg) posterImg.style.display = "none";
+    };
+
+    const showVideo = () => {
+      v.style.display = "block";
+      if (gifImg) gifImg.style.display = "none";
+      if (posterImg) posterImg.style.display = "none";
+    };
+
+    const loadMedia = () => {
       if (loaded) return;
       loaded = true;
 
-      const s = document.createElement("source");
-      s.src = src;
-      s.type = "video/mp4";
-      v.appendChild(s);
+      // If no video sources — try GIF
+      if (!webmSrc && !mp4Src) {
+        if (gifSrc) return showGif();
+        return showPosterOnly();
+      }
+
+      // Build sources (webm first)
+      if (webmSrc) {
+        const s1 = document.createElement("source");
+        s1.src = webmSrc;
+        s1.type = "video/webm";
+        v.appendChild(s1);
+      }
+      if (mp4Src) {
+        const s2 = document.createElement("source");
+        s2.src = mp4Src;
+        s2.type = "video/mp4";
+        v.appendChild(s2);
+      }
 
       v.load();
 
-      const showVideo = () => {
-        v.style.display = "block";
-        if (posterImg) posterImg.style.display = "none";
+      const onReady = () => {
+        showVideo();
       };
 
-      v.addEventListener("canplay", showVideo, { once: true });
+      v.addEventListener("canplay", onReady, { once: true });
 
-      v.play().then(showVideo).catch(() => {
-        // если autoplay заблокирован — просто оставляем картинку (LCP уже ок)
-      });
+      // Attempt autoplay; if blocked or fails — fallback to GIF/poster
+      v.play()
+        .then(() => showVideo())
+        .catch(() => {
+          if (gifSrc) showGif();
+          else showPosterOnly();
+        });
     };
 
+    // load when idle + also on first user interaction
     if ("requestIdleCallback" in window) {
-      requestIdleCallback(loadVideo, { timeout: 1500 });
+      requestIdleCallback(loadMedia, { timeout: 1500 });
     } else {
-      setTimeout(loadVideo, 1200);
+      setTimeout(loadMedia, 1200);
     }
 
-    window.addEventListener("scroll", loadVideo, { once: true, passive: true });
-    window.addEventListener("touchstart", loadVideo, { once: true, passive: true });
-    window.addEventListener("mousemove", loadVideo, { once: true, passive: true });
+    window.addEventListener("scroll", loadMedia, { once: true, passive: true });
+    window.addEventListener("touchstart", loadMedia, { once: true, passive: true });
+    window.addEventListener("mousemove", loadMedia, { once: true, passive: true });
   };
 
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", run);
