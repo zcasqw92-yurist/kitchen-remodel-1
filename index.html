@@ -341,6 +341,21 @@
       padding: 0 20px 20px 20px;
     }
 
+      /* Hide horizontal scrollbar (Chrome/Edge/Safari) */
+.gallery-track::-webkit-scrollbar,
+.reviews-track::-webkit-scrollbar {
+  height: 0;
+  width: 0;
+  display: none;
+}
+
+/* Hide scrollbar (old Edge/IE) */
+.gallery-track,
+.reviews-track {
+  -ms-overflow-style: none;
+  scrollbar-width: none; /* Firefox (можно оставить, уже есть) */
+} 
+    
     .gallery-track { padding: 0; gap: 0; }
 
     .review-user { display: flex; align-items: center; gap: 12px; }
@@ -1691,3 +1706,4 @@
   </script>
 </body>
 </html>
+
