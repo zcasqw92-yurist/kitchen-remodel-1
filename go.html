@@ -2,62 +2,63 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <!-- Надежно скрываем реферер от партнерки -->
+    <!-- 100% защита от передачи домена преленда (homesupplycenter) в партнерку -->
     <meta name="referrer" content="no-referrer">
     <title>Loading your options...</title>
 
     <script>
-        // 1. БАЗОВАЯ ссылка партнерки (ровно та, что вы скинули)
+        // 1. Ваша чистая трекинговая ссылка Marketcall
         var baseAffiliateLink = "https://trkmcl.com/7o4z7mo89q/d8qw9z7l8o";
 
-        // 2. Ловим параметры, которые пришли с Пинтереста на преленд
+        // 2. Читаем параметры, которые передал преленд (через обновленную кнопку)
         var urlParams = new URLSearchParams(window.location.search);
         var source = urlParams.get('source') || 'unknown'; 
-        var keyword = urlParams.get('sub1'); // Ключевое слово (динамическое)
-        var customAdId = urlParams.get('sub2'); // Ваш секретный ID креатива (ручной)
+        var keyword = urlParams.get('sub1');     // Ловим ключевое слово
+        var customAdId = urlParams.get('sub2');  // Ловим ID креатива
 
-        // 3. Формируем финальную ссылку для редиректа в партнерку
+        // 3. Формируем финальную ссылку для Marketcall
         var finalLink = baseAffiliateLink;
         var separator = finalLink.indexOf('?') !== -1 ? '&' : '?';
         finalLink += separator;
         
         var paramsToAppend = [];
 
-        // Логика распределения трафика
+        // Умная маршрутизация трафика
         if (source === 'paid' || keyword || customAdId) {
-            // Трафик с Рекламы Pinterest
+            // === ТРАФИК С ПЛАТНОЙ РЕКЛАМЫ PINTEREST ===
             paramsToAppend.push("utm_source=pinterest_paid");
             
             if (keyword) {
-                // Отправляем ключ в SubId1
-                paramsToAppend.push("SubId1=" + encodeURIComponent(keyword));
+                // ВАЖНО: Для Marketcall ключ передаем строго в параметр subid
+                paramsToAppend.push("subid=" + encodeURIComponent(keyword));
             }
             
             if (customAdId) {
-                // Отправляем ваш секретный код креатива в SubId2
-                paramsToAppend.push("SubId2=" + encodeURIComponent(customAdId));
+                // ID креатива передаем в параметр subid1
+                paramsToAppend.push("subid1=" + encodeURIComponent(customAdId));
             } else {
-                // Если забыли указать sub2, ставим заглушку
-                paramsToAppend.push("SubId2=creo_unknown"); 
+                // Заглушка, чтобы менеджеры партнерки не искали наши пины
+                paramsToAppend.push("subid1=creo_unknown"); 
             }
 
         } else if (source === 'organic') {
-            // Трафик с бесплатных Пинов
+            // === ТРАФИК С БЕСПЛАТНЫХ ПИНОВ (Органика) ===
             paramsToAppend.push("utm_source=pinterest_organic");
 
         } else {
-            // Прямой трафик
+            // === ПРЯМОЙ ЗАХОД ===
             paramsToAppend.push("utm_source=direct");
         }
 
-        // Склеиваем параметры
+        // Склеиваем всё вместе
         finalLink += paramsToAppend.join('&');
 
-        // 4. Мгновенный редирект без сохранения истории
+        // 4. Мгновенный редирект (заменяем URL, чтобы юзер не мог нажать кнопку "Назад" и сломать воронку)
         window.location.replace(finalLink);
     </script>
 </head>
 <body>
+    <!-- Резервный редирект на случай, если у пользователя в браузере отключен JavaScript -->
     <noscript>
         <meta http-equiv="refresh" content="0; url=https://trkmcl.com/7o4z7mo89q/d8qw9z7l8o">
     </noscript>
