@@ -25,11 +25,18 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@600;700;800&display=swap">
 
   <script>
-    // ==========================================
-    // ⚙️ ВАША ССЫЛКА НА ОФФЕР (QUIZ / LEAD FORM)
-    // ==========================================
-    const OFFER_URL = "go.html";
-    function goToOffer() { window.location.href = OFFER_URL; }
+      // ==========================================
+  // ⚙️ ВАША ССЫЛКА НА ОФФЕР (ПРОКЛАДКА go.html)
+  // ==========================================
+  const OFFER_URL = "go.html";
+
+  function goToOffer() { 
+      // Берем все метки из адресной строки (например, ?sub1=keyword&source=paid)
+      var currentParams = window.location.search; 
+
+      // Склеиваем имя файла с метками и делаем переход
+      window.location.href = OFFER_URL + currentParams; 
+  }
   </script>
 
   <style>
@@ -1528,6 +1535,7 @@
   </script>
 </body>
 </html>
+
 
 
 
