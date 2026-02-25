@@ -1,16 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="referrer" content="no-referrer">
-  <meta http-equiv="refresh" content="0; url=https://trkmcl.com/7o4z7mo89q/d8qw9z7l8o">
-  <title>Loading...</title>
-  <script>
-    window.location.replace("https://trkmcl.com/7o4z7mo89q/d8qw9z7l8o");
-  </script>
+    <meta charset="UTF-8">
+    <!-- Надежно скрываем реферер от партнерки -->
+    <meta name="referrer" content="no-referrer">
+    <title>Loading your options...</title>
+
+    <script>
+        // 1. БАЗОВАЯ ссылка партнерки (ровно та, что вы скинули)
+        var baseAffiliateLink = "https://trkmcl.com/7o4z7mo89q/d8qw9z7l8o";
+
+        // 2. Ловим параметры, которые пришли с Пинтереста на преленд
+        var urlParams = new URLSearchParams(window.location.search);
+        var source = urlParams.get('source') || 'unknown'; 
+        var keyword = urlParams.get('sub1'); // Ключевое слово (динамическое)
+        var customAdId = urlParams.get('sub2'); // Ваш секретный ID креатива (ручной)
+
+        // 3. Формируем финальную ссылку для редиректа в партнерку
+        var finalLink = baseAffiliateLink;
+        var separator = finalLink.indexOf('?') !== -1 ? '&' : '?';
+        finalLink += separator;
+        
+        var paramsToAppend = [];
+
+        // Логика распределения трафика
+        if (source === 'paid' || keyword || customAdId) {
+            // Трафик с Рекламы Pinterest
+            paramsToAppend.push("utm_source=pinterest_paid");
+            
+            if (keyword) {
+                // Отправляем ключ в SubId1
+                paramsToAppend.push("SubId1=" + encodeURIComponent(keyword));
+            }
+            
+            if (customAdId) {
+                // Отправляем ваш секретный код креатива в SubId2
+                paramsToAppend.push("SubId2=" + encodeURIComponent(customAdId));
+            } else {
+                // Если забыли указать sub2, ставим заглушку
+                paramsToAppend.push("SubId2=creo_unknown"); 
+            }
+
+        } else if (source === 'organic') {
+            // Трафик с бесплатных Пинов
+            paramsToAppend.push("utm_source=pinterest_organic");
+
+        } else {
+            // Прямой трафик
+            paramsToAppend.push("utm_source=direct");
+        }
+
+        // Склеиваем параметры
+        finalLink += paramsToAppend.join('&');
+
+        // 4. Мгновенный редирект без сохранения истории
+        window.location.replace(finalLink);
+    </script>
 </head>
-<body></body>
+<body>
+    <noscript>
+        <meta http-equiv="refresh" content="0; url=https://trkmcl.com/7o4z7mo89q/d8qw9z7l8o">
+    </noscript>
+</body>
 </html>
-
-
-
