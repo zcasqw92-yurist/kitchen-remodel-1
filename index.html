@@ -89,7 +89,7 @@
     }
 
     /* TYPOGRAPHY OVERRIDES */
-    h1, h2, h3, .section-title, .review-title, .form-header, .exit-header {
+    h1, h2, h3, .section-title, .review-title, .form-header {
       font-family: 'Sora', system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
       color: var(--text-strong);
       letter-spacing: -0.01em;
@@ -159,8 +159,7 @@
     .btn-accent { animation: none; }
 
     .btn:focus-visible,
-    .submit-btn:focus-visible,
-    .exit-btn:focus-visible {
+    .submit-btn:focus-visible {
       outline: 2px solid rgba(245,179,1,0.45);
       outline-offset: 2px;
     }
@@ -1225,78 +1224,6 @@
     </button>
   </div>
 
-  <!-- === SMART COMEBACKER (ONE-TIME BACK BUTTON TRAP) === -->
-  <style>
-    .exit-modal {
-      display:none;
-      position:fixed;
-      inset:0;
-      z-index:999999;
-      background-color:rgba(0,0,0,0.55);
-      backdrop-filter: blur(4px);
-      -webkit-backdrop-filter: blur(4px);
-      animation: fadeIn 0.25s;
-      font-family: -apple-system, system-ui, sans-serif;
-      align-items:center;
-      justify-content:center;
-      padding: 16px;
-      padding-top: calc(16px + env(safe-area-inset-top));
-      padding-bottom: calc(16px + env(safe-area-inset-bottom));
-    }
-    .exit-modal-content {
-      background:#fff;
-      width: min(420px, 92vw);
-      max-height: min(78vh, 640px);
-      overflow:auto;
-      border-radius:14px;
-      box-shadow:0 12px 30px rgba(0,0,0,0.35);
-      position:relative;
-      text-align:center;
-    }
-    .exit-header { background: rgba(245,179,1,0.14); padding: 14px 16px; font-weight: 900; color: #0b1220; font-size: 14px; font-family: 'Sora', sans-serif; }
-    .exit-body { padding: 16px 16px 18px 16px; }
-    .exit-title { margin: 6px 0 10px 0; color: #0b1220; font-size: 20px; line-height: 1.25; font-weight: 900; font-family: 'Sora', sans-serif; }
-    .exit-text { color: #4b5563; font-size: 15px; line-height: 1.45; margin: 0 0 12px 0; }
-    .exit-pill { display: inline-flex; align-items: center; gap: 8px; background: rgba(245,179,1,0.12); color: #0b1220; border: 1px solid rgba(15,23,42,0.10); padding: 10px 12px; border-radius: 12px; font-size: 13px; line-height: 1.35; margin: 10px 0 12px 0; text-align: left; font-weight: 600; }
-    .exit-btn { width: 100%; background: var(--cta); border: none; color: var(--cta-text); padding: 16px 14px; border-radius: 12px; font-weight: 900; font-size: 17px; cursor: pointer; transition: background-color 0.2s ease, transform 0.1s ease; font-family: 'Sora', sans-serif; box-shadow: 0 4px 12px rgba(245, 179, 1, 0.25); }
-    .exit-btn:hover { background: var(--cta-hover); }
-    .exit-btn:active { transform: scale(0.98); }
-    .exit-micro { margin: 12px 0 0 0; font-size: 12px; color: #9ca3af; }
-    .close-link { display: inline-block; margin-top: 14px; font-size: 13px; color: #6b7280; text-decoration: underline; cursor: pointer; opacity: 0.8; }
-    .close-link:hover { opacity: 1; }
-    @keyframes fadeIn { from {opacity: 0;} to {opacity: 1;} }
-  </style>
-
-  <div id="exitModal" class="exit-modal">
-    <div class="exit-modal-content">
-      <div class="exit-header">Just curious about pricing? 💛</div>
-      <div class="exit-body">
-        <div class="exit-title">You don't need to talk to anyone yet.</div>
-        <p class="exit-text" style="margin-bottom:14px; color:#4b5563;">
-          Use the 2-minute check strictly for <strong>information gathering</strong>:
-        </p>
-        <div style="text-align:left; max-width:340px; margin:0 auto 16px auto; color:#374151; font-size:15px; line-height:1.6;">
-          <div style="display:flex; gap:10px; align-items:flex-start; margin:6px 0;">
-            <span style="color:var(--cta); font-weight:bold;">•</span>
-            <span>See realistic price ranges near you</span>
-          </div>
-          <div style="display:flex; gap:10px; align-items:flex-start; margin:6px 0;">
-            <span style="color:var(--cta); font-weight:bold;">•</span>
-            <span>Compare: Refacing vs. New Counters vs. Appliances</span>
-          </div>
-          <div style="display:flex; gap:10px; align-items:flex-start; margin:6px 0;">
-            <span style="color:var(--cta); font-weight:bold;">•</span>
-            <span>Get a timeline (so you can plan for later)</span>
-          </div>
-        </div>
-        <div class="exit-pill">Free matching • No obligation • Text-first option</div>
-        <button onclick="goToOffer()" class="exit-btn">See Pricing & Ideas (2 min) →</button>
-        <div class="exit-micro">It’s free and helps you plan your budget.</div>
-        <span class="close-link" onclick="__closeExitModal()">No thanks — I’ll keep browsing</span>
-      </div>
-    </div>
-  </div>
-
   <!-- SCRIPTS -->
   <script>
     // 1) DATE LOGIC
@@ -1578,67 +1505,6 @@
       else run();
     })();
 
-    // 7) COMEBACKER LOGIC (centered + allows exit)
-    (function() {
-      const modal = document.getElementById("exitModal");
-      if (!modal) return;
-      let trapArmed = false;
-      let hasShownOnce = false;
-      let allowExitNow = false;
-
-      function openModal() {
-        modal.style.display = "flex";
-        document.documentElement.style.overflow = "hidden";
-        document.body.style.overflow = "hidden";
-      }
-
-      function closeModal() {
-        modal.style.display = "none";
-        document.documentElement.style.overflow = "";
-        document.body.style.overflow = "";
-        allowExitNow = true;
-      }
-
-      window.__closeExitModal = closeModal;
-
-      function armTrapOnce() {
-        if (trapArmed) return;
-        history.pushState({ cb: 1 }, "", location.href);
-        trapArmed = true;
-      }
-
-      document.addEventListener("click", armTrapOnce, { once: true, passive: true });
-      document.addEventListener("touchstart", armTrapOnce, { once: true, passive: true });
-
-      window.addEventListener("popstate", function() {
-        if (!trapArmed) return;
-        if (allowExitNow) return;
-        if (!hasShownOnce) {
-          hasShownOnce = true;
-          openModal();
-          history.pushState({ cb: 1 }, "", location.href);
-          return;
-        }
-      });
-
-      let mouseTrapTriggered = false;
-      document.addEventListener("mouseleave", function(e) {
-        if (e.clientY < 0 && !mouseTrapTriggered && !hasShownOnce) {
-          openModal();
-          hasShownOnce = true;
-          mouseTrapTriggered = true;
-        }
-      });
-
-      modal.addEventListener("click", function(e) {
-        if (e.target === modal) closeModal();
-      });
-
-      document.addEventListener("keydown", function(e) {
-        if (e.key === "Escape" && modal.style.display !== "none") closeModal();
-      });
-    })();
-
     // 8) UI: TESTIMONIALS & FAQ
     const stars = document.querySelectorAll('.star-rating span');
     stars.forEach((star, index) => {
@@ -1720,6 +1586,7 @@
   </script>
 </body>
 </html>
+
 
 
 
