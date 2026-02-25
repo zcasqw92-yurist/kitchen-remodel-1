@@ -981,42 +981,6 @@
         <span>👆 Swipe to see common renovation wins</span>
       </div>
 
-      <!-- “FAKE FORM” repurposed as OPTIONAL NOTE -->
-      <div id="review-form-box" class="write-review-box">
-        <div class="form-header">Optional: Leave a note for your project goal</div>
-        <form id="fake-review-form">
-          <div class="star-rating" aria-label="Optional rating (not required)">
-            <span data-val="1">★</span><span data-val="2">★</span><span data-val="3">★</span><span data-val="4">★</span><span data-val="5">★</span>
-          </div>
-          <input type="text" class="fake-input" placeholder="First name (optional)">
-          <textarea class="fake-input fake-textarea" placeholder="E.g., I want to keep my current layout but change the color. Best time to call is after 6 PM."></textarea>
-          <button type="submit" class="submit-btn">Save Note</button>
-          <p style="margin:10px 0 0 0; font-size:12px; color:var(--muted);">
-            Optional — this helps a pro come prepared, so you get fewer back-and-forth questions.<br>
-            Main step: the 2-minute check to see options.
-          </p>
-        </form>
-      </div>
-
-      <!-- SUCCESS -->
-      <div id="review-success" class="success-overlay">
-        <h3 style="color:var(--success-text); margin:0 0 8px 0; font-family:'Sora',sans-serif; font-weight:800;">
-          Sent for Moderation ✅
-        </h3>
-        <p style="margin:0; font-size:14px; color:var(--success-text); line-height: 1.5;">
-          Thank you! Your note has been submitted for review.<br>
-          <span style="font-weight:600; display:block; margin-top:4px;">
-            Next step: Start the 2-minute check to see your options.
-          </span>
-        </p>
-        <div style="margin-top:14px;">
-          <button onclick="goToOffer()" class="btn btn-primary" style="padding: 14px; border-radius: 14px;">
-            Show My Options (2 min)
-          </button>
-        </div>
-      </div>
-    </div>
-
     <!-- 6. AUTHORITY -->
     <div class="section" id="how-it-works-section">
       <h2 class="section-title">How to Get Your Exact Price (Simple & Stress-Free)</h2>
@@ -1505,28 +1469,6 @@
       else run();
     })();
 
-    // 8) UI: TESTIMONIALS & FAQ
-    const stars = document.querySelectorAll('.star-rating span');
-    stars.forEach((star, index) => {
-      star.addEventListener('click', () => {
-        stars.forEach((s, i) => { s.classList.toggle('active', i <= index); });
-      });
-    });
-
-    const fakeForm = document.getElementById('fake-review-form');
-    if (fakeForm) {
-      fakeForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        const btn = this.querySelector('button');
-        btn.innerText = "Saving…";
-        btn.style.opacity = "0.7";
-        setTimeout(() => {
-          document.getElementById('review-form-box').style.display = 'none';
-          document.getElementById('review-success').style.display = 'block';
-        }, 1200);
-      });
-    }
-
     const faqs = document.querySelectorAll('.faq-item');
     faqs.forEach(faq => {
       const question = faq.querySelector('.faq-question');
@@ -1586,6 +1528,7 @@
   </script>
 </body>
 </html>
+
 
 
 
