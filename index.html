@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="description" content="Compare kitchen refacing, countertops, backsplash, and refresh options. Get a free price range and local availability in 2 minutes.">
-  <link rel="canonical" href="https://homesupplycenter.org/">
-  <meta name="robots" content="index,follow">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="referrer" content="no-referrer">
-  <title>Kitchen Refacing & Refresh Guide</title>
+<meta charset="UTF-8">
+<meta name="description" content="Compare kitchen refacing, countertops, backsplash, and refresh options. Get a free price range and local availability in 2 minutes.">
+<link rel="canonical" href="https://homesupplycenter.org/">
+<meta name="robots" content="index,follow">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="no-referrer">
+<title>Kitchen Refacing & Refresh Guide</title>
 
-    <!-- Leaflet CSS -->
+<!-- Leaflet CSS -->
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 
 <!-- Google Fonts -->
@@ -17,1574 +17,1579 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@600;700;800&display=swap">
 
-  <script>
-      // ==========================================
-  // ⚙️ ВАША ССЫЛКА НА ОФФЕР (ПРОКЛАДКА go.html)
-  // ==========================================
-  const OFFER_URL = "go.html";
+<script>
+// ==========================================
+// ⚙️ ВАША ССЫЛКА НА ОФФЕР (ПРОКЛАДКА go.html)
+// ==========================================
+const OFFER_URL = "go.html";
+function goToOffer() {
+// Берем все метки из адресной строки (например, ?sub1=keyword&source=paid)
+var currentParams = window.location.search;
+// Склеиваем имя файла с метками и делаем переход
+window.location.href = OFFER_URL + currentParams;
+}
+</script>
 
-  function goToOffer() { 
-      // Берем все метки из адресной строки (например, ?sub1=keyword&source=paid)
-      var currentParams = window.location.search; 
+<style>
+/* CSS RESET & VARIABLES */
+:root {
+--bg: #FFFFFF;
+--surface: #FFFFFF;
+--border: rgba(15, 23, 42, 0.12);
+--text-strong: #0B1220;
+--text: #1F2937;
+--muted: #6B7280;
+--dark: #0F172A;
+--dark-2: #0B0F14;
+--on-dark: rgba(255,255,255,0.92);
+--on-dark-muted: rgba(255,255,255,0.68);
+--cta: #F5B301;
+--cta-hover: #E2A400;
+--cta-text: #111111;
+--highlight: rgba(245, 179, 1, 0.12);
+--success-bg: rgba(34, 197, 94, 0.12);
+--success-text: #166534;
+--warning-bg: rgba(245, 179, 1, 0.18);
+--warning-text: #92400E;
+}
 
-      // Склеиваем имя файла с метками и делаем переход
-      window.location.href = OFFER_URL + currentParams; 
-  }
-  </script>
+body {
+font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+margin: 0;
+background: var(--bg);
+padding-bottom: 100px;
+color: var(--text);
+line-height: 1.6;
+font-size: 17px;
+-webkit-user-select: none;
+-moz-user-select: none;
+-ms-user-select: none;
+user-select: none;
+}
 
-  <style>
-    /* CSS RESET & VARIABLES */
-    :root {
-      --bg: #FFFFFF;
-      --surface: #FFFFFF;
-      --border: rgba(15, 23, 42, 0.12);
-      --text-strong: #0B1220;
-      --text: #1F2937;
-      --muted: #6B7280;
-      --dark: #0F172A;
-      --dark-2: #0B0F14;
-      --on-dark: rgba(255,255,255,0.92);
-      --on-dark-muted: rgba(255,255,255,0.68);
-      --cta: #F5B301;
-      --cta-hover: #E2A400;
-      --cta-text: #111111;
-      --highlight: rgba(245, 179, 1, 0.12);
-      --success-bg: rgba(34, 197, 94, 0.12);
-      --success-text: #166534;
-      --warning-bg: rgba(245, 179, 1, 0.18);
-      --warning-text: #92400E;
-    }
+/* Input Selection */
+input, textarea {
+-webkit-user-select: text;
+-moz-user-select: text;
+-ms-user-select: text;
+user-select: text;
+}
 
-    body {
-      font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
-      margin: 0;
-      background: var(--bg);
-      padding-bottom: 100px;
-      color: var(--text);
-      line-height: 1.6;
-      font-size: 17px;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      user-select: none;
-    }
+.container {
+max-width: 600px;
+margin: 0 auto;
+background: var(--surface);
+box-shadow: none;
+border-left: 1px solid var(--border);
+border-right: 1px solid var(--border);
+overflow: hidden;
+min-height: 100vh;
+}
 
-    /* Input Selection */
-    input, textarea {
-      -webkit-user-select: text;
-      -moz-user-select: text;
-      -ms-user-select: text;
-      user-select: text;
-    }
+/* TYPOGRAPHY OVERRIDES */
+h1, h2, h3, .section-title, .review-title {
+font-family: 'Sora', system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+color: var(--text-strong);
+letter-spacing: -0.01em;
+}
 
-    .container {
-      max-width: 600px;
-      margin: 0 auto;
-      background: var(--surface);
-      box-shadow: none;
-      border-left: 1px solid var(--border);
-      border-right: 1px solid var(--border);
-      overflow: hidden;
-      min-height: 100vh;
-    }
+/* HEADER */
+.status-bar {
+min-height: 40px;
+background: var(--dark);
+padding: 12px 10px;
+font-size: 13px;
+text-align: center;
+border-bottom: 1px solid rgba(255,255,255,0.08);
+color: var(--on-dark-muted);
+letter-spacing: 0.02em;
+font-weight: 500;
+}
 
-    /* TYPOGRAPHY OVERRIDES */
-    h1, h2, h3, .section-title, .review-title {
-      font-family: 'Sora', system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
-      color: var(--text-strong);
-      letter-spacing: -0.01em;
-    }
+/* HERO */
+.hero-section {
+padding: 32px 20px;
+text-align: center;
+border-bottom: 1px solid var(--border);
+}
 
-    /* HEADER */
-    .status-bar {
-      min-height: 40px;
-      background: var(--dark);
-      padding: 12px 10px;
-      font-size: 13px;
-      text-align: center;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-      color: var(--on-dark-muted);
-      letter-spacing: 0.02em;
-      font-weight: 500;
-    }
+h1 {
+font-size: 28px;
+line-height: 1.3;
+margin: 0 0 16px 0;
+font-weight: 800;
+}
 
-    /* HERO */
-    .hero-section {
-      padding: 32px 20px;
-      text-align: center;
-      border-bottom: 1px solid var(--border);
-    }
+.sub-headline {
+font-size: 18px;
+color: var(--text);
+margin-bottom: 24px;
+font-weight: 400;
+}
 
-    h1 {
-      font-size: 28px;
-      line-height: 1.3;
-      margin: 0 0 16px 0;
-      font-weight: 800;
-    }
+/* BUTTONS */
+.btn {
+display: block;
+width: 100%;
+padding: 18px;
+font-size: 18px;
+font-family: 'Sora', sans-serif;
+font-weight: 800;
+text-align: center;
+border-radius: 14px;
+border: none;
+cursor: pointer;
+text-decoration: none;
+box-sizing: border-box;
+transition: background-color 0.2s ease, transform 0.1s ease;
+touch-action: manipulation;
+}
 
-    .sub-headline {
-      font-size: 18px;
-      color: var(--text);
-      margin-bottom: 24px;
-      font-weight: 400;
-    }
+.btn:active { transform: scale(0.98); }
 
-    /* BUTTONS */
-    .btn {
-      display: block;
-      width: 100%;
-      padding: 18px;
-      font-size: 18px;
-      font-family: 'Sora', sans-serif;
-      font-weight: 800;
-      text-align: center;
-      border-radius: 14px;
-      border: none;
-      cursor: pointer;
-      text-decoration: none;
-      box-sizing: border-box;
-      transition: background-color 0.2s ease, transform 0.1s ease;
-      touch-action: manipulation;
-    }
+.btn-primary, .btn-accent {
+background: var(--cta);
+color: var(--cta-text);
+box-shadow: none;
+}
 
-    .btn:active { transform: scale(0.98); }
+.btn-primary:hover, .btn-accent:hover { background: var(--cta-hover); }
+.btn-accent { animation: none; }
 
-    .btn-primary, .btn-accent {
-      background: var(--cta);
-      color: var(--cta-text);
-      box-shadow: none;
-    }
+.btn:focus-visible,
+.submit-btn:focus-visible {
+outline: 2px solid rgba(245,179,1,0.45);
+outline-offset: 2px;
+}
 
-    .btn-primary:hover, .btn-accent:hover { background: var(--cta-hover); }
-    .btn-accent { animation: none; }
+/* SECTIONS */
+.section {
+padding: 32px 20px;
+border-bottom: 1px solid var(--border);
+}
 
-    .btn:focus-visible,
-    .submit-btn:focus-visible {
-      outline: 2px solid rgba(245,179,1,0.45);
-      outline-offset: 2px;
-    }
+.section-title {
+font-size: 22px;
+font-weight: 800;
+margin: 0 0 20px 0;
+color: var(--text-strong);
+}
 
-    /* SECTIONS */
-    .section {
-      padding: 32px 20px;
-      border-bottom: 1px solid var(--border);
-    }
+/* MAP STYLES */
+#map-wrapper {
+position: relative;
+height: 280px;
+width: 100%;
+border-radius: 12px;
+overflow: hidden;
+border: 1px solid var(--border);
+background: #eee;
+margin-top: 20px;
+/* Изоляция лайаута для производительности */
+contain: strict;
+}
 
-    .section-title {
-      font-size: 22px;
-      font-weight: 800;
-      margin: 0 0 20px 0;
-      color: var(--text-strong);
-    }
+#map { height: 100%; width: 100%; z-index: 1; }
 
-    /* MAP STYLES */
-    #map-wrapper {
-      position: relative;
-      height: 280px;
-      width: 100%;
-      border-radius: 12px;
-      overflow: hidden;
-      border: 1px solid var(--border);
-      background: #eee;
-      margin-top: 20px;
-      /* Изоляция лайаута для производительности */
-      contain: strict; 
-    }
+/* WIDGET */
+.live-notification {
+position: absolute;
+bottom: 15px;
+left: 50%;
+transform: translateX(-50%);
+width: 90%;
+background: rgba(255, 255, 255, 0.95);
+backdrop-filter: blur(8px);
+padding: 12px 16px;
+border-radius: 12px;
+box-shadow: 0 6px 22px rgba(0,0,0,0.10);
+z-index: 500;
+display: flex;
+align-items: center;
+gap: 12px;
+box-sizing: border-box;
+transition: opacity 0.5s;
+pointer-events: none;
+border: 1px solid var(--border);
+}
 
-    #map { height: 100%; width: 100%; z-index: 1; }
+.live-icon { font-size: 16px; }
 
-    /* WIDGET */
-    .live-notification {
-      position: absolute;
-      bottom: 15px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 90%;
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(8px);
-      padding: 12px 16px;
-      border-radius: 12px;
-      box-shadow: 0 6px 22px rgba(0,0,0,0.10);
-      z-index: 500;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      box-sizing: border-box;
-      transition: opacity 0.5s;
-      pointer-events: none;
-      border: 1px solid var(--border);
-    }
+.live-text {
+font-size: 14px;
+font-weight: 800;
+color: var(--text-strong);
+line-height: 1.2;
+font-family: 'Sora', sans-serif;
+}
 
-    .live-icon { font-size: 16px; }
+.live-subtext { font-size: 12px; color: var(--muted); }
 
-    .live-text {
-      font-size: 14px;
-      font-weight: 800;
-      color: var(--text-strong);
-      line-height: 1.2;
-      font-family: 'Sora', sans-serif;
-    }
+/* LISTS & ALERTS */
+ul.stages-list { padding-left: 0; list-style: none; }
+ul.stages-list li {
+margin-bottom: 24px;
+padding-left: 0;
+position: relative;
+display: flex;
+gap: 12px;
+align-items: flex-start;
+}
 
-    .live-subtext { font-size: 12px; color: var(--muted); }
+ul.stages-list li::before { content: none; }
 
-    /* LISTS & ALERTS */
-    ul.stages-list { padding-left: 0; list-style: none; }
-    ul.stages-list li {
-      margin-bottom: 24px;
-      padding-left: 0;
-      position: relative;
-      display: flex;
-      gap: 12px;
-      align-items: flex-start;
-    }
-    ul.stages-list li::before { content: none; }
+.cheat-sheet {
+background: var(--highlight);
+border: 1px solid var(--border);
+padding: 20px;
+border-radius: 12px;
+margin-top: 20px;
+}
 
-    .cheat-sheet {
-      background: var(--highlight);
-      border: 1px solid var(--border);
-      padding: 20px;
-      border-radius: 12px;
-      margin-top: 20px;
-    }
+.cheat-sheet h3 { margin-top: 0; font-size: 18px; display: flex; align-items: center; gap: 8px; color: var(--text-strong); }
+.cheat-sheet ol { padding-left: 24px; color: var(--text); }
+.cheat-sheet li { margin-bottom: 12px; }
 
-    .cheat-sheet h3 { margin-top: 0; font-size: 18px; display: flex; align-items: center; gap: 8px; color: var(--text-strong); }
-    .cheat-sheet ol { padding-left: 24px; color: var(--text); }
-    .cheat-sheet li { margin-bottom: 12px; }
+/* GEO TEXT */
+.geo-highlight{
+background: #FBBF24;
+color: #111827;
+padding: 5px 10px;
+border-radius: 8px;
+font-weight: 800;
+font-size: 10px;
+letter-spacing: 0.5px;
+line-height: 1;
+display: inline-block;
+white-space: nowrap;
+box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+}
 
-    /* GEO TEXT */
-    .geo-highlight{
-      background: #FBBF24;
-      color: #111827;
-      padding: 5px 10px;
-      border-radius: 8px;
-      font-weight: 800;
-      font-size: 10px;
-      letter-spacing: 0.5px;
-      line-height: 1;
-      display: inline-block;
-      white-space: nowrap;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.25);
-    }
+.geo-city{ display:inline-block; }
 
-      .geo-city{ display:inline-block; }
+/* именно для плашки */
+.geo-highlight{
+min-width: 10ch; /* можно 12ch если часто длинные города */
+text-align: center;
+}
 
-      /* именно для плашки */
-      .geo-highlight{
-       min-width: 10ch;         /* можно 12ch если часто длинные города */
-       text-align: center;
-    }
+/* STICKY FOOTER */
+.sticky-footer {
+position: fixed;
+bottom: 0;
+left: 0;
+width: 100%;
+height: auto;
+min-height: 72px;
+background: rgba(255, 255, 255, 0.92);
+backdrop-filter: blur(10px);
+-webkit-backdrop-filter: blur(10px);
+padding: 10px 14px calc(10px + env(safe-area-inset-bottom)) 14px;
+box-sizing: border-box;
+border-top: 1px solid var(--border);
+box-shadow: 0 -10px 28px rgba(0,0,0,0.06);
+z-index: 999;
+text-align: center;
+transform: translateY(120%);
+transition: transform 0.2s ease;
+}
 
+.sticky-footer.visible { transform: translateY(0); }
 
-    /* STICKY FOOTER */
-    .sticky-footer {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: auto;
-      min-height: 72px;
-      background: rgba(255, 255, 255, 0.92);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      padding: 10px 14px calc(10px + env(safe-area-inset-bottom)) 14px;
-      box-sizing: border-box;
-      border-top: 1px solid var(--border);
-      box-shadow: 0 -10px 28px rgba(0,0,0,0.06);
-      z-index: 999;
-      text-align: center;
-      transform: translateY(120%);
-      transition: transform 0.2s ease;
-    }
+.sticky-sub {
+font-size: 13px;
+color: var(--muted);
+margin-bottom: 8px;
+display: block;
+font-weight: 500;
+}
 
-    .sticky-footer.visible { transform: translateY(0); }
+.legal-footer {
+padding: 32px 20px;
+font-size: 12px;
+text-align: center;
+background: var(--dark-2);
+color: var(--on-dark-muted);
+margin-bottom: 20px;
+line-height: 1.5;
+}
 
-    .sticky-sub {
-      font-size: 13px;
-      color: var(--muted);
-      margin-bottom: 8px;
-      display: block;
-      font-weight: 500;
-    }
+.legal-footer strong { color: var(--on-dark); }
 
-    .legal-footer {
-      padding: 32px 20px;
-      font-size: 12px;
-      text-align: center;
-      background: var(--dark-2);
-      color: var(--on-dark-muted);
-      margin-bottom: 20px;
-      line-height: 1.5;
-    }
+/* REVIEWS & GALLERY */
+.reviews-container {
+background-color: var(--surface);
+padding: 32px 0;
+border-bottom: 1px solid var(--border);
+overflow: hidden;
+}
 
-    .legal-footer strong { color: var(--on-dark); }
+.reviews-header { padding: 0 20px 16px 20px; }
 
-    /* REVIEWS & GALLERY */
-    .reviews-container {
-      background-color: var(--surface);
-      padding: 32px 0;
-      border-bottom: 1px solid var(--border);
-      overflow: hidden;
-    }
+.reviews-track, .gallery-track {
+display: flex;
+overflow-x: auto;
+scroll-snap-type: x mandatory;
+gap: 16px;
+scrollbar-width: none;
+-webkit-overflow-scrolling: touch;
+cursor: grab;
+user-select: none;
+padding: 0 20px 20px 20px;
+}
 
-    .reviews-header { padding: 0 20px 16px 20px; }
-
-    .reviews-track, .gallery-track {
-      display: flex;
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
-      gap: 16px;
-      scrollbar-width: none;
-      -webkit-overflow-scrolling: touch;
-      cursor: grab;
-      user-select: none;
-      padding: 0 20px 20px 20px;
-    }
-
-      /* Hide horizontal scrollbar (Chrome/Edge/Safari) */
+/* Hide horizontal scrollbar (Chrome/Edge/Safari) */
 .gallery-track::-webkit-scrollbar,
 .reviews-track::-webkit-scrollbar {
-  height: 0;
-  width: 0;
-  display: none;
+height: 0;
+width: 0;
+display: none;
 }
 
 /* Hide scrollbar (old Edge/IE) */
 .gallery-track,
 .reviews-track {
-  -ms-overflow-style: none;
-  scrollbar-width: none; /* Firefox (можно оставить, уже есть) */
-} 
-    
-    .gallery-track { padding: 0; gap: 0; }
+-ms-overflow-style: none;
+scrollbar-width: none; /* Firefox (можно оставить, уже есть) */
+}
 
-    .review-user { display: flex; align-items: center; gap: 12px; }
-    .review-meta { display: flex; flex-direction: column; align-items: flex-start; }
+.gallery-track { padding: 0; gap: 0; }
 
-    .review-card {
-      min-width: 85%;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 20px;
-      scroll-snap-align: center;
-      box-shadow: 0 10px 28px rgba(0,0,0,0.06);
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
+.review-user { display: flex; align-items: center; gap: 12px; }
+.review-meta { display: flex; flex-direction: column; align-items: flex-start; }
 
-    .review-avatar {
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
-      background: #eee;
-      object-fit: cover;
-      border: 1px solid var(--border);
-      box-shadow: none;
-    }
+.review-card {
+min-width: 85%;
+background: var(--surface);
+border: 1px solid var(--border);
+border-radius: 12px;
+padding: 20px;
+scroll-snap-align: center;
+box-shadow: 0 10px 28px rgba(0,0,0,0.06);
+display: flex;
+flex-direction: column;
+justify-content: space-between;
+}
 
-    .review-name { font-weight: 800; font-size: 15px; color: var(--text-strong); font-family: 'Sora', sans-serif; }
-    .review-date { font-size: 12px; color: var(--muted); margin-top: 2px; }
-    .review-stars { color: #F59E0B; font-size: 16px; margin-bottom: 12px; letter-spacing: 2px; }
-    .review-title { font-weight: 800; font-size: 16px; margin-bottom: 8px; color: var(--text-strong); }
-    .review-body { font-size: 15px; color: var(--text); line-height: 1.6; font-style: normal; }
+.review-avatar {
+width: 48px;
+height: 48px;
+border-radius: 50%;
+background: #eee;
+object-fit: cover;
+border: 1px solid var(--border);
+box-shadow: none;
+}
 
-    .verified-badge {
-      margin-top: 16px;
-      padding-top: 12px;
-      border-top: 1px solid var(--border);
-      color: var(--text-strong);
-      font-size: 12px;
-      font-weight: 800;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
+.review-name { font-weight: 800; font-size: 15px; color: var(--text-strong); font-family: 'Sora', sans-serif; }
+.review-date { font-size: 12px; color: var(--muted); margin-top: 2px; }
+.review-stars { color: #F59E0B; font-size: 16px; margin-bottom: 12px; letter-spacing: 2px; }
+.review-title { font-weight: 800; font-size: 16px; margin-bottom: 8px; color: var(--text-strong); }
+.review-body { font-size: 15px; color: var(--text); line-height: 1.6; font-style: normal; }
 
-    /* Fake Form */
-    .write-review-box {
-      margin: 20px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 24px;
-      box-shadow: 0 10px 28px rgba(0,0,0,0.06);
-    }
+.verified-badge {
+margin-top: 16px;
+padding-top: 12px;
+border-top: 1px solid var(--border);
+color: var(--text-strong);
+font-size: 12px;
+font-weight: 800;
+display: flex;
+align-items: center;
+gap: 6px;
+}
 
-    .form-header { font-size: 18px; font-weight: 800; margin-bottom: 16px; color: var(--text-strong); }
+/* Fake Form */
+.write-review-box {
+margin: 20px;
+background: var(--surface);
+border: 1px solid var(--border);
+border-radius: 12px;
+padding: 24px;
+box-shadow: 0 10px 28px rgba(0,0,0,0.06);
+}
 
-    .fake-input {
-      width: 100%;
-      padding: 14px;
-      margin-bottom: 12px;
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      font-size: 16px;
-      box-sizing: border-box;
-      background: #FFFFFF;
-      color: var(--text);
-      font-family: 'Inter', sans-serif;
-    }
+.form-header { font-size: 18px; font-weight: 800; margin-bottom: 16px; color: var(--text-strong); }
 
-    .fake-input:focus {
-      outline: 2px solid rgba(245,179,1,0.35);
-      border-color: rgba(245,179,1,0.65);
-    }
+.fake-input {
+width: 100%;
+padding: 14px;
+margin-bottom: 12px;
+border: 1px solid var(--border);
+border-radius: 12px;
+font-size: 16px;
+box-sizing: border-box;
+background: #FFFFFF;
+color: var(--text);
+font-family: 'Inter', sans-serif;
+}
 
-    .fake-textarea { height: 100px; resize: none; }
+.fake-input:focus {
+outline: 2px solid rgba(245,179,1,0.35);
+border-color: rgba(245,179,1,0.65);
+}
 
-    .submit-btn {
-      background: var(--dark);
-      color: white;
-      border: none;
-      padding: 16px;
-      width: 100%;
-      border-radius: 14px;
-      font-weight: 800;
-      cursor: pointer;
-      font-size: 16px;
-      transition: opacity 0.2s;
-      font-family: 'Sora', sans-serif;
-    }
+.fake-textarea { height: 100px; resize: none; }
 
-    .submit-btn:hover { opacity: 0.92; }
+.submit-btn {
+background: var(--dark);
+color: white;
+border: none;
+padding: 16px;
+width: 100%;
+border-radius: 14px;
+font-weight: 800;
+cursor: pointer;
+font-size: 16px;
+transition: opacity 0.2s;
+font-family: 'Sora', sans-serif;
+}
 
-    /* Stars (base + active) */
-    .star-rating { display:flex; gap:6px; font-size:22px; margin-bottom:12px; justify-content:center; }
-    .star-rating span { cursor:pointer; color: rgba(107,114,128,0.6); transition: color 0.15s ease; }
-    .star-rating span:hover, .star-rating span.active { color: #F59E0B; }
+.submit-btn:hover { opacity: 0.92; }
 
-    /* Success Msg */
-    .success-overlay {
-      display: none;
-      text-align: center;
-      padding: 30px 20px;
-      background: var(--success-bg);
-      border: 1px solid transparent;
-      border-radius: 12px;
-      margin: 20px;
-    }
+/* Stars (base + active) */
+.star-rating { display:flex; gap:6px; font-size:22px; margin-bottom:12px; justify-content:center; }
+.star-rating span { cursor:pointer; color: rgba(107,114,128,0.6); transition: color 0.15s ease; }
+.star-rating span:hover, .star-rating span.active { color: #F59E0B; }
 
-    /* GALLERY STYLES (4:3 VERTICAL / PORTRAIT) */
-    .gallery-container {
-      position: relative;
-      width: 100%;
-      margin: 24px 0;
-      border-radius: 12px;
-      overflow: hidden;
-      border: 1px solid var(--border);
-      background: #eee; /* Цвет фона, пока грузится картинка */
-      
-      /* FIX CLS: Строгая изоляция. Браузер сразу знает размер блока */
-      contain: strict;
-      
-      /* Основная пропорция 3:4 */
-      aspect-ratio: 3 / 4; 
-    }
+/* Success Msg */
+.success-overlay {
+display: none;
+text-align: center;
+padding: 30px 20px;
+background: var(--success-bg);
+border: 1px solid transparent;
+border-radius: 12px;
+margin: 20px;
+}
 
-    /* трек и слайды */
-    .gallery-track {
-      display: flex;
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
-      height: 100%;
-      gap: 0;
-      scrollbar-width: none;
-      -webkit-overflow-scrolling: touch;
-      scroll-behavior: smooth;
-      cursor: grab;
-      padding: 0;
-    }
+/* GALLERY STYLES (4:3 VERTICAL / PORTRAIT) */
+.gallery-container {
+position: relative;
+width: 100%;
+margin: 24px 0;
+border-radius: 12px;
+overflow: hidden;
+border: 1px solid var(--border);
+background: #eee; /* Цвет фона, пока грузится картинка */
+/* FIX CLS: Строгая изоляция. Браузер сразу знает размер блока */
+contain: strict;
+/* Основная пропорция 3:4 */
+aspect-ratio: 3 / 4;
+}
 
-    .gallery-item {
-      min-width: 100%;
-      flex: 0 0 100%;
-      height: 100%;
-      position: relative;
-      scroll-snap-align: center;
-      scroll-snap-stop: always;
-    }
+/* трек и слайды */
+.gallery-track {
+display: flex;
+overflow-x: auto;
+scroll-snap-type: x mandatory;
+height: 100%;
+gap: 0;
+scrollbar-width: none;
+-webkit-overflow-scrolling: touch;
+scroll-behavior: smooth;
+cursor: grab;
+padding: 0;
+}
 
-    /* Универсально для img и video */
-    .gallery-img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      pointer-events: none;
-    }
+.gallery-item {
+min-width: 100%;
+flex: 0 0 100%;
+height: 100%;
+position: relative;
+scroll-snap-align: center;
+scroll-snap-stop: always;
+}
 
-    /* badges + hint */
-    .badge {
-      position: absolute;
-      top: 12px;
-      left: 12px;
-      padding: 5px 10px;
-      border-radius: 8px;
-      font-size: 10px;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      color: white;
-      z-index: 3;
-      pointer-events: none;
-      font-family: 'Sora', sans-serif;
-    }
+/* Универсально для img и video */
+.gallery-img {
+width: 100%;
+height: 100%;
+object-fit: cover;
+display: block;
+pointer-events: none;
+}
 
-    .badge-before {
-      background: rgba(0, 0, 0, 0.65);
-      backdrop-filter: blur(4px);
-    }
+/* badges + hint */
+.badge {
+position: absolute;
+top: 12px;
+left: 12px;
+padding: 5px 10px;
+border-radius: 8px;
+font-size: 10px;
+font-weight: 800;
+text-transform: uppercase;
+letter-spacing: 0.5px;
+color: white;
+z-index: 3;
+pointer-events: none;
+font-family: 'Sora', sans-serif;
+}
 
-    .badge-after {
-      background: var(--cta);
-      box-shadow: 0 2px 10px rgba(0,0,0,0.22);
-      color: var(--cta-text);
-    }
+.badge-before {
+background: rgba(0, 0, 0, 0.65);
+backdrop-filter: blur(4px);
+}
 
-    .badge-right {
-      left: auto;
-      right: 12px;
-    }
+.badge-after {
+background: var(--cta);
+box-shadow: 0 2px 10px rgba(0,0,0,0.22);
+color: var(--cta-text);
+}
 
-    .right-arrow-hint {
-      position: absolute;
-      right: 12px;
-      top: 50%;
-      transform: translateY(-50%);
-      font-size: 32px;
-      color: rgba(255,255,255,0.9);
-      text-shadow: 0 1px 3px rgba(0,0,0,0.5);
-      animation: bounceRight 1.5s infinite ease-in-out;
-      z-index: 10;
-      pointer-events: none;
-    }
+.badge-right {
+left: auto;
+right: 12px;
+}
 
-    @keyframes bounceRight {
-      0%, 100% { transform: translateY(-50%) translateX(0); opacity: 0.7; }
-      50%      { transform: translateY(-50%) translateX(6px); opacity: 1; }
-    }
+.right-arrow-hint {
+position: absolute;
+right: 12px;
+top: 50%;
+transform: translateY(-50%);
+font-size: 32px;
+color: rgba(255,255,255,0.9);
+text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+animation: bounceRight 1.5s infinite ease-in-out;
+z-index: 10;
+pointer-events: none;
+}
 
-    /* FAQ STYLES */
-    .faq-section {
-      background: var(--surface);
-      padding: 40px 20px;
-      border-bottom: 1px solid var(--border);
-    }
+@keyframes bounceRight {
+0%, 100% { transform: translateY(-50%) translateX(0); opacity: 0.7; }
+50% { transform: translateY(-50%) translateX(6px); opacity: 1; }
+}
 
-    .faq-item {
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      margin-bottom: 12px;
-      overflow: hidden;
-      transition: all 0.3s ease;
-      background: #fff;
-    }
+/* FAQ STYLES */
+.faq-section {
+background: var(--surface);
+padding: 40px 20px;
+border-bottom: 1px solid var(--border);
+}
 
-    .faq-item.active {
-      border-color: var(--border);
-      background: var(--highlight);
-    }
+.faq-item {
+border: 1px solid var(--border);
+border-radius: 12px;
+margin-bottom: 12px;
+overflow: hidden;
+transition: all 0.3s ease;
+background: #fff;
+}
 
-    .faq-question {
-      background: var(--surface);
-      padding: 18px 20px;
-      font-size: 16px;
-      font-weight: 800;
-      color: var(--text-strong);
-      cursor: pointer;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-family: 'Sora', sans-serif;
-    }
+.faq-item.active {
+border-color: var(--border);
+background: var(--highlight);
+}
 
-    .faq-question:hover { background: rgba(0,0,0,0.02); }
+.faq-question {
+background: var(--surface);
+padding: 18px 20px;
+font-size: 16px;
+font-weight: 800;
+color: var(--text-strong);
+cursor: pointer;
+display: flex;
+justify-content: space-between;
+align-items: center;
+font-family: 'Sora', sans-serif;
+}
 
-    .faq-answer {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.3s ease-out, padding 0.3s ease, opacity 0.3s ease;
-      background: var(--surface);
-      padding: 0 20px;
-      font-size: 16px;
-      color: var(--text);
-      line-height: 1.7;
-      opacity: 0;
-    }
+.faq-question:hover { background: rgba(0,0,0,0.02); }
 
-    .faq-item.active .faq-answer {
-      max-height: 1000px;
-      padding: 20px;
-      border-top: 1px solid var(--border);
-      opacity: 1;
-    }
+.faq-answer {
+max-height: 0;
+overflow: hidden;
+transition: max-height 0.3s ease-out, padding 0.3s ease, opacity 0.3s ease;
+background: var(--surface);
+padding: 0 20px;
+font-size: 16px;
+color: var(--text);
+line-height: 1.7;
+opacity: 0;
+}
 
-    .arrow-icon {
-      transition: transform 0.3s;
-      font-size: 12px;
-      color: var(--muted);
-    }
+.faq-item.active .faq-answer {
+max-height: 1000px;
+padding: 20px;
+border-top: 1px solid var(--border);
+opacity: 1;
+}
 
-    .faq-item.active .arrow-icon { transform: rotate(180deg); color: var(--text-strong); }
+.arrow-icon {
+transition: transform 0.3s;
+font-size: 12px;
+color: var(--muted);
+}
 
-    /* SECURITY STYLES */
-    img {
-      -webkit-user-drag: none;
-      -khtml-user-drag: none;
-      -moz-user-drag: none;
-      -o-user-drag: none;
-      pointer-events: none;
-    }
+.faq-item.active .arrow-icon { transform: rotate(180deg); color: var(--text-strong); }
 
-    /* TRUST BADGES */
-    .trust-badges {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 16px;
-      margin-top: 16px;
-      flex-wrap: wrap;
-      padding: 0 10px;
-    }
+/* SECURITY STYLES */
+img {
+-webkit-user-drag: none;
+-khtml-user-drag: none;
+-moz-user-drag: none;
+-o-user-drag: none;
+pointer-events: none;
+}
 
-    .trust-item {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 11px;
-      color: var(--muted);
-      font-weight: 500;
-      white-space: nowrap;
-    }
+/* TRUST BADGES */
+.trust-badges {
+display: flex;
+justify-content: center;
+align-items: center;
+gap: 16px;
+margin-top: 16px;
+flex-wrap: wrap;
+padding: 0 10px;
+}
 
-    .trust-icon {
-      font-size: 14px;
-      filter: grayscale(1);
-      opacity: 0.7;
-    }
+.trust-item {
+display: flex;
+align-items: center;
+gap: 6px;
+font-size: 11px;
+color: var(--muted);
+font-weight: 500;
+white-space: nowrap;
+}
 
-    @media (prefers-reduced-motion: reduce) {
-      .right-arrow-hint { animation: none; }
-      .btn { transition: none; }
-      .live-notification { transition: none; }
-    }
+.trust-icon {
+font-size: 14px;
+filter: grayscale(1);
+opacity: 0.7;
+}
 
-    /* === CLS FIX: reserve hero text height on small screens === */
-    @media (max-width: 520px) {
-      .hero-section h1 {
-        min-height: 2.6em; /* резерв под ~2 строки */
-      }
-      .hero-section .sub-headline {
-        min-height: 3.2em; /* резерв под ~2 строки */
-      }
+@media (prefers-reduced-motion: reduce) {
+.right-arrow-hint { animation: none; }
+.btn { transition: none; }
+.live-notification { transition: none; }
+}
 
-      .hero-section h1,
-      .hero-section .sub-headline,
-      .hero-section .btn{
-       font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
-      }
-    }
-  </style>
+/* === CLS FIX: reserve hero text height on small screens === */
+@media (max-width: 520px) {
+.hero-section h1 {
+min-height: 2.6em; /* резерв под ~2 строки */
+}
+.hero-section .sub-headline {
+min-height: 3.2em; /* резерв под ~2 строки */
+}
+.hero-section h1,
+.hero-section .sub-headline,
+.hero-section .btn{
+font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+}
+}
+</style>
+
 <!-- Yandex.Metrika counter -->
 <script type="text/javascript">
-    (function(m,e,t,r,i,k,a){
-        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-        m[i].l=1*new Date();
-        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
-        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
-    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=106979229', 'ym');
+(function(m,e,t,r,i,k,a){
+m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+m[i].l=1*new Date();
+for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+})(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=106979229', 'ym');
 
-    ym(106979229, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+ym(106979229, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
 </script>
 <noscript><div><img src="https://mc.yandex.ru/watch/106979229" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 <!-- /Yandex.Metrika counter -->
+
 <meta name="p:domain_verify" content="96c31558edf7667bdbcff14d2b46c7e1"/>
+
 </head>
-
 <body>
-  <div class="container">
-    <!-- 1. STATUS BAR -->
-    <div class="status-bar">
-      Updated:
-      <strong style="color:var(--on-dark)"><span id="current-date">Today</span></strong><br>
-      <span class="geo-city geo-highlight">Your Area</span>
-    </div>
-
-    <!-- 2. HERO SECTION -->
-    <div class="hero-section">
-      <h1>Update your kitchen’s look without a full remodel.</h1>
-      <p class="sub-headline">
-        New countertops, backsplash, built-in appliances, or cabinet refacing.
-        Check if <span class="geo-city">your area</span> qualifies for a custom refresh plan.
-      </p>
-
-      <!-- GALLERY -->
-      <div class="gallery-container">
-        <div class="gallery-track">
-          <!-- === PAIR 0 === -->
-          <div class="gallery-item">
-            <span class="badge badge-before">❌ Before</span>
-            <span class="badge badge-after badge-right">After ✨</span>
-            <div class="right-arrow-hint">›</div>
-            <!-- LCP poster (webp) -->
-            <img
-              class="gallery-img lcp-poster"
-              src="img/1111-before.webp"
-              width="768" height="1024"
-              alt="Kitchen before and after preview"
-              fetchpriority="high"
-              decoding="async"
-            >
-            <!-- Video (mp4/webm) loads later and replaces poster -->
-            <video
-              class="gallery-img lcp-video"
-              autoplay loop muted playsinline
-              preload="none"
-              data-webm="img/1111-before.webm"
-              data-mp4="img/1111-before.mp4"
-              style="display:none"
-            ></video>
-            <!-- GIF fallback (optional): покажется только если видео не взлетит -->
-            <img
-              class="gallery-img lcp-gif"
-              data-gif="img/1111-before.gif"
-              alt="Kitchen preview animation"
-              decoding="async"
-              loading="lazy"
-              style="display:none"
-            >
-          </div>
-
-          <!-- === PAIR 1 === -->
-          <div class="gallery-item">
-            <span class="badge badge-before">❌ Before</span>
-            <img src="img/1-before.webp" class="gallery-img" alt="Kitchen before update" loading="lazy" decoding="async">
-          </div>
-          <div class="gallery-item">
-            <span class="badge badge-after">✨ After | Saved ~$5,800</span>
-            <img src="img/1-after.webp" class="gallery-img" alt="Kitchen after refacing" loading="lazy" decoding="async">
-          </div>
-
-          <!-- === PAIR 2 === -->
-          <div class="gallery-item">
-            <span class="badge badge-before">❌ Before</span>
-            <img src="img/2-before.webp" class="gallery-img" alt="Kitchen before" loading="lazy" decoding="async">
-          </div>
-          <div class="gallery-item">
-            <span class="badge badge-after">✨ After | -50% Less vs. New</span>
-            <img src="img/2-after.webp" class="gallery-img" alt="Kitchen after" loading="lazy" decoding="async">
-          </div>
-
-          <!-- === PAIR 3 === -->
-          <div class="gallery-item">
-            <span class="badge badge-before">❌ Before</span>
-            <img src="img/3-before.webp" class="gallery-img" alt="Kitchen before" loading="lazy" decoding="async">
-          </div>
-          <div class="gallery-item">
-            <span class="badge badge-after">✨ After</span>
-            <img src="img/3-after.webp" class="gallery-img" alt="Kitchen after" loading="lazy" decoding="async">
-          </div>
-
-          <!-- === PAIR 4 === -->
-          <div class="gallery-item">
-            <span class="badge badge-before">❌ Before</span>
-            <img src="img/4-before.webp" class="gallery-img" alt="Kitchen before" loading="lazy" decoding="async">
-          </div>
-          <div class="gallery-item">
-            <span class="badge badge-after">✨ After | Done in 4 Days</span>
-            <img src="img/4-after.webp" class="gallery-img" alt="Kitchen after" loading="lazy" decoding="async">
-          </div>
-
-          <!-- === PAIR 5 === -->
-          <div class="gallery-item">
-            <span class="badge badge-before">❌ Before</span>
-            <img src="img/5-before.webp" class="gallery-img" alt="Kitchen before" loading="lazy" decoding="async">
-          </div>
-          <div class="gallery-item">
-            <span class="badge badge-after">✨ After | High-End Upgrade</span>
-            <img src="img/5-after.webp" class="gallery-img" alt="Kitchen after" loading="lazy" decoding="async">
-          </div>
-        </div>
-      </div>
-
-      <button onclick="goToOffer()" class="btn btn-primary">Show My Options (2 min)</button>
-
-      <!-- TRUST BADGES BLOCK END -->
-      <p style="font-size: 13px; color: var(--muted); margin-top: 12px; margin-bottom: 0;">
-        Free matching • No obligation • Text-first option
-      </p>
-
-      <!-- TRUST BADGES BLOCK START -->
-      <div class="trust-badges">
-        <div class="trust-item"><span class="trust-icon">🔒</span> SSL Secure</div>
-      </div>
-
-      <!-- What you get (inline-only, no new classes) -->
-      <div style="margin-top:14px; background:var(--highlight); border:1px solid var(--border); border-radius:12px; padding:14px 16px; font-size:15px; line-height:1.5; text-align:left;">
-        <div style="font-weight:800; font-family:'Sora',sans-serif; color:var(--text-strong); margin-bottom:8px;">What you’ll get (in 2 minutes):</div>
-        <div>• A realistic starting price range</div>
-        <div>• Options for: counters, doors, appliances, & more</div>
-        <div>• Timeline + mess level (so you can plan)</div>
-      </div>
-    </div>
-
-        <!-- ========================================== -->
-    <!-- 2.5. ADVERTORIAL ARTICLE (СЕКРЕТ С ПИНТЕРЕСТА) -->
-    <!-- ========================================== -->
-    <div class="section" style="background-color: #FAFAFA; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
-      
-      <!-- Бейдж "В тренде" -->
-      <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 16px;">
-         <span style="background: #ef4444; color: white; padding: 4px 8px; border-radius: 6px; font-size: 11px; font-weight: 800; letter-spacing: 0.5px; text-transform: uppercase;">Trending</span>
-         <span style="font-size: 13px; color: var(--muted); font-weight: 500;">3 min read</span>
-      </div>
-      
-      <h2 class="section-title" style="font-size: 26px; line-height: 1.35; margin-bottom: 16px;">The Kitchen Upgrade "Secret": Why You Should NEVER Replace Your Cabinets</h2>
-      
-      <p style="font-size: 17px; margin-bottom: 16px; color: var(--text);">Let’s cut right to the chase. The "secret" local contractors don't want you to know is actually very simple: <strong style="background: var(--warning-bg); padding: 2px 6px; border-radius: 4px; color: var(--warning-text);">you probably don't need to replace your kitchen cabinets.</strong></p>
-      
-      <p style="font-size: 17px; margin-bottom: 24px; color: var(--text);">If you like your current layout and the cabinet boxes (the frames attached to the walls) are solid, ripping them out is a massive waste of your budget.</p>
-      
-      <h3 style="font-size: 20px; font-family: 'Sora', sans-serif; font-weight: 800; color: var(--text-strong); margin-bottom: 12px;">Why Contractors Hate This Option</h3>
-      <p style="font-size: 17px; margin-bottom: 24px; color: var(--text);">Traditional remodeling companies make their biggest profits on full "gut-job" renovations. They charge you thousands for demolition, disposal, and weeks of billable labor. That’s why they rarely suggest the smarter, faster alternative: <strong>Professional Cabinet Refacing</strong>.</p>
-      
-      <h3 style="font-size: 20px; font-family: 'Sora', sans-serif; font-weight: 800; color: var(--text-strong); margin-bottom: 12px;">Update Without A Full Remodel</h3>
-      <p style="font-size: 17px; margin-bottom: 16px; color: var(--text);">Instead of destroying your kitchen, refacing leaves your sturdy existing boxes exactly where they are. Specialists reinforce the frames, cover them in a premium veneer, and then install <strong>brand-new, custom-crafted doors, drawer fronts, and soft-close hardware</strong>.</p>
-      
-      <ul style="padding-left: 0; list-style: none; margin-bottom: 28px;">
-        <li style="margin-bottom: 16px; display: flex; gap: 12px; align-items: flex-start;">
-          <span style="font-size: 22px; line-height: 1.2;">🛑</span> 
-          <span style="font-size: 16px; color: var(--text); line-height: 1.5;"><strong>No Demolition & No Dust:</strong> Your home doesn't turn into a toxic construction zone.</span>
-        </li>
-        <li style="margin-bottom: 16px; display: flex; gap: 12px; align-items: flex-start;">
-          <span style="font-size: 22px; line-height: 1.2;">⏱️</span> 
-          <span style="font-size: 16px; color: var(--text); line-height: 1.5;"><strong>Done in Days, Not Weeks:</strong> Most installations are completely finished in just 3 to 5 days.</span>
-        </li>
-        <li style="margin-bottom: 16px; display: flex; gap: 12px; align-items: flex-start;">
-          <span style="font-size: 22px; line-height: 1.2;">💰</span> 
-          <span style="font-size: 16px; color: var(--text); line-height: 1.5;"><strong>Massive Savings:</strong> You save thousands by not paying for hidden cabinet boxes and unnecessary labor.</span>
-        </li>
-      </ul>
-      
-      <h3 style="font-size: 20px; font-family: 'Sora', sans-serif; font-weight: 800; color: var(--text-strong); margin-bottom: 12px;">The Catch: Do You Qualify?</h3>
-      <p style="font-size: 17px; margin-bottom: 16px; color: var(--text);">Because this "no-demo" method relies on using your existing cabinet frames, <strong>not every kitchen is eligible.</strong> If your boxes are rotting or you want to completely change the shape of your kitchen, you will need a traditional remodel.</p>
-      
-      <p style="font-size: 17px; margin-bottom: 24px; color: var(--text);">Find out instantly if this low-mess upgrade is available for your home. Use the <strong>Free 2-Minute Eligibility Checker</strong> below to see if your kitchen qualifies and get a realistic starting price range for your zip code.</p>
-      
-      <!-- Кнопка, вызывающая твой скрипт перехода на Квиз -->
-      <button onclick="goToOffer()" class="btn btn-primary" style="margin-top: 8px; box-shadow: 0 8px 20px rgba(245, 179, 1, 0.3);">Check My Eligibility (2 mins) ➔</button>
-      
-    </div>
-    <!-- ========================================== -->
-
-
-    <!-- 3. RATIONALIZATION -->
-    <div class="section">
-      <h2 class="section-title">What is the best option for your kitchen?</h2>
-      <p style="margin-bottom: 24px; color: var(--text);">
-        <strong>Refacing:</strong> Keeps your existing layout but replaces doors, drawers, and hardware for a brand-new look.<br><br>
-        <strong>Counters & More:</strong> You can update <em>just</em> the countertops, backsplash, or appliances — or combine everything for a full transformation.
-        It’s often faster, cleaner, and more budget-friendly than a full rip-out remodel.
-      </p>
-      <div style="background: var(--warning-bg); padding: 20px; border: 1px solid var(--border); border-radius: 12px; font-size: 15px;">
-        <p style="margin: 0; color: var(--warning-text); line-height: 1.6;">
-          <strong>💡 Quick reality check:</strong><br>
-          Not sure what you need? The 2-minute check helps you compare options (refacing vs. just counters vs. full remodel) so you don't waste time or money on the wrong service.
-        </p>
-      </div>
-    </div>
-
-    <!-- 4. MAP -->
-    <div class="section">
-      <h2 class="section-title">Local options near <span class="geo-city">Your Area</span></h2>
-      <p style="font-size: 15px; margin-bottom: 8px;">
-        We check your area for top-rated specialists, whether you need full refacing, new countertops, or a simple refresh.
-      </p>
-      <p style="font-size:13px; color:var(--muted); margin:0 0 12px 0;">
-        We match by expertise (cabinetry, stone, tile, appliances) — so you get the right pro for the job.
-      </p>
-      <div id="map-wrapper">
-        <div id="map"></div>
-        <div class="live-notification" id="live-widget">
-          <div class="live-icon">🟢</div>
-          <div>
-            <div class="live-text">Finding nearby options…</div>
-            <div class="live-subtext">Text-first option. No obligation.</div>
-          </div>
-        </div>
-      </div>
-      <p style="font-size: 13px; color: var(--muted); text-align: center; margin-top: 12px;">
-        <span style="color: var(--cta)">●</span> We are actively matching homeowners in <span class="geo-city">your area</span> right now. Start the 2-minute check to see availability.
-      </p>
-    </div>
-
-    <!-- 5. TESTIMONIALS -->
-    <div class="reviews-container">
-      <div class="reviews-header">
-        <h2 class="section-title" style="margin-bottom: 8px;">See how homeowners saved time & money</h2>
-        <p style="font-size: 14px; color: var(--muted); margin: 0;">Feedback from neighbors who used our diagnostic quiz to find the smartest renovation path and avoid overpriced quotes.</p>
-      </div>
-      <div class="reviews-track">
-        <!-- 1 -->
-        <div class="review-card">
-          <div>
-            <div class="review-user">
-              <img src="img/review-sarah.jpg" class="review-avatar" alt="Homeowner" loading="lazy" decoding="async">
-              <div class="review-meta">
-                <div class="review-name">Sarah M. (Homeowner)</div>
-                <div class="review-date">Saved roughly $5k on cabinets</div>
-              </div>
-            </div>
-            <div class="review-stars">★★★★★</div>
-            <div class="review-title">“The call saved me roughly $5,000.”</div>
-            <p class="review-body">
-              I was convinced I needed brand new cabinets. I took the quiz just to compare prices.
-              The expert who called me reviewed my answers and explained that my cabinet boxes were still good—I only needed refacing.
-              Honest advice, no upsell, and the call took less than 10 minutes.
-            </p>
-          </div>
-          <div class="verified-badge">✔ Outcome: Saved money by choosing refacing vs. replacement</div>
-        </div>
-        <!-- 2 -->
-        <div class="review-card">
-          <div>
-            <div class="review-user">
-              <img src="img/review-mark.jpg" class="review-avatar" alt="Homeowner" loading="lazy" decoding="async">
-              <div class="review-meta">
-                <div class="review-name">Mark T. (Homeowner)</div>
-                <div class="review-date">Hates robocalls & spam</div>
-              </div>
-            </div>
-            <div class="review-stars">★★★★★</div>
-            <div class="review-title">“Short, professional, and zero spam.”</div>
-            <p class="review-body">
-              I hesitate to give out my number because of robocalls. But here, I selected "Evening" for a callback, and that’s exactly when they called.
-              The contractor came prepared because of the quiz info.
-              We skipped the awkward "sales pitch" and went straight to discussing my kitchen layout.
-            </p>
-          </div>
-          <div class="verified-badge">✔ Experience: Respectful communication • No unwanted calls</div>
-        </div>
-        <!-- 3 -->
-        <div class="review-card">
-          <div>
-            <div class="review-user">
-              <img src="img/review-jen.jpg" class="review-avatar" alt="Homeowner" loading="lazy" decoding="async">
-              <div class="review-meta">
-                <div class="review-name">Danielle R. (Homeowner)</div>
-                <div class="review-date">Needed clear direction</div>
-              </div>
-            </div>
-            <div class="review-stars">★★★★★</div>
-            <div class="review-title">“Finally, someone listened to what I actually wanted.”</div>
-            <p class="review-body">
-              Other companies tried to sell me a full demo instantly.
-              This 2-minute check helped me clarify that I only wanted to change the countertops and backsplash.
-              The specialist confirmed this was possible without tearing everything apart. It gave me the confidence to move forward.
-            </p>
-          </div>
-          <div class="verified-badge">✔ Outcome: Clear renovation plan tailored to my needs</div>
-        </div>
-        <!-- 4 -->
-        <div class="review-card">
-          <div>
-            <div class="review-user">
-              <img src="img/review-michelle.jpg" class="review-avatar" alt="Homeowner" loading="lazy" decoding="async">
-              <div class="review-meta">
-                <div class="review-name">Michelle K. (Homeowner)</div>
-                <div class="review-date">Needed a low-disruption plan (kids at home)</div>
-              </div>
-            </div>
-            <div class="review-stars">★★★★★</div>
-            <div class="review-title">“We figured out a plan to keep the kitchen livable.”</div>
-            <p class="review-body">
-              With kids at home, I couldn't afford a messy 6-week renovation.
-              The quiz asked about my timeline, and the pro who called suggested a "low-disruption" refacing plan.
-              I didn't know that was an option! We got the modern look we wanted in just 5 days of actual work.
-            </p>
-          </div>
-          <div class="verified-badge">✔ Best for: Minimal disruption + Accurate timeline expectations</div>
-        </div>
-        <!-- 5 -->
-        <div class="review-card">
-          <div>
-            <div class="review-user">
-              <img src="img/review-robert.jpg" class="review-avatar" alt="Homeowner" loading="lazy" decoding="async">
-              <div class="review-meta">
-                <div class="review-name">Robert S. (Homeowner)</div>
-                <div class="review-date">Not ready for home visits yet</div>
-              </div>
-            </div>
-            <div class="review-stars">★★★★★</div>
-            <div class="review-title">“Got my questions answered without a home visit.”</div>
-            <p class="review-body">
-              I wasn't ready to have strangers in my house yet. Filling out the form allowed me to get a preliminary consultation over the phone first.
-              The representative was knowledgeable, answered my questions about materials, and gave me a ballpark idea before we ever scheduled a measurement.
-            </p>
-          </div>
-          <div class="verified-badge">✔ Preference: Informative phone consultation before home visit</div>
-        </div>
-      </div>
-
-      <div style="text-align:center; margin-top:16px; font-size:13px; color:var(--muted); display:flex; align-items:center; justify-content:center; gap:6px;">
-        <span>👆 Swipe to see common renovation wins</span>
-      </div>
-
-    <!-- 6. AUTHORITY -->
-    <div class="section" id="how-it-works-section">
-      <h2 class="section-title">How to Get Your Exact Price (Simple & Stress-Free)</h2>
-      <ul class="stages-list">
-        <li>
-          <div style="flex-shrink:0; width:28px; height:28px; background:var(--highlight); color:var(--text-strong); border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:14px; font-family:'Sora',sans-serif;">1</div>
-          <div>
-            <strong>Answer a few questions:</strong><br>
-            Tell us about your current kitchen layout and what style you’re looking for. It takes less than 2 minutes.
-          </div>
-        </li>
-        <li>
-          <div style="flex-shrink:0; width:28px; height:28px; background:var(--highlight); color:var(--text-strong); border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:14px; font-family:'Sora',sans-serif;">2</div>
-          <div>
-            <strong>Get Matched with a Pro:</strong><br>
-            We analyze your project needs and connect you with a local expert who specializes in your specific request.
-          </div>
-        </li>
-        <li>
-          <div style="flex-shrink:0; width:28px; height:28px; background:var(--highlight); color:var(--text-strong); border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:14px; font-family:'Sora',sans-serif;">3</div>
-          <div>
-            <strong>Receive Your Custom Quote:</strong><br>
-            Review your options and pricing details with a specialist. No guesswork—just honest numbers so you can decide.
-          </div>
-        </li>
-      </ul>
-    </div>
-
-    <!-- 7. CHEAT SHEET -->
-    <div class="section" style="background-color: var(--bg);">
-      <h2 class="section-title">Insider Checklist: 4 Questions That Save You Money & Headaches</h2>
-      <p>
-        Don't just get a quote—get the <em>right</em> quote. Use this cheat sheet when you speak with a pro to ensure you get the best deal with zero surprises.
-      </p>
-      <div class="cheat-sheet">
-        <h3><span style="font-size:20px">🧾</span> Ask these 4 questions:</h3>
-        <ol style="margin: 0; padding-left: 20px;">
-          <li style="margin-bottom: 16px;">
-            <strong>"Is this the 'Out-the-Door' Price?"</strong><br>
-            <span style="font-size: 14px; color: var(--muted);">Make sure materials, installation, disposal, and cleanup are ALL included. No hidden fees later.</span>
-          </li>
-          <li style="margin-bottom: 16px;">
-            <strong>"Can you verify your License & Insurance?"</strong><br>
-            <span style="font-size: 14px; color: var(--muted);">Protects you from liability. Legit pros (like the ones in our network) will happily show proof.</span>
-          </li>
-          <li style="margin-bottom: 16px;">
-            <strong>"What is the Guaranteed Finish Date?"</strong><br>
-            <span style="font-size: 14px; color: var(--muted);">Refacing should take days, not weeks. Get a firm timeline in writing.</span>
-          </li>
-          <li style="margin-bottom: 16px;">
-            <strong>"What is your Dust Control Plan?"</strong><br>
-            <span style="font-size: 14px; color: var(--muted);">Professional crews use specialized coverings to keep your floors safe and your home dust-free.</span>
-          </li>
-        </ol>
-      </div>
-      <p style="font-size: 14px; color: var(--text-strong); text-align: center; margin-top: 16px; margin-bottom: 0; background: var(--success-bg); padding: 10px; border-radius: 8px;">
-        <strong>✅ Confidence Booster:</strong> Our network pros expect these questions. In fact, they love educated homeowners!
-      </p>
-    </div>
-
-    <!-- 8. FAQ ACCORDION -->
-    <div class="faq-section">
-      <h2 class="section-title" style="text-align:center; margin-bottom:32px;">Frequently Asked Questions</h2>
-      <div class="faq-container">
-        <!-- Q1 -->
-        <div class="faq-item active">
-          <div class="faq-question">What happens after I tap “Show My Options (2 min)”?<span class="arrow-icon">▼</span></div>
-          <div class="faq-answer">
-            You’ll go to a quick 2-minute check where you describe what you want (refacing, counters, backsplash, appliances, or a mix).
-            After that, a local pro can reach out to confirm a couple details and give you a <strong>realistic price range</strong> for your area.
-            <br><br>
-            <strong>Zero pressure:</strong> you can use it just to plan your budget.
-          </div>
-        </div>
-        <!-- Q2 -->
-        <div class="faq-item">
-          <div class="faq-question">Why can’t I see an exact price instantly on this page?<span class="arrow-icon">▼</span></div>
-          <div class="faq-answer">
-            Kitchens are priced by details that online calculators usually miss: cabinet condition, door style, material choices, layout, and install complexity.
-            The 2-minute check narrows it down, and a pro confirms the specifics so you don’t get “bait” pricing.
-          </div>
-        </div>
-        <!-- Q3 -->
-        <div class="faq-item">
-          <div class="faq-question">Do I have to talk to someone right away?<span class="arrow-icon">▼</span></div>
-          <div class="faq-answer">
-            Not necessarily. Many homeowners start with <strong>text-first</strong> to get a ballpark range and ask a few questions.
-            If you want a truly exact quote, you can schedule a measurement later — only if and when you’re comfortable.
-          </div>
-        </div>
-        <!-- Q4 -->
-        <div class="faq-item">
-          <div class="faq-question">Why do you need my phone number?<span class="arrow-icon">▼</span></div>
-          <div class="faq-answer">
-            Because accurate pricing usually needs 1–2 clarifying questions (materials, rough measurements, timeline).
-            <br><br>
-            <strong>Important:</strong> you should never be asked for sensitive info (like SSN or bank details) just to get an estimate.
-          </div>
-        </div>
-        <!-- Q6 -->
-        <div class="faq-item">
-          <div class="faq-question">Will I get spammed with calls?<span class="arrow-icon">▼</span></div>
-          <div class="faq-answer">
-            It’s normal to get a follow-up when you request pricing — that’s how estimates work.
-            But you stay in control:
-            <ul style="margin:10px 0 0 18px;">
-              <li>Request <strong>text-first</strong> if you hate calls</li>
-              <li>Set a <strong>time window</strong> (morning/evening)</li>
-              <li>If you’re not moving forward, say “Please stop contacting me”</li>
-            </ul>
-          </div>
-        </div>
-        <!-- Q7 -->
-        <div class="faq-item">
-          <div class="faq-question">How many pros will contact me?<span class="arrow-icon">▼</span></div>
-          <div class="faq-answer">
-            Often it’s one local specialist. In some areas, more than one may reach out.
-            If you only want one quote, just tell the first person: <strong>“I’m only collecting one estimate right now.”</strong>
-          </div>
-        </div>
-        <!-- Q8 -->
-        <div class="faq-item">
-          <div class="faq-question">Is the estimate really free? Am I obligated to buy?<span class="arrow-icon">▼</span></div>
-          <div class="faq-answer">
-            Yes — requesting options and an estimate is <strong>free</strong>, and you’re not obligated to hire anyone.
-            Any work agreement (if you choose to move forward) is between you and the contractor.
-          </div>
-        </div>
-        <!-- Q9 -->
-        <div class="faq-item">
-          <div class="faq-question">Are the pros local and trustworthy?<span class="arrow-icon">▼</span></div>
-          <div class="faq-answer">
-            We aim to match you with <strong>local specialists</strong> who handle the type of work you selected (cabinetry, stone, tile, appliances).
-            <br><br>
-            Still — always verify basics before scheduling:
-            <ul style="margin:10px 0 0 18px;">
-              <li><strong>License</strong> (where required)</li>
-              <li><strong>Insurance</strong> (proof)</li>
-              <li>A <strong>written</strong>, itemized estimate</li>
-            </ul>
-          </div>
-        </div>
-        <!-- Q10 -->
-        <div class="faq-item">
-          <div class="faq-question">I’m scared of hidden fees or “price jumps.” How do I protect myself?<span class="arrow-icon">▼</span></div>
-          <div class="faq-answer">
-            Ask for an <strong>out-the-door</strong> price in writing (materials + labor + cleanup + disposal), and confirm what triggers extra costs.
-            <br><br>
-            Tip: use the <strong>“Insider Checklist”</strong> above — it’s designed exactly for this.
-          </div>
-        </div>
-        <!-- Q11 -->
-        <div class="faq-item">
-          <div class="faq-question">What’s the difference: refacing vs. refresh vs. full remodel?<span class="arrow-icon">▼</span></div>
-          <div class="faq-answer">
-            <strong>Refacing:</strong> keeps cabinet boxes, replaces doors/drawers/hardware for a new look.<br>
-            <strong>Refresh:</strong> smaller upgrades (paint/finish, hardware, lighting, backsplash, counters).<br>
-            <strong>Full remodel:</strong> layout changes, major demo, typically higher cost and longer timeline.
-          </div>
-        </div>
-        <!-- Q12 -->
-        <div class="faq-item">
-          <div class="faq-question">Can I just replace countertops, backsplash, or appliances (no full remodel)?<span class="arrow-icon">▼</span></div>
-          <div class="faq-answer">
-            Yes. Many homeowners do a “smart upgrade” instead of a full tear-out.
-            You can mix and match: counters + backsplash, refacing + new sink, appliance install, and more.
-          </div>
-        </div>
-        <!-- Q13 -->
-        <div class="faq-item">
-          <div class="faq-question">How long does it take, and how messy is it?<span class="arrow-icon">▼</span></div>
-          <div class="faq-answer">
-            Refacing/refresh projects are often measured in <strong>days</strong> (not weeks), but timing depends on kitchen size, materials, and scope.
-            Ask about <strong>dust control</strong>, daily cleanup, and what stays usable during the work — a good crew will explain it clearly.
-          </div>
-        </div>
-        <!-- Q15 -->
-        <div class="faq-item">
-          <div class="faq-question">I’m just browsing and not ready. Is it still worth doing?<span class="arrow-icon">▼</span></div>
-          <div class="faq-answer">
-            Yes — many people use the 2-minute check for <strong>budget planning</strong> only.
-            If a pro reaches out, you can simply say you’re “researching” and want a rough range. That’s totally normal.
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 9. FOOTER -->
-    <div class="legal-footer">
-      <p><strong>Disclaimer:</strong> HomeSupplyCenter.org is a free service to assist homeowners in connecting with local service providers. All contractors/providers are independent and HomeSupplyCenter.org does not warrant or guarantee any work performed. It is the responsibility of the homeowner to verify that the hired contractor furnishes the necessary license and insurance required for the work being performed. We may receive compensation or a referral fee when you connect with a service provider through our site.</p>
-      <p style="margin-top: 16px; font-size: 11px;">
-        <a href="privacy.html" style="color: var(--on-dark-muted); text-decoration: none; margin: 0 8px;">Privacy Policy</a> |
-        <a href="terms.html" style="color: var(--on-dark-muted); text-decoration: none; margin: 0 8px;">Terms of Use</a> |
-        <a href="ccpa.html" style="color: var(--on-dark-muted); text-decoration: none; margin: 0 8px;">Do Not Sell My Personal Information</a>
-      </p>
-      <p style="margin-top:10px;">&copy; <span id="copyright-year">2024</span> Kitchen Refacing & Refresh Guide.</p>
-    </div>
-  </div><!-- /container -->
-
-  <!-- STICKY FOOTER -->
-  <div class="sticky-footer" id="sticky-cta">
-    <span class="sticky-sub"><span style="color:var(--cta)">●</span> Get a realistic starting range in <span class="geo-city">your area</span> — no pressure.</span>
-    <button onclick="goToOffer()" class="btn btn-accent" style="padding: 14px; border-radius: 14px;">
-      Get My Options (2 min)
-    </button>
-  </div>
-
-  <!-- SCRIPTS -->
-  <script>
-    // 1) DATE LOGIC
-    (function setDate() {
-      const d = new Date();
-      try {
-        const dateEl = document.getElementById('current-date');
-        if (dateEl) dateEl.textContent = d.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
-        const copyEl = document.getElementById('copyright-year');
-        if (copyEl) copyEl.textContent = d.getFullYear();
-      } catch(e) {}
-    })();
-
-    // 2) WIDGET LOGIC
-    (function widgetRotate() {
-      const widgetBox = document.getElementById('live-widget');
-      if (!widgetBox) return;
-      const widgetText = widgetBox.querySelector('.live-text');
-      const widgetSub  = widgetBox.querySelector('.live-subtext');
-      const widgetIcon = widgetBox.querySelector('.live-icon');
-
-      function getCity() {
-        const el = document.querySelector('.geo-city');
-        return el && el.textContent !== "Your Area" ? el.textContent : "your area";
-      }
-
-      const messages = [
-        { icon: "🧰", t: () => "Finding local specialists…", s: () => `Checking ${getCity()}` },
-        { icon: "🧩", t: () => "Comparing your options", s: () => "Refacing • Counters • Appliances" },
-        { icon: "💬", t: () => "Text-first option available", s: () => "No pressure. No spam." },
-        { icon: "💰", t: () => "100% Free Quote", s: () => "See pricing in 2 mins" }
-      ];
-
-      let msgIdx = 0;
-      setInterval(() => {
-        widgetBox.style.opacity = '0';
-        setTimeout(() => {
-          msgIdx = (msgIdx + 1) % messages.length;
-          widgetIcon.textContent = messages[msgIdx].icon;
-          widgetText.textContent = messages[msgIdx].t();
-          widgetSub.textContent  = messages[msgIdx].s();
-          widgetBox.style.opacity = '1';
-        }, 500);
-      }, 5000);
-    })();
-
-    // 3) MAP & GEO LOGIC (true lazy init when map gets near viewport)
-    let __leafletLoaded = false;
-    let __mapInited = false;
-
-    function loadLeaflet() {
-      if (__leafletLoaded) return Promise.resolve();
-      __leafletLoaded = true;
-
-      const css = new Promise((res, rej) => {
-        const existing = document.querySelector("link[href*='leaflet@1.9.4/dist/leaflet.css']");
-        if (existing) return res();
-        const l = document.createElement("link");
-        l.rel = "stylesheet";
-        l.href = "https://unpkg.com/leaflet@1.9.4/dist/leaflet.css";
-        l.onload = res;
-        l.onerror = rej;
-        document.head.appendChild(l);
-      });
-
-      const js = new Promise((res, rej) => {
-        const s = document.createElement("script");
-        s.src = "https://unpkg.com/leaflet@1.9.4/dist/leaflet.js";
-        s.defer = true;
-        s.onload = res;
-        s.onerror = rej;
-        document.body.appendChild(s);
-      });
-
-      return Promise.all([css, js]);
-    }
-
-    async function initMap() {
-      if (__mapInited) return;
-      __mapInited = true;
-
-      await loadLeaflet();
-
-      let lat = 41.8781, lon = -87.6298;
-      let city = "Your Area";
-      let region = "Your State";
-      let found = false;
-
-      const tryFetch = async (url) => {
-        try {
-          const res = await fetch(url, { cache: "no-store" });
-          if (res.ok) return await res.json();
-        } catch (e) { return null; }
-        return null;
-      };
-
-      // providers in order (fast -> fallback)
-      if (!found) {
-        const data = await tryFetch('https://ipapi.co/json/');
-        if (data && data.city) {
-          lat = data.latitude; lon = data.longitude; city = data.city; region = data.region; found = true;
-        }
-      }
-      if (!found) {
-        const data = await tryFetch('https://ipwho.is/');
-        if (data && data.success) {
-          lat = data.latitude; lon = data.longitude; city = data.city; region = data.region; found = true;
-        }
-      }
-      if (!found) {
-        const data = await tryFetch('https://get.geojs.io/v1/ip/geo.json');
-        if (data && data.city) {
-          lat = parseFloat(data.latitude); lon = parseFloat(data.longitude); city = data.city; region = data.region; found = true;
-        }
-      }
-
-      if (found) {
-        document.querySelectorAll('.geo-city').forEach(el => el.textContent = city);
-        document.querySelectorAll('.geo-state').forEach(el => el.textContent = region);
-      }
-
-      if (typeof L !== 'undefined') {
-        const map = L.map('map', {
-          zoomControl: false,
-          scrollWheelZoom: false,
-          dragging: false,
-          touchZoom: false,
-          doubleClickZoom: false,
-          attributionControl: false
-        }).setView([lat, lon], 11);
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
-        L.circle([lat, lon], { color: '#C97C5D', fillColor: '#C97C5D', fillOpacity: 0.15, radius: 6500 }).addTo(map);
-        L.marker([lat, lon]).addTo(map);
-      }
-    }
-
-    (function lazyMapObserver() {
-      const wrap = document.getElementById('map-wrapper');
-      if (!wrap) return;
-
-      if (!('IntersectionObserver' in window)) {
-        // fallback
-        initMap();
-        return;
-      }
-
-      const obs = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            initMap();
-            obs.disconnect();
-          }
-        });
-      }, { root: null, rootMargin: "600px 0px", threshold: 0.01 });
-      obs.observe(wrap);
-    })();
-
-    // 4) DRAG SCROLL (desktop) - OPTIMIZED FOR PERFORMANCE (Passive & RAF)
-    function enableDragScroll(selector) {
-      const slider = document.querySelector(selector);
-      if (!slider) return;
-      let isDown = false;
-      let startX;
-      let scrollLeft;
-      let isTicking = false; // Flag for requestAnimationFrame
-
-      slider.addEventListener('mousedown', (e) => {
-        isDown = true;
-        startX = e.pageX - slider.offsetLeft;
-        scrollLeft = slider.scrollLeft;
-      });
-      slider.addEventListener('mouseleave', () => { isDown = false; });
-      slider.addEventListener('mouseup', () => { isDown = false; });
-
-      slider.addEventListener('mousemove', (e) => {
-        if (!isDown) return;
-        e.preventDefault();
-        
-        // FIX: Wrap in requestAnimationFrame to avoid "Forced Reflow"
-        if(!isTicking) {
-          window.requestAnimationFrame(() => {
-            const x = e.pageX - slider.offsetLeft;
-            const walk = (x - startX) * 2; 
-            slider.scrollLeft = scrollLeft - walk;
-            isTicking = false;
-          });
-          isTicking = true;
-        }
-      });
-    }
-
-    enableDragScroll('.gallery-track');
-    enableDragScroll('.reviews-track');
-
-    // 6) HERO media: prefer VIDEO (webm/mp4), fallback to GIF, else keep poster
-    (function lazyLoadHeroMedia() {
-      const run = () => {
-        const v = document.querySelector(".lcp-video");
-        const posterImg = document.querySelector(".lcp-poster");
-        const gifImg = document.querySelector(".lcp-gif");
-        if (!v) return;
-
-        const webmSrc = v.getAttribute("data-webm");
-        const mp4Src  = v.getAttribute("data-mp4");
-        const gifSrc  = gifImg ? gifImg.getAttribute("data-gif") : null;
-        let loaded = false;
-
-        const showPosterOnly = () => {
-          v.style.display = "none";
-          if (gifImg) gifImg.style.display = "none";
-          if (posterImg) posterImg.style.display = "block";
-        };
-
-        const showGif = () => {
-          if (!gifImg || !gifSrc) return showPosterOnly();
-          gifImg.src = gifSrc;
-          gifImg.style.display = "block";
-          v.style.display = "none";
-          if (posterImg) posterImg.style.display = "none";
-        };
-
-        const showVideo = () => {
-          v.style.display = "block";
-          if (gifImg) gifImg.style.display = "none";
-          if (posterImg) posterImg.style.display = "none";
-        };
-
-        const loadMedia = () => {
-          if (loaded) return;
-          loaded = true;
-
-          // If no video sources — try GIF
-          if (!webmSrc && !mp4Src) {
-            if (gifSrc) return showGif();
-            return showPosterOnly();
-          }
-
-          // Build sources (webm first)
-          if (webmSrc) {
-            const s1 = document.createElement("source");
-            s1.src = webmSrc;
-            s1.type = "video/webm";
-            v.appendChild(s1);
-          }
-          if (mp4Src) {
-            const s2 = document.createElement("source");
-            s2.src = mp4Src;
-            s2.type = "video/mp4";
-            v.appendChild(s2);
-          }
-
-          v.load();
-          const onReady = () => {
-            showVideo();
-          };
-          v.addEventListener("canplay", onReady, { once: true });
-
-          // Attempt autoplay; if blocked or fails — fallback to GIF/poster
-          v.play()
-            .then(() => showVideo())
-            .catch(() => {
-              if (gifSrc) showGif();
-              else showPosterOnly();
-            });
-        };
-
-        // load when idle + also on first user interaction
-        if ("requestIdleCallback" in window) {
-          requestIdleCallback(loadMedia, { timeout: 1500 });
-        } else {
-          setTimeout(loadMedia, 1200);
-        }
-        window.addEventListener("scroll", loadMedia, { once: true, passive: true });
-        window.addEventListener("touchstart", loadMedia, { once: true, passive: true });
-        window.addEventListener("mousemove", loadMedia, { once: true, passive: true });
-      };
-
-      if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", run);
-      else run();
-    })();
-
-    const faqs = document.querySelectorAll('.faq-item');
-    faqs.forEach(faq => {
-      const question = faq.querySelector('.faq-question');
-      question.addEventListener('click', () => {
-        if (faq.classList.contains('active')) {
-          faq.classList.remove('active');
-          return;
-        }
-        faqs.forEach(item => item.classList.remove('active'));
-        faq.classList.add('active');
-      });
-    });
-
-    // 9) STICKY CTA BEHAVIOR
-    document.addEventListener("DOMContentLoaded", function() {
-      const sticky = document.getElementById('sticky-cta');
-      const howItWorks = document.getElementById('how-it-works-section');
-      const inputs = document.querySelectorAll('input, textarea, select');
-
-      let lastScrollTop = 0;
-      let isInputFocused = false;
-      let hasPassedThreshold = false;
-      const THRESHOLD_PX = 500;
-      const SCROLL_DELTA = 10;
-
-      if (inputs && inputs.length) {
-        inputs.forEach(input => {
-          input.addEventListener('focus', () => {
-            isInputFocused = true;
-            if (sticky) sticky.classList.remove('visible');
-          });
-          input.addEventListener('blur', () => {
-            isInputFocused = false;
-            if (hasPassedThreshold && sticky) sticky.classList.add('visible');
-          });
-        });
-      }
-
-      window.addEventListener('scroll', function() {
-        if (isInputFocused || !sticky) return;
-        const st = window.pageYOffset || document.documentElement.scrollTop;
-        const howItWorksTop = howItWorks ? howItWorks.offsetTop : THRESHOLD_PX;
-
-        if (!hasPassedThreshold) {
-          if (st > THRESHOLD_PX || st > howItWorksTop - window.innerHeight) {
-            hasPassedThreshold = true;
-            sticky.classList.add('visible');
-          }
-        } else {
-          if (Math.abs(lastScrollTop - st) <= SCROLL_DELTA) return;
-          if (st > lastScrollTop) sticky.classList.remove('visible');
-          else sticky.classList.add('visible');
-        }
-        lastScrollTop = st <= 0 ? 0 : st;
-      }, false);
-    });
-  </script>
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<div class="container">
+<!-- 1. STATUS BAR -->
+<div class="status-bar">
+Updated:
+<strong style="color:var(--on-dark)"><span id="current-date">Today</span></strong><br>
+<span class="geo-city geo-highlight">Your Area</span>
+</div>
+
+<!-- 2. HERO SECTION -->
+<div class="hero-section">
+<h1>Update your kitchen’s look without a full remodel.</h1>
+<p class="sub-headline">
+New countertops, backsplash, built-in appliances, or cabinet refacing.
+Check if <span class="geo-city">your area</span> qualifies for a custom refresh plan.
+</p>
+
+<!-- GALLERY -->
+<div class="gallery-container">
+<div class="gallery-track">
+
+<!-- === PAIR 0 === -->
+<div class="gallery-item">
+<span class="badge badge-before">❌ Before</span>
+<span class="badge badge-after badge-right">After ✨</span>
+<div class="right-arrow-hint">›</div>
+<!-- LCP poster (webp) -->
+<img
+class="gallery-img lcp-poster"
+src="img/1111-before.webp"
+width="768" height="1024"
+alt="Kitchen before and after preview"
+fetchpriority="high"
+decoding="async"
+>
+<!-- Video (mp4/webm) loads later and replaces poster -->
+<video
+class="gallery-img lcp-video"
+autoplay loop muted playsinline
+preload="none"
+data-webm="img/1111-before.webm"
+data-mp4="img/1111-before.mp4"
+style="display:none"
+></video>
+<!-- GIF fallback (optional): покажется только если видео не взлетит -->
+<img
+class="gallery-img lcp-gif"
+data-gif="img/1111-before.gif"
+alt="Kitchen preview animation"
+decoding="async"
+loading="lazy"
+style="display:none"
+>
+</div>
+
+<!-- === PAIR 1 === -->
+<div class="gallery-item">
+<span class="badge badge-before">❌ Before</span>
+<img src="img/1-before.webp" class="gallery-img" alt="Kitchen before update" loading="lazy" decoding="async">
+</div>
+<div class="gallery-item">
+<span class="badge badge-after">✨ After | Saved ~$5,800</span>
+<img src="img/1-after.webp" class="gallery-img" alt="Kitchen after refacing" loading="lazy" decoding="async">
+</div>
+
+<!-- === PAIR 2 === -->
+<div class="gallery-item">
+<span class="badge badge-before">❌ Before</span>
+<img src="img/2-before.webp" class="gallery-img" alt="Kitchen before" loading="lazy" decoding="async">
+</div>
+<div class="gallery-item">
+<span class="badge badge-after">✨ After | -50% Less vs. New</span>
+<img src="img/2-after.webp" class="gallery-img" alt="Kitchen after" loading="lazy" decoding="async">
+</div>
+
+<!-- === PAIR 3 === -->
+<div class="gallery-item">
+<span class="badge badge-before">❌ Before</span>
+<img src="img/3-before.webp" class="gallery-img" alt="Kitchen before" loading="lazy" decoding="async">
+</div>
+<div class="gallery-item">
+<span class="badge badge-after">✨ After</span>
+<img src="img/3-after.webp" class="gallery-img" alt="Kitchen after" loading="lazy" decoding="async">
+</div>
+
+<!-- === PAIR 4 === -->
+<div class="gallery-item">
+<span class="badge badge-before">❌ Before</span>
+<img src="img/4-before.webp" class="gallery-img" alt="Kitchen before" loading="lazy" decoding="async">
+</div>
+<div class="gallery-item">
+<span class="badge badge-after">✨ After | Done in 4 Days</span>
+<img src="img/4-after.webp" class="gallery-img" alt="Kitchen after" loading="lazy" decoding="async">
+</div>
+
+<!-- === PAIR 5 === -->
+<div class="gallery-item">
+<span class="badge badge-before">❌ Before</span>
+<img src="img/5-before.webp" class="gallery-img" alt="Kitchen before" loading="lazy" decoding="async">
+</div>
+<div class="gallery-item">
+<span class="badge badge-after">✨ After | High-End Upgrade</span>
+<img src="img/5-after.webp" class="gallery-img" alt="Kitchen after" loading="lazy" decoding="async">
+</div>
+
+</div>
+</div>
+
+<button onclick="goToOffer()" class="btn btn-primary">Show My Options (2 min)</button>
+
+<!-- TRUST BADGES BLOCK END -->
+<p style="font-size: 13px; color: var(--muted); margin-top: 12px; margin-bottom: 0;">
+Free matching • No obligation • Text-first option
+</p>
+<!-- TRUST BADGES BLOCK START -->
+<div class="trust-badges">
+<div class="trust-item"><span class="trust-icon">🔒</span> SSL Secure</div>
+</div>
+
+<!-- What you get (inline-only, no new classes) -->
+<div style="margin-top:14px; background:var(--highlight); border:1px solid var(--border); border-radius:12px; padding:14px 16px; font-size:15px; line-height:1.5; text-align:left;">
+<div style="font-weight:800; font-family:'Sora',sans-serif; color:var(--text-strong); margin-bottom:8px;">What you’ll get (in 2 minutes):</div>
+<div>• A realistic starting price range</div>
+<div>• Options for: counters, doors, appliances, & more</div>
+<div>• Timeline + mess level (so you can plan)</div>
+</div>
+</div>
+
+<!-- ========================================== -->
+<!-- 2.5. ADVERTORIAL ARTICLE (СЕКРЕТ С ПИНТЕРЕСТА) -->
+<!-- ========================================== -->
+<div class="section" style="background-color: #FAFAFA; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+
+<!-- Бейдж "В тренде" -->
+<div style="display: flex; align-items: center; gap: 8px; margin-bottom: 16px;">
+<span style="background: #ef4444; color: white; padding: 4px 8px; border-radius: 6px; font-size: 11px; font-weight: 800; letter-spacing: 0.5px; text-transform: uppercase;">Trending</span>
+<span style="font-size: 13px; color: var(--muted); font-weight: 500;">3 min read</span>
+</div>
+
+<h2 class="section-title" style="font-size: 26px; line-height: 1.35; margin-bottom: 16px;">The Kitchen Upgrade "Secret": Why You Should NEVER Replace Your Cabinets</h2>
+<p style="font-size: 17px; margin-bottom: 16px; color: var(--text);">Let’s cut right to the chase. The "secret" local contractors don't want you to know is actually very simple: <strong style="background: var(--warning-bg); padding: 2px 6px; border-radius: 4px; color: var(--warning-text);">you probably don't need to replace your kitchen cabinets.</strong></p>
+<p style="font-size: 17px; margin-bottom: 24px; color: var(--text);">If you like your current layout and the cabinet boxes (the frames attached to the walls) are solid, ripping them out is a massive waste of your budget.</p>
+
+<h3 style="font-size: 20px; font-family: 'Sora', sans-serif; font-weight: 800; color: var(--text-strong); margin-bottom: 12px;">Why Contractors Hate This Option</h3>
+<p style="font-size: 17px; margin-bottom: 24px; color: var(--text);">Traditional remodeling companies make their biggest profits on full "gut-job" renovations. They charge you thousands for demolition, disposal, and weeks of billable labor. That’s why they rarely suggest the smarter, faster alternative: <strong>Professional Cabinet Refacing</strong>.</p>
+
+<h3 style="font-size: 20px; font-family: 'Sora', sans-serif; font-weight: 800; color: var(--text-strong); margin-bottom: 12px;">Update Without A Full Remodel</h3>
+<p style="font-size: 17px; margin-bottom: 16px; color: var(--text);">Instead of destroying your kitchen, refacing leaves your sturdy existing boxes exactly where they are. Specialists reinforce the frames, cover them in a premium veneer, and then install <strong>brand-new, custom-crafted doors, drawer fronts, and soft-close hardware</strong>.</p>
+
+<ul style="padding-left: 0; list-style: none; margin-bottom: 28px;">
+<li style="margin-bottom: 16px; display: flex; gap: 12px; align-items: flex-start;">
+<span style="font-size: 22px; line-height: 1.2;">🛑</span>
+<span style="font-size: 16px; color: var(--text); line-height: 1.5;"><strong>No Demolition & No Dust:</strong> Your home doesn't turn into a toxic construction zone.</span>
+</li>
+<li style="margin-bottom: 16px; display: flex; gap: 12px; align-items: flex-start;">
+<span style="font-size: 22px; line-height: 1.2;">⏱️</span>
+<span style="font-size: 16px; color: var(--text); line-height: 1.5;"><strong>Done in Days, Not Weeks:</strong> Most installations are completely finished in just 3 to 5 days.</span>
+</li>
+<li style="margin-bottom: 16px; display: flex; gap: 12px; align-items: flex-start;">
+<span style="font-size: 22px; line-height: 1.2;">💰</span>
+<span style="font-size: 16px; color: var(--text); line-height: 1.5;"><strong>Massive Savings:</strong> You save thousands by not paying for hidden cabinet boxes and unnecessary labor.</span>
+</li>
+</ul>
+
+<h3 style="font-size: 20px; font-family: 'Sora', sans-serif; font-weight: 800; color: var(--text-strong); margin-bottom: 12px;">The Catch: Do You Qualify?</h3>
+<p style="font-size: 17px; margin-bottom: 16px; color: var(--text);">Because this "no-demo" method relies on using your existing cabinet frames, <strong>not every kitchen is eligible.</strong> If your boxes are rotting or you want to completely change the shape of your kitchen, you will need a traditional remodel.</p>
+<p style="font-size: 17px; margin-bottom: 24px; color: var(--text);">Find out instantly if this low-mess upgrade is available for your home. Use the <strong>Free 2-Minute Eligibility Checker</strong> below to see if your kitchen qualifies and get a realistic starting price range for your zip code.</p>
+
+<!-- Кнопка, вызывающая твой скрипт перехода на Квиз -->
+<button onclick="goToOffer()" class="btn btn-primary" style="margin-top: 8px; box-shadow: 0 8px 20px rgba(245, 179, 1, 0.3);">Check My Eligibility (2 mins) ➔</button>
+
+</div>
+
+<!-- ========================================== -->
+<!-- 3. RATIONALIZATION -->
+<div class="section">
+<h2 class="section-title">What is the best option for your kitchen?</h2>
+<p style="margin-bottom: 24px; color: var(--text);">
+<strong>Refacing:</strong> Keeps your existing layout but replaces doors, drawers, and hardware for a brand-new look.<br><br>
+<strong>Counters & More:</strong> You can update <em>just</em> the countertops, backsplash, or appliances — or combine everything for a full transformation.
+It’s often faster, cleaner, and more budget-friendly than a full rip-out remodel.
+</p>
+
+<div style="background: var(--warning-bg); padding: 20px; border: 1px solid var(--border); border-radius: 12px; font-size: 15px;">
+<p style="margin: 0; color: var(--warning-text); line-height: 1.6;">
+<strong>💡 Quick reality check:</strong><br>
+Not sure what you need? The 2-minute check helps you compare options (refacing vs. just counters vs. full remodel) so you don't waste time or money on the wrong service.
+</p>
+</div>
+</div>
+
+<!-- 4. MAP -->
+<div class="section">
+<h2 class="section-title">Local options near <span class="geo-city">Your Area</span></h2>
+<p style="font-size: 15px; margin-bottom: 8px;">
+We check your area for top-rated specialists, whether you need full refacing, new countertops, or a simple refresh.
+</p>
+<p style="font-size:13px; color:var(--muted); margin:0 0 12px 0;">
+We match by expertise (cabinetry, stone, tile, appliances) — so you get the right pro for the job.
+</p>
+<div id="map-wrapper">
+<div id="map"></div>
+<div class="live-notification" id="live-widget">
+<div class="live-icon">🟢</div>
+<div>
+<div class="live-text">Finding nearby options…</div>
+<div class="live-subtext">Text-first option. No obligation.</div>
+</div>
+</div>
+</div>
+<p style="font-size: 13px; color: var(--muted); text-align: center; margin-top: 12px;">
+<span style="color: var(--cta)">●</span> We are actively matching homeowners in <span class="geo-city">your area</span> right now. Start the 2-minute check to see availability.
+</p>
+</div>
+
+<!-- 5. TESTIMONIALS -->
+<div class="reviews-container">
+<div class="reviews-header">
+<h2 class="section-title" style="margin-bottom: 8px;">See how homeowners saved time & money</h2>
+<p style="font-size: 14px; color: var(--muted); margin: 0;">Feedback from neighbors who used our diagnostic quiz to find the smartest renovation path and avoid overpriced quotes.</p>
+</div>
+<div class="reviews-track">
+<!-- 1 -->
+<div class="review-card">
+<div>
+<div class="review-user">
+<img src="img/review-sarah.jpg" class="review-avatar" alt="Homeowner" loading="lazy" decoding="async">
+<div class="review-meta">
+<div class="review-name">Sarah M. (Homeowner)</div>
+<div class="review-date">Saved roughly $5k on cabinets</div>
+</div>
+</div>
+<div class="review-stars">★★★★★</div>
+<div class="review-title">“The call saved me roughly $5,000.”</div>
+<p class="review-body">
+I was convinced I needed brand new cabinets. I took the quiz just to compare prices.
+The expert who called me reviewed my answers and explained that my cabinet boxes were still good—I only needed refacing.
+Honest advice, no upsell, and the call took less than 10 minutes.
+</p>
+</div>
+<div class="verified-badge">✔ Outcome: Saved money by choosing refacing vs. replacement</div>
+</div>
+<!-- 2 -->
+<div class="review-card">
+<div>
+<div class="review-user">
+<img src="img/review-mark.jpg" class="review-avatar" alt="Homeowner" loading="lazy" decoding="async">
+<div class="review-meta">
+<div class="review-name">Mark T. (Homeowner)</div>
+<div class="review-date">Hates robocalls & spam</div>
+</div>
+</div>
+<div class="review-stars">★★★★★</div>
+<div class="review-title">“Short, professional, and zero spam.”</div>
+<p class="review-body">
+I hesitate to give out my number because of robocalls. But here, I selected "Evening" for a callback, and that’s exactly when they called.
+The contractor came prepared because of the quiz info.
+We skipped the awkward "sales pitch" and went straight to discussing my kitchen layout.
+</p>
+</div>
+<div class="verified-badge">✔ Experience: Respectful communication • No unwanted calls</div>
+</div>
+<!-- 3 -->
+<div class="review-card">
+<div>
+<div class="review-user">
+<img src="img/review-jen.jpg" class="review-avatar" alt="Homeowner" loading="lazy" decoding="async">
+<div class="review-meta">
+<div class="review-name">Danielle R. (Homeowner)</div>
+<div class="review-date">Needed clear direction</div>
+</div>
+</div>
+<div class="review-stars">★★★★★</div>
+<div class="review-title">“Finally, someone listened to what I actually wanted.”</div>
+<p class="review-body">
+Other companies tried to sell me a full demo instantly.
+This 2-minute check helped me clarify that I only wanted to change the countertops and backsplash.
+The specialist confirmed this was possible without tearing everything apart. It gave me the confidence to move forward.
+</p>
+</div>
+<div class="verified-badge">✔ Outcome: Clear renovation plan tailored to my needs</div>
+</div>
+<!-- 4 -->
+<div class="review-card">
+<div>
+<div class="review-user">
+<img src="img/review-michelle.jpg" class="review-avatar" alt="Homeowner" loading="lazy" decoding="async">
+<div class="review-meta">
+<div class="review-name">Michelle K. (Homeowner)</div>
+<div class="review-date">Needed a low-disruption plan (kids at home)</div>
+</div>
+</div>
+<div class="review-stars">★★★★★</div>
+<div class="review-title">“We figured out a plan to keep the kitchen livable.”</div>
+<p class="review-body">
+With kids at home, I couldn't afford a messy 6-week renovation.
+The quiz asked about my timeline, and the pro who called suggested a "low-disruption" refacing plan.
+I didn't know that was an option! We got the modern look we wanted in just 5 days of actual work.
+</p>
+</div>
+<div class="verified-badge">✔ Best for: Minimal disruption + Accurate timeline expectations</div>
+</div>
+<!-- 5 -->
+<div class="review-card">
+<div>
+<div class="review-user">
+<img src="img/review-robert.jpg" class="review-avatar" alt="Homeowner" loading="lazy" decoding="async">
+<div class="review-meta">
+<div class="review-name">Robert S. (Homeowner)</div>
+<div class="review-date">Not ready for home visits yet</div>
+</div>
+</div>
+<div class="review-stars">★★★★★</div>
+<div class="review-title">“Got my questions answered without a home visit.”</div>
+<p class="review-body">
+I wasn't ready to have strangers in my house yet. Filling out the form allowed me to get a preliminary consultation over the phone first.
+The representative was knowledgeable, answered my questions about materials, and gave me a ballpark idea before we ever scheduled a measurement.
+</p>
+</div>
+<div class="verified-badge">✔ Preference: Informative phone consultation before home visit</div>
+</div>
+</div>
+
+<div style="text-align:center; margin-top:16px; font-size:13px; color:var(--muted); display:flex; align-items:center; justify-content:center; gap:6px;">
+<span>👆 Swipe to see common renovation wins</span>
+</div>
+
+<!-- 6. AUTHORITY -->
+<div class="section" id="how-it-works-section">
+<h2 class="section-title">How to Get Your Exact Price (Simple & Stress-Free)</h2>
+<ul class="stages-list">
+<li>
+<div style="flex-shrink:0; width:28px; height:28px; background:var(--highlight); color:var(--text-strong); border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:14px; font-family:'Sora',sans-serif;">1</div>
+<div>
+<strong>Answer a few questions:</strong><br>
+Tell us about your current kitchen layout and what style you’re looking for. It takes less than 2 minutes.
+</div>
+</li>
+<li>
+<div style="flex-shrink:0; width:28px; height:28px; background:var(--highlight); color:var(--text-strong); border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:14px; font-family:'Sora',sans-serif;">2</div>
+<div>
+<strong>Get Matched with a Pro:</strong><br>
+We analyze your project needs and connect you with a local expert who specializes in your specific request.
+</div>
+</li>
+<li>
+<div style="flex-shrink:0; width:28px; height:28px; background:var(--highlight); color:var(--text-strong); border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:14px; font-family:'Sora',sans-serif;">3</div>
+<div>
+<strong>Receive Your Custom Quote:</strong><br>
+Review your options and pricing details with a specialist. No guesswork—just honest numbers so you can decide.
+</div>
+</li>
+</ul>
+</div>
+
+<!-- 7. CHEAT SHEET -->
+<div class="section" style="background-color: var(--bg);">
+<h2 class="section-title">Insider Checklist: 4 Questions That Save You Money & Headaches</h2>
+<p>
+Don't just get a quote—get the <em>right</em> quote. Use this cheat sheet when you speak with a pro to ensure you get the best deal with zero surprises.
+</p>
+<div class="cheat-sheet">
+<h3><span style="font-size:20px">🧾</span> Ask these 4 questions:</h3>
+<ol style="margin: 0; padding-left: 20px;">
+<li style="margin-bottom: 16px;">
+<strong>"Is this the 'Out-the-Door' Price?"</strong><br>
+<span style="font-size: 14px; color: var(--muted);">Make sure materials, installation, disposal, and cleanup are ALL included. No hidden fees later.</span>
+</li>
+<li style="margin-bottom: 16px;">
+<strong>"Can you verify your License & Insurance?"</strong><br>
+<span style="font-size: 14px; color: var(--muted);">Protects you from liability. Legit pros (like the ones in our network) will happily show proof.</span>
+</li>
+<li style="margin-bottom: 16px;">
+<strong>"What is the Guaranteed Finish Date?"</strong><br>
+<span style="font-size: 14px; color: var(--muted);">Refacing should take days, not weeks. Get a firm timeline in writing.</span>
+</li>
+<li style="margin-bottom: 16px;">
+<strong>"What is your Dust Control Plan?"</strong><br>
+<span style="font-size: 14px; color: var(--muted);">Professional crews use specialized coverings to keep your floors safe and your home dust-free.</span>
+</li>
+</ol>
+</div>
+<p style="font-size: 14px; color: var(--text-strong); text-align: center; margin-top: 16px; margin-bottom: 0; background: var(--success-bg); padding: 10px; border-radius: 8px;">
+<strong>✅ Confidence Booster:</strong> Our network pros expect these questions. In fact, they love educated homeowners!
+</p>
+</div>
+
+<!-- 8. FAQ ACCORDION -->
+<div class="faq-section">
+<h2 class="section-title" style="text-align:center; margin-bottom:32px;">Frequently Asked Questions</h2>
+<div class="faq-container">
+<!-- Q1 -->
+<div class="faq-item active">
+<div class="faq-question">What happens after I tap “Show My Options (2 min)”?<span class="arrow-icon">▼</span></div>
+<div class="faq-answer">
+You’ll go to a quick 2-minute check where you describe what you want (refacing, counters, backsplash, appliances, or a mix).
+After that, a local pro can reach out to confirm a couple details and give you a <strong>realistic price range</strong> for your area.
+<br><br>
+<strong>Zero pressure:</strong> you can use it just to plan your budget.
+</div>
+</div>
+<!-- Q2 -->
+<div class="faq-item">
+<div class="faq-question">Why can’t I see an exact price instantly on this page?<span class="arrow-icon">▼</span></div>
+<div class="faq-answer">
+Kitchens are priced by details that online calculators usually miss: cabinet condition, door style, material choices, layout, and install complexity.
+The 2-minute check narrows it down, and a pro confirms the specifics so you don’t get “bait” pricing.
+</div>
+</div>
+<!-- Q3 -->
+<div class="faq-item">
+<div class="faq-question">Do I have to talk to someone right away?<span class="arrow-icon">▼</span></div>
+<div class="faq-answer">
+Not necessarily. Many homeowners start with <strong>text-first</strong> to get a ballpark range and ask a few questions.
+If you want a truly exact quote, you can schedule a measurement later — only if and when you’re comfortable.
+</div>
+</div>
+<!-- Q4 -->
+<div class="faq-item">
+<div class="faq-question">Why do you need my phone number?<span class="arrow-icon">▼</span></div>
+<div class="faq-answer">
+Because accurate pricing usually needs 1–2 clarifying questions (materials, rough measurements, timeline).
+<br><br>
+<strong>Important:</strong> you should never be asked for sensitive info (like SSN or bank details) just to get an estimate.
+</div>
+</div>
+<!-- Q6 -->
+<div class="faq-item">
+<div class="faq-question">Will I get spammed with calls?<span class="arrow-icon">▼</span></div>
+<div class="faq-answer">
+It’s normal to get a follow-up when you request pricing — that’s how estimates work.
+But you stay in control:
+<ul style="margin:10px 0 0 18px;">
+<li>Request <strong>text-first</strong> if you hate calls</li>
+<li>Set a <strong>time window</strong> (morning/evening)</li>
+<li>If you’re not moving forward, say “Please stop contacting me”</li>
+</ul>
+</div>
+</div>
+<!-- Q7 -->
+<div class="faq-item">
+<div class="faq-question">How many pros will contact me?<span class="arrow-icon">▼</span></div>
+<div class="faq-answer">
+Often it’s one local specialist. In some areas, more than one may reach out.
+If you only want one quote, just tell the first person: <strong>“I’m only collecting one estimate right now.”</strong>
+</div>
+</div>
+<!-- Q8 -->
+<div class="faq-item">
+<div class="faq-question">Is the estimate really free? Am I obligated to buy?<span class="arrow-icon">▼</span></div>
+<div class="faq-answer">
+Yes — requesting options and an estimate is <strong>free</strong>, and you’re not obligated to hire anyone.
+Any work agreement (if you choose to move forward) is between you and the contractor.
+</div>
+</div>
+<!-- Q9 -->
+<div class="faq-item">
+<div class="faq-question">Are the pros local and trustworthy?<span class="arrow-icon">▼</span></div>
+<div class="faq-answer">
+We aim to match you with <strong>local specialists</strong> who handle the type of work you selected (cabinetry, stone, tile, appliances).
+<br><br>
+Still — always verify basics before scheduling:
+<ul style="margin:10px 0 0 18px;">
+<li><strong>License</strong> (where required)</li>
+<li><strong>Insurance</strong> (proof)</li>
+<li>A <strong>written</strong>, itemized estimate</li>
+</ul>
+</div>
+</div>
+<!-- Q10 -->
+<div class="faq-item">
+<div class="faq-question">I’m scared of hidden fees or “price jumps.” How do I protect myself?<span class="arrow-icon">▼</span></div>
+<div class="faq-answer">
+Ask for an <strong>out-the-door</strong> price in writing (materials + labor + cleanup + disposal), and confirm what triggers extra costs.
+<br><br>
+Tip: use the <strong>“Insider Checklist”</strong> above — it’s designed exactly for this.
+</div>
+</div>
+<!-- Q11 -->
+<div class="faq-item">
+<div class="faq-question">What’s the difference: refacing vs. refresh vs. full remodel?<span class="arrow-icon">▼</span></div>
+<div class="faq-answer">
+<strong>Refacing:</strong> keeps cabinet boxes, replaces doors/drawers/hardware for a new look.<br>
+<strong>Refresh:</strong> smaller upgrades (paint/finish, hardware, lighting, backsplash, counters).<br>
+<strong>Full remodel:</strong> layout changes, major demo, typically higher cost and longer timeline.
+</div>
+</div>
+<!-- Q12 -->
+<div class="faq-item">
+<div class="faq-question">Can I just replace countertops, backsplash, or appliances (no full remodel)?<span class="arrow-icon">▼</span></div>
+<div class="faq-answer">
+Yes. Many homeowners do a “smart upgrade” instead of a full tear-out.
+You can mix and match: counters + backsplash, refacing + new sink, appliance install, and more.
+</div>
+</div>
+<!-- Q13 -->
+<div class="faq-item">
+<div class="faq-question">How long does it take, and how messy is it?<span class="arrow-icon">▼</span></div>
+<div class="faq-answer">
+Refacing/refresh projects are often measured in <strong>days</strong> (not weeks), but timing depends on kitchen size, materials, and scope.
+Ask about <strong>dust control</strong>, daily cleanup, and what stays usable during the work — a good crew will explain it clearly.
+</div>
+</div>
+<!-- Q15 -->
+<div class="faq-item">
+<div class="faq-question">I’m just browsing and not ready. Is it still worth doing?<span class="arrow-icon">▼</span></div>
+<div class="faq-answer">
+Yes — many people use the 2-minute check for <strong>budget planning</strong> only.
+If a pro reaches out, you can simply say you’re “researching” and want a rough range. That’s totally normal.
+</div>
+</div>
+</div>
+</div>
+
+<!-- 9. FOOTER -->
+<div class="legal-footer">
+<p><strong>Disclaimer:</strong> HomeSupplyCenter.org is a free service to assist homeowners in connecting with local service providers. All contractors/providers are independent and HomeSupplyCenter.org does not warrant or guarantee any work performed. It is the responsibility of the homeowner to verify that the hired contractor furnishes the necessary license and insurance required for the work being performed. We may receive compensation or a referral fee when you connect with a service provider through our site.</p>
+<p style="margin-top: 16px; font-size: 11px;">
+<a href="privacy.html" style="color: var(--on-dark-muted); text-decoration: none; margin: 0 8px;">Privacy Policy</a> |
+<a href="terms.html" style="color: var(--on-dark-muted); text-decoration: none; margin: 0 8px;">Terms of Use</a> |
+<a href="ccpa.html" style="color: var(--on-dark-muted); text-decoration: none; margin: 0 8px;">Do Not Sell My Personal Information</a>
+</p>
+<p style="margin-top:10px;">&copy; <span id="copyright-year">2024</span> Kitchen Refacing & Refresh Guide.</p>
+</div>
+
+</div><!-- /container -->
+
+<!-- STICKY FOOTER -->
+<div class="sticky-footer" id="sticky-cta">
+<span class="sticky-sub"><span style="color:var(--cta)">●</span> Get a realistic starting range in <span class="geo-city">your area</span> — no pressure.</span>
+<button onclick="goToOffer()" class="btn btn-accent" style="padding: 14px; border-radius: 14px;">
+Get My Options (2 min)
+</button>
+</div>
+
+<!-- SCRIPTS -->
+<script>
+// 1) DATE LOGIC
+(function setDate() {
+const d = new Date();
+try {
+const dateEl = document.getElementById('current-date');
+if (dateEl) dateEl.textContent = d.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+const copyEl = document.getElementById('copyright-year');
+if (copyEl) copyEl.textContent = d.getFullYear();
+} catch(e) {}
+})();
+
+// 2) WIDGET LOGIC
+(function widgetRotate() {
+const widgetBox = document.getElementById('live-widget');
+if (!widgetBox) return;
+const widgetText = widgetBox.querySelector('.live-text');
+const widgetSub = widgetBox.querySelector('.live-subtext');
+const widgetIcon = widgetBox.querySelector('.live-icon');
+
+function getCity() {
+const el = document.querySelector('.geo-city');
+return el && el.textContent !== "Your Area" ? el.textContent : "your area";
+}
+
+const messages = [
+{ icon: "🧰", t: () => "Finding local specialists…", s: () => `Checking ${getCity()}` },
+{ icon: "🧩", t: () => "Comparing your options", s: () => "Refacing • Counters • Appliances" },
+{ icon: "💬", t: () => "Text-first option available", s: () => "No pressure. No spam." },
+{ icon: "💰", t: () => "100% Free Quote", s: () => "See pricing in 2 mins" }
+];
+
+let msgIdx = 0;
+setInterval(() => {
+widgetBox.style.opacity = '0';
+setTimeout(() => {
+msgIdx = (msgIdx + 1) % messages.length;
+widgetIcon.textContent = messages[msgIdx].icon;
+widgetText.textContent = messages[msgIdx].t();
+widgetSub.textContent = messages[msgIdx].s();
+widgetBox.style.opacity = '1';
+}, 500);
+}, 5000);
+})();
+
+// 3) MAP & GEO LOGIC (Исправлено)
+let __leafletLoaded = false;
+let __mapInited = false;
+let globalLat = 41.8781, globalLon = -87.6298;
+let globalCity = "Your Area", globalRegion = "Your State";
+let locationPromise = null;
+
+function loadLeaflet() {
+if (__leafletLoaded) return Promise.resolve();
+__leafletLoaded = true;
+
+const css = new Promise((res, rej) => {
+const existing = document.querySelector("link[href*='leaflet@1.9.4/dist/leaflet.css']");
+if (existing) return res();
+const l = document.createElement("link");
+l.rel = "stylesheet";
+l.href = "https://unpkg.com/leaflet@1.9.4/dist/leaflet.css";
+l.onload = res;
+l.onerror = rej;
+document.head.appendChild(l);
+});
+
+const js = new Promise((res, rej) => {
+// Проверяем, не загружен ли Leaflet ранее
+if (window.L) return res();
+const s = document.createElement("script");
+s.src = "https://unpkg.com/leaflet@1.9.4/dist/leaflet.js";
+s.defer = true;
+s.onload = res;
+s.onerror = rej;
+document.body.appendChild(s);
+});
+
+return Promise.all([css, js]);
+}
+
+function fetchLocation() {
+if (locationPromise) return locationPromise;
+locationPromise = (async () => {
+const tryFetch = async (url) => {
+try {
+const res = await fetch(url, { cache: "no-store" });
+if (res.ok) return await res.json();
+} catch (e) { return null; }
+return null;
+};
+
+let found = false;
+
+// Провайдеры локации по порядку
+if (!found) {
+const data = await tryFetch('https://ipapi.co/json/');
+if (data && data.city) {
+globalLat = data.latitude; globalLon = data.longitude; globalCity = data.city; globalRegion = data.region; found = true;
+}
+}
+if (!found) {
+const data = await tryFetch('https://ipwho.is/');
+if (data && data.success) {
+globalLat = data.latitude; globalLon = data.longitude; globalCity = data.city; globalRegion = data.region; found = true;
+}
+}
+if (!found) {
+const data = await tryFetch('https://get.geojs.io/v1/ip/geo.json');
+if (data && data.city) {
+globalLat = parseFloat(data.latitude); globalLon = parseFloat(data.longitude); globalCity = data.city; globalRegion = data.region; found = true;
+}
+}
+
+if (found) {
+document.querySelectorAll('.geo-city').forEach(el => el.textContent = globalCity);
+document.querySelectorAll('.geo-state').forEach(el => el.textContent = globalRegion);
+}
+return found;
+})();
+return locationPromise;
+}
+
+// Запускаем поиск местоположения СРАЗУ, чтобы верхняя плашка отобразила город мгновенно
+fetchLocation();
+
+async function initMap() {
+if (__mapInited) return;
+__mapInited = true;
+
+// Дожидаемся загрузки Leaflet и завершения поиска геолокации (если еще не завершено)
+await Promise.all([loadLeaflet(), fetchLocation()]);
+
+if (typeof L !== 'undefined') {
+const map = L.map('map', {
+zoomControl: false,
+scrollWheelZoom: false,
+dragging: false,
+touchZoom: false,
+doubleClickZoom: false,
+attributionControl: false
+}).setView([globalLat, globalLon], 11);
+
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+
+L.circle([globalLat, globalLon], { color: '#C97C5D', fillColor: '#C97C5D', fillOpacity: 0.15, radius: 6500 }).addTo(map);
+L.marker([globalLat, globalLon]).addTo(map);
+}
+}
+
+(function lazyMapObserver() {
+const wrap = document.getElementById('map-wrapper');
+if (!wrap) return;
+
+if (!('IntersectionObserver' in window)) {
+initMap();
+return;
+}
+
+const obs = new IntersectionObserver((entries) => {
+entries.forEach((entry) => {
+if (entry.isIntersecting) {
+initMap();
+obs.disconnect();
+}
+});
+}, { root: null, rootMargin: "600px 0px", threshold: 0.01 });
+
+obs.observe(wrap);
+})();
+
+// 4) DRAG SCROLL (desktop) - OPTIMIZED FOR PERFORMANCE (Passive & RAF)
+function enableDragScroll(selector) {
+const slider = document.querySelector(selector);
+if (!slider) return;
+let isDown = false;
+let startX;
+let scrollLeft;
+let isTicking = false; // Flag for requestAnimationFrame
+
+slider.addEventListener('mousedown', (e) => {
+isDown = true;
+startX = e.pageX - slider.offsetLeft;
+scrollLeft = slider.scrollLeft;
+});
+
+slider.addEventListener('mouseleave', () => { isDown = false; });
+slider.addEventListener('mouseup', () => { isDown = false; });
+slider.addEventListener('mousemove', (e) => {
+if (!isDown) return;
+e.preventDefault();
+
+// FIX: Wrap in requestAnimationFrame to avoid "Forced Reflow"
+if(!isTicking) {
+window.requestAnimationFrame(() => {
+const x = e.pageX - slider.offsetLeft;
+const walk = (x - startX) * 2;
+slider.scrollLeft = scrollLeft - walk;
+isTicking = false;
+});
+isTicking = true;
+}
+});
+}
+
+enableDragScroll('.gallery-track');
+enableDragScroll('.reviews-track');
+
+// 6) HERO media: prefer VIDEO (webm/mp4), fallback to GIF, else keep poster
+(function lazyLoadHeroMedia() {
+const run = () => {
+const v = document.querySelector(".lcp-video");
+const posterImg = document.querySelector(".lcp-poster");
+const gifImg = document.querySelector(".lcp-gif");
+if (!v) return;
+
+const webmSrc = v.getAttribute("data-webm");
+const mp4Src = v.getAttribute("data-mp4");
+const gifSrc = gifImg ? gifImg.getAttribute("data-gif") : null;
+let loaded = false;
+
+const showPosterOnly = () => {
+v.style.display = "none";
+if (gifImg) gifImg.style.display = "none";
+if (posterImg) posterImg.style.display = "block";
+};
+
+const showGif = () => {
+if (!gifImg || !gifSrc) return showPosterOnly();
+gifImg.src = gifSrc;
+gifImg.style.display = "block";
+v.style.display = "none";
+if (posterImg) posterImg.style.display = "none";
+};
+
+const showVideo = () => {
+v.style.display = "block";
+if (gifImg) gifImg.style.display = "none";
+if (posterImg) posterImg.style.display = "none";
+};
+
+const loadMedia = () => {
+if (loaded) return;
+loaded = true;
+
+// If no video sources — try GIF
+if (!webmSrc && !mp4Src) {
+if (gifSrc) return showGif();
+return showPosterOnly();
+}
+
+// Build sources (webm first)
+if (webmSrc) {
+const s1 = document.createElement("source");
+s1.src = webmSrc;
+s1.type = "video/webm";
+v.appendChild(s1);
+}
+if (mp4Src) {
+const s2 = document.createElement("source");
+s2.src = mp4Src;
+s2.type = "video/mp4";
+v.appendChild(s2);
+}
+
+v.load();
+const onReady = () => {
+showVideo();
+};
+
+v.addEventListener("canplay", onReady, { once: true });
+
+// Attempt autoplay; if blocked or fails — fallback to GIF/poster
+v.play()
+.then(() => showVideo())
+.catch(() => {
+if (gifSrc) showGif();
+else showPosterOnly();
+});
+};
+
+// load when idle + also on first user interaction
+if ("requestIdleCallback" in window) {
+requestIdleCallback(loadMedia, { timeout: 1500 });
+} else {
+setTimeout(loadMedia, 1200);
+}
+
+window.addEventListener("scroll", loadMedia, { once: true, passive: true });
+window.addEventListener("touchstart", loadMedia, { once: true, passive: true });
+window.addEventListener("mousemove", loadMedia, { once: true, passive: true });
+};
+
+if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", run);
+else run();
+})();
+
+const faqs = document.querySelectorAll('.faq-item');
+faqs.forEach(faq => {
+const question = faq.querySelector('.faq-question');
+question.addEventListener('click', () => {
+if (faq.classList.contains('active')) {
+faq.classList.remove('active');
+return;
+}
+faqs.forEach(item => item.classList.remove('active'));
+faq.classList.add('active');
+});
+});
+
+// 9) STICKY CTA BEHAVIOR
+document.addEventListener("DOMContentLoaded", function() {
+const sticky = document.getElementById('sticky-cta');
+const howItWorks = document.getElementById('how-it-works-section');
+const inputs = document.querySelectorAll('input, textarea, select');
+let lastScrollTop = 0;
+let isInputFocused = false;
+let hasPassedThreshold = false;
+const THRESHOLD_PX = 500;
+const SCROLL_DELTA = 10;
+
+if (inputs && inputs.length) {
+inputs.forEach(input => {
+input.addEventListener('focus', () => {
+isInputFocused = true;
+if (sticky) sticky.classList.remove('visible');
+});
+
+input.addEventListener('blur', () => {
+isInputFocused = false;
+if (hasPassedThreshold && sticky) sticky.classList.add('visible');
+});
+});
+}
+
+window.addEventListener('scroll', function() {
+if (isInputFocused || !sticky) return;
+const st = window.pageYOffset || document.documentElement.scrollTop;
+const howItWorksTop = howItWorks ? howItWorks.offsetTop : THRESHOLD_PX;
+
+if (!hasPassedThreshold) {
+if (st > THRESHOLD_PX || st > howItWorksTop - window.innerHeight) {
+hasPassedThreshold = true;
+sticky.classList.add('visible');
+}
+} else {
+if (Math.abs(lastScrollTop - st) <= SCROLL_DELTA) return;
+
+if (st > lastScrollTop) sticky.classList.remove('visible');
+else sticky.classList.add('visible');
+}
+
+lastScrollTop = st <= 0 ? 0 : st;
+}, false);
+});
+</script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
