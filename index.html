@@ -1296,7 +1296,7 @@
     // Дефолтные координаты на случай блокировок всех API
     let userLat = 41.8781, userLon = -87.6298;
 
-    // --- ФУНКЦИЯ 1: МГНОВЕННОЕ ОПРЕДЕЛЕНИЕ IP ---
+        // --- ФУНКЦИЯ 1: МГНОВЕННОЕ ОПРЕДЕЛЕНИЕ IP С КЕШИРОВАНИЕМ ---
     async function fetchUserLocation() {
       if (isGeoFetched) return;
       isGeoFetched = true;
@@ -1305,49 +1305,85 @@
       let region = "Your State";
       let found = false;
 
-      // Функция запроса с таймаутом (чтобы не ждать вечно зависший API)
-      const tryFetch = async (url) => {
+      // 1. Проверяем наличие сохраненных данных в localStorage
+      const cachedGeo = localStorage.getItem('userGeoCache');
+      if (cachedGeo) {
         try {
-          const controller = new AbortController();
-          const timeoutId = setTimeout(() => controller.abort(), 3500); // 3.5 секунды на ответ
-          const res = await fetch(url, { cache: "no-store", signal: controller.signal });
-          clearTimeout(timeoutId);
-          if (res.ok) return await res.json();
-        } catch (e) { return null; }
-        return null;
-      };
-
-      // 1. GeoJS (Самый трастовый, огромные лимиты)
-      if (!found) {
-        const data = await tryFetch('https://get.geojs.io/v1/ip/geo.json');
-        if (data && data.city) {
-          userLat = parseFloat(data.latitude); userLon = parseFloat(data.longitude); 
-          city = data.city; region = data.region; found = true;
-        }
-      }
-      // 2. IPAPI.co (Строгие лимиты, обязательно проверяем отсутствие ошибки)
-      if (!found) {
-        const data = await tryFetch('https://ipapi.co/json/');
-        if (data && data.city && !data.error) {
-          userLat = data.latitude; userLon = data.longitude; 
-          city = data.city; region = data.region; found = true;
-        }
-      }
-      // 3. IPWhois (Запасной вариант)
-      if (!found) {
-        const data = await tryFetch('https://ipwho.is/');
-        if (data && data.success) {
-          userLat = data.latitude; userLon = data.longitude; 
-          city = data.city; region = data.region; found = true;
+          const parsed = JSON.parse(cachedGeo);
+          const now = new Date().getTime();
+          
+          // Проверяем, не устарел ли кеш (срок годности: 24 часа = 86400000 мс)
+          if (now - parsed.timestamp < 86400000) {
+            userLat = parsed.lat;
+            userLon = parsed.lon;
+            city = parsed.city;
+            region = parsed.region;
+            found = true;
+          }
+        } catch (e) {
+          // Если кеш поврежден, игнорируем ошибку и делаем новый запрос
+          console.warn("Geo cache error", e);
         }
       }
 
-      // Обновляем текст на сайте мгновенно
+      // 2. Если данных в кеше нет или они устарели, делаем запросы к API
+      if (!found) {
+        const tryFetch = async (url) => {
+          try {
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 3500); // Таймаут 3.5 сек
+            const res = await fetch(url, { cache: "no-store", signal: controller.signal });
+            clearTimeout(timeoutId);
+            if (res.ok) return await res.json();
+          } catch (e) { return null; }
+          return null;
+        };
+
+        // Провайдер 1: GeoJS (Безлимитный)
+        if (!found) {
+          const data = await tryFetch('https://get.geojs.io/v1/ip/geo.json');
+          if (data && data.city) {
+            userLat = parseFloat(data.latitude); userLon = parseFloat(data.longitude); 
+            city = data.city; region = data.region; found = true;
+          }
+        }
+        // Провайдер 2: IPAPI.co (Строгие лимиты)
+        if (!found) {
+          const data = await tryFetch('https://ipapi.co/json/');
+          if (data && data.city && !data.error) {
+            userLat = data.latitude; userLon = data.longitude; 
+            city = data.city; region = data.region; found = true;
+          }
+        }
+        // Провайдер 3: IPWhois (Запасной)
+        if (!found) {
+          const data = await tryFetch('https://ipwho.is/');
+          if (data && data.success) {
+            userLat = data.latitude; userLon = data.longitude; 
+            city = data.city; region = data.region; found = true;
+          }
+        }
+
+        // 3. Если удалось получить новые данные — сохраняем их в localStorage
+        if (found) {
+          const geoDataToSave = {
+            lat: userLat,
+            lon: userLon,
+            city: city,
+            region: region,
+            timestamp: new Date().getTime()
+          };
+          localStorage.setItem('userGeoCache', JSON.stringify(geoDataToSave));
+        }
+      }
+
+      // 4. Мгновенно обновляем текст на сайте (из кеша или после API)
       if (found) {
         document.querySelectorAll('.geo-city').forEach(el => el.textContent = city);
         document.querySelectorAll('.geo-state').forEach(el => el.textContent = region);
       }
     }
+
 
     // ЗАПУСКАЕМ СРАЗУ, чтобы город появился в шапке при открытии сайта
     fetchUserLocation();
