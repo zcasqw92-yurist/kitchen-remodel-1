@@ -1028,18 +1028,20 @@
       }
 
      .hero-slider-track {
-       display: flex;
-       width: 100%;
-       height: 100%;
-       overflow-x: auto;
-       overflow-y: hidden;
-       scroll-snap-type: x mandatory;
-       scroll-behavior: smooth;
-       scrollbar-width: none;
-       -ms-overflow-style: none;
-       touch-action: pan-y;
-       cursor: grab;
-      }
+  display: flex;
+  width: 100%;
+  height: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+  touch-action: pan-x pinch-zoom;
+  cursor: grab;
+}
     }
   </style>
     <!-- Yandex.Metrika counter -->
@@ -1478,27 +1480,37 @@
         }
 
         sliderTrack.addEventListener('pointerdown', (event) => {
-          isPointerDown = true;
-          startX = event.clientX;
-          startScrollLeft = sliderTrack.scrollLeft;
-          sliderTrack.classList.add('is-dragging');
-          sliderTrack.setPointerCapture(event.pointerId);
-        });
+  if (event.pointerType !== 'mouse') return;
 
-        sliderTrack.addEventListener('pointermove', (event) => {
-          if (!isPointerDown) return;
-          const deltaX = event.clientX - startX;
-          sliderTrack.scrollLeft = startScrollLeft - deltaX;
-        });
+  isPointerDown = true;
+  startX = event.clientX;
+  startScrollLeft = sliderTrack.scrollLeft;
+  sliderTrack.classList.add('is-dragging');
+  sliderTrack.setPointerCapture(event.pointerId);
+});
+
+sliderTrack.addEventListener('pointermove', (event) => {
+  if (!isPointerDown || event.pointerType !== 'mouse') return;
+
+  const deltaX = event.clientX - startX;
+  sliderTrack.scrollLeft = startScrollLeft - deltaX;
+});
 
         const stopDragging = (event) => {
-          if (!isPointerDown) return;
-          isPointerDown = false;
-          sliderTrack.classList.remove('is-dragging');
-          if (event && typeof event.pointerId === 'number' && sliderTrack.hasPointerCapture(event.pointerId)) {
-            sliderTrack.releasePointerCapture(event.pointerId);
-          }
-        };
+  if (!isPointerDown) return;
+
+  isPointerDown = false;
+  sliderTrack.classList.remove('is-dragging');
+
+  if (
+    event &&
+    event.pointerType === 'mouse' &&
+    typeof event.pointerId === 'number' &&
+    sliderTrack.hasPointerCapture(event.pointerId)
+  ) {
+    sliderTrack.releasePointerCapture(event.pointerId);
+  }
+};
 
         sliderTrack.addEventListener('pointerup', stopDragging);
         sliderTrack.addEventListener('pointercancel', stopDragging);
