@@ -258,8 +258,8 @@
       scroll-behavior: smooth;
       scrollbar-width: none;
       -ms-overflow-style: none;
-      touch-action: pan-y;
-      cursor: grab;
+      touch-action: auto;
+      -webkit-overflow-scrolling: touch;
     }
 
     .hero-slider-track::-webkit-scrollbar {
@@ -1217,9 +1217,9 @@ pintrk('page');
             <p>To make that easier, the online kitchen checker walks you through a few quick questions about your kitchen, preferences, and location.</p>
 
             <ol class="steps">
-              <li><span>Click the button below to start the kitchen checker.</li>
-              <li><span>Answer a few quick questions about your kitchen and what kind of update you are considering.</li>
-              <li><span>See whether your kitchen may qualify and whether there may be a simpler path available in <span class="geo-city">your area</span>.</li>
+              <li>Click the button below to start the kitchen checker.</li>
+              <li>Answer a few quick questions about your kitchen and what kind of update you are considering.</li>
+              <li>See whether your kitchen may qualify and whether there may be a simpler path available in <span class="geo-city">your area</span>.</li>
             </ol>
 
             <div class="cta-wrap">
@@ -1469,10 +1469,7 @@ document.querySelectorAll('.quiz-link').forEach((link) => {
 
       if (sliderTrack && sliderThumb) {
         const slides = Array.from(sliderTrack.querySelectorAll('.hero-slide'));
-        let isPointerDown = false;
-        let startX = 0;
-        let startScrollLeft = 0;
-
+       
         const getSlideWidth = () => sliderTrack.clientWidth || 1;
 
         const updateSliderUi = () => {
@@ -1504,33 +1501,7 @@ document.querySelectorAll('.quiz-link').forEach((link) => {
             scrollToSlide(currentIndex + 1);
           });
         }
-
-        sliderTrack.addEventListener('pointerdown', (event) => {
-          isPointerDown = true;
-          startX = event.clientX;
-          startScrollLeft = sliderTrack.scrollLeft;
-          sliderTrack.classList.add('is-dragging');
-          sliderTrack.setPointerCapture(event.pointerId);
-        });
-
-        sliderTrack.addEventListener('pointermove', (event) => {
-          if (!isPointerDown) return;
-          const deltaX = event.clientX - startX;
-          sliderTrack.scrollLeft = startScrollLeft - deltaX;
-        });
-
-        const stopDragging = (event) => {
-          if (!isPointerDown) return;
-          isPointerDown = false;
-          sliderTrack.classList.remove('is-dragging');
-          if (event && typeof event.pointerId === 'number' && sliderTrack.hasPointerCapture(event.pointerId)) {
-            sliderTrack.releasePointerCapture(event.pointerId);
-          }
-        };
-
-        sliderTrack.addEventListener('pointerup', stopDragging);
-        sliderTrack.addEventListener('pointercancel', stopDragging);
-        sliderTrack.addEventListener('pointerleave', stopDragging);
+  
         sliderTrack.addEventListener('scroll', updateSliderUi, { passive: true });
         window.addEventListener('resize', updateSliderUi, { passive: true });
 
