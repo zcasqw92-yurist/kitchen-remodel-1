@@ -1018,50 +1018,42 @@
     }
 
     @media (prefers-reduced-motion: reduce) {
-      html {
-        scroll-behavior: auto;
-      }
-
-      *, *::before, *::after {
-        animation: none !important;
-        transition: none !important;
-      }
-
-     .hero-slider-track {
-       display: flex;
-       width: 100%;
-       height: 100%;
-       overflow-x: auto;
-       overflow-y: hidden;
-       scroll-snap-type: x mandatory;
-       scroll-behavior: smooth;
-       scrollbar-width: none;
-       -ms-overflow-style: none;
-       touch-action: pan-y;
-       cursor: grab;
-      }
-	  .hero-slider-ui,
-      .hero-slider-scrollbar,
-      .hero-slider-hint {
-      display: none !important;
-      }
+    html {
+    scroll-behavior: auto;
     }
+
+    *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+    }
+
+    .hero-slider-track {
+    scroll-behavior: auto;
+    }
+   }
+
+    .hero-slider-ui,
+    .hero-slider-scrollbar,
+    .hero-slider-hint {
+    display: none !important;
+    }
+   }
   </style>
     
 	<!-- Pinterest Tag -->
-<script>
+       <script>
 !function(e){if(!window.pintrk){window.pintrk = function () {
 window.pintrk.queue.push(Array.prototype.slice.call(arguments))};var
   n=window.pintrk;n.queue=[],n.version="3.0";var
   t=document.createElement("script");t.async=!0,t.src=e;var
   r=document.getElementsByTagName("script")[0];
   r.parentNode.insertBefore(t,r)}}("https://s.pinimg.com/ct/core.js");
-pintrk('load', '2613724752483', {em: '<user_email_address>'});
+pintrk('load', '2613724752483');
 pintrk('page');
 </script>
 <noscript>
 <img height="1" width="1" style="display:none;" alt=""
-  src="https://ct.pinterest.com/v3/?event=init&tid=2613724752483&pd[em]=<hashed_email_address>&noscript=1" />
+  src="https://ct.pinterest.com/v3/?event=init&tid=2613724752483&noscript=1" />
 </noscript>
 <!-- end Pinterest Tag -->
 	
@@ -1360,11 +1352,11 @@ pintrk('page');
     <div class="site-footer__inner">
       <p><strong>Disclaimer:</strong> HomeSupplyCenter.org is a free service to assist homeowners in connecting with local service providers. All contractors/providers are independent and HomeSupplyCenter.org does not warrant or guarantee any work performed. It is the responsibility of the homeowner to verify that the hired contractor furnishes the necessary license and insurance required for the work being performed. We may receive compensation or a referral fee when you connect with a service provider through our site.</p>
       <div class="footer-links">
-        <a href="#">Privacy Policy</a>
+        <a href="/privacy.html">Privacy Policy</a>
         <span>|</span>
-        <a href="#">Terms of Use</a>
+        <a href="/terms.html">Terms of Use</a>
         <span>|</span>
-        <a href="#">Do Not Sell My Personal Information</a>
+        <a href="/ccpa.html">Do Not Sell My Personal Information</a>
       </div>
       <p>© 2026 Kitchen Refacing &amp; Refresh Guide.</p>
     </div>
